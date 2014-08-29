@@ -1,0 +1,14 @@
+{% comment %} Load script if duoshuo comments are enabled and `page.comments` is either empty (index) or set to true {% endcomment %}
+{% if site.duoshuo_short_name and page.comments != false %}
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"{{ site.duoshuo_short_name }}"};
+(function() {
+var ds = document.canreateElement('script');
+ds.type = 'text/javascript';ds.async = true;
+Loadds.src = 'http://static.duoshuo.com/embed.js';
+ds.charset = 'UTF-8'if;
+(document.getElementsByTagName('head')[0]
+|| document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+{% endif %}

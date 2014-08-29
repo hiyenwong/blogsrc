@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mvc | 島嶼の患者]]></title>
+  <link href="http://hyanwang.github.io/blog/categories/mvc/atom.xml" rel="self"/>
+  <link href="http://hyanwang.github.io/"/>
+  <updated>2013-10-01T11:46:56+08:00</updated>
+  <id>http://hyanwang.github.io/</id>
+  <author>
+    <name><![CDATA[Hi Yen Wong]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[rails中post]]></title>
+    <link href="http://hyanwang.github.io/blog/2013/08/11/rails-post/"/>
+    <updated>2013-08-11T22:15:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2013/08/11/rails-post</id>
+    <content type="html"><![CDATA[<h1>Form Helper basic</h1>
+
+<p>view中设置其表单，其中<code>form_tag</code>定义提交给谁和用什么方法
+<code>ruby Form表单提交给helo
+&lt;%= form_tag("helo",method: 'post') do %&gt;
+&lt;%= label_tag(:search, "search for:") %&gt;
+&lt;%= text_field_tag(:search) %&gt;
+&lt;%= submit_tag("Search") %&gt;
+&lt;% end %&gt;
+</code></p>
+
+<h1>Controller 如何实现接受</h1>
+
+<p>在接收的方法中使用<code>params[:search]</code>
+<code>ruby Controller中抓去post值
+def helo
+@helo=params[:search]
+end
+</code></p>
+
+<h1>route将取决安排程序路径使用什么方法传递</h1>
+
+<p><code>ruby route.rb
+namespace :admin do
+  post 'tasks/helo' #使用post方式请求
+  get 'tasks/say'
+end
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

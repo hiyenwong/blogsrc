@@ -1,0 +1,54 @@
+---
+layout: post
+title: "vim-split 分屏显示"
+date: 2013-06-14 12:43
+comments: true
+categories: [vim, linux]
+---
+
+# 关于vim分屏编辑 #
+
+* vim -o file1 file2:水平分割窗口，同时打开file1和file2
+
+* vim -O file1 file2:垂直分割窗口，同时打开file1和file2
+
+## 水平显示 ##
+* :split(:sp) -- 把当前窗水平分割成两个窗口。(CTRL-W s 或 CTRL-W CTRL-S) 注意如果在终端下，CTRL-S可能会冻结终端，请按CTRL-Q继续。
+* :split filename -- 水平分割窗口，并在新窗口中显示另一个文件。
+* :nsplit(:nsp) -- 水平分割出一个n行高的窗口。
+* :[N]new -- 水平分割出一个N行高的窗口，并编辑一个新文件。 (CTRL-W n或 CTRL-W CTRL-N)
+* ctrl+w f --水平分割出一个窗口，并在新窗口打开名称为光标所在词的文件 。
+* C-w C-^ -- 水平分割一个窗口，打开刚才编辑的文件。
+
+## 垂直显示 ##
+* :vsplit(:vsp) -- 把当前窗口分割成水平分布的两个窗口。 (CTRL-W v或CTRL CTRL-V)
+* :[N]vne[w] -- 垂直分割出一个新窗口。
+* :vertical 水平分割的命令： 相应的垂直分割。
+
+## 关闭子窗口 ##
+* :qall -- 关闭所有窗口，退出vim。
+* :wall -- 保存所有修改过的窗口。
+* :only -- 只保留当前窗口，关闭其它窗口。(CTRL-W o)
+* :close -- 关闭当前窗口，CTRL-W c能实现同样的功能。 (象 :q :x同样工作 )
+
+## 调整窗口大小 ##
+* ctrl+w + --当前窗口增高一行。也可以用n增高n行。
+* ctrl+w - --当前窗口减小一行。也可以用n减小n行。
+* ctrl+w _ --当前窗口扩展到尽可能的大。也可以用n设定行数。
+* :resize n -- 当前窗口n行高。
+* ctrl+w = -- 所有窗口同样高度。
+* n ctrl+w _ -- 当前窗口的高度设定为n行。
+* ctrl+w < --当前窗口减少一列。也可以用n减少n列。
+* ctrl+w > --当前窗口增宽一列。也可以用n增宽n列。
+* ctrl+w | --当前窗口尽可能的宽。也可以用n设定列数。
+
+## 切换和移动窗口 ##
+如果支持鼠标，切换和调整子窗口的大小就简单了。
+
+* ctrl+w ctrl+w: 切换到下一个窗口。或者是ctrl+w w。
+* ctrl+w p: 切换到前一个窗口。
+* ctrl+w h(l,j,k):切换到左（右，下，上）的窗口。
+* ctrl+w t(b):切换到最上（下）面的窗口。<BR>
+* ctrl+w H(L,K,J): 将当前窗口移动到最左（右、上、下）面。
+* ctrl+w r：旋转窗口的位置。
+* ctrl+w T: 将当前的窗口移动到新的标签页上。

@@ -1,0 +1,1329 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>島嶼の患者</title>
+  <meta name="author" content="Hi Yen Wong">
+
+  
+  <meta name="description" content="关于rails中的namespace namespace可以将某些控制器集中在一个区域下，从而可以有效地权限管理等操作。 1
+rails g controller admin/managers 我们可以用以上的命令创建在一个namespace下的控制器manager 当然也需要在route. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hyanwang.github.io">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="島嶼の患者" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">島嶼の患者</a></h1>
+  
+    <h2>禪の海[Zen LIVE].</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hyanwang.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about-me/">about me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/28/rails-namespace/">Rails Namespace</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-28T18:17:00+08:00" pubdate data-updated="true">Sep 28<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/09/28/rails-namespace/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>关于rails中的namespace</h1>
+
+<p>namespace可以将某些控制器集中在一个区域下，从而可以有效地权限管理等操作。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rails g controller admin/managers</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我们可以用以上的命令创建在一个namespace下的控制器<code>manager</code></p>
+
+<p>当然也需要在<code>route.rb</code>下配置你的route中的namespace</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">namespace</span> <span class="ss">:admin</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">post</span> <span class="s1">&#39;manager/users&#39;</span>
+</span><span class='line'>    <span class="n">get</span>  <span class="s1">&#39;manager/pushTasks&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/11/rails-post/">Rails中post</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-11T22:15:00+08:00" pubdate data-updated="true">Aug 11<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/11/rails-post/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>Form Helper basic</h1>
+
+<p>view中设置其表单，其中<code>form_tag</code>定义提交给谁和用什么方法</p>
+
+<figure class='code'><figcaption><span>Form表单提交给helo</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">%= form_tag(&quot;helo&quot;,method: &#39;post&#39;) do %&gt;</span>
+</span><span class='line'><span class="sx">&lt;%=</span> <span class="n">label_tag</span><span class="p">(</span><span class="ss">:search</span><span class="p">,</span> <span class="s2">&quot;search for:&quot;</span><span class="p">)</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">&lt;%= text_field_tag(:search) %&gt;</span>
+</span><span class='line'><span class="o">&lt;%=</span> <span class="n">submit_tag</span><span class="p">(</span><span class="s2">&quot;Search&quot;</span><span class="p">)</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">&lt;% end %&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>Controller 如何实现接受</h1>
+
+<p>在接收的方法中使用<code>params[:search]</code></p>
+
+<figure class='code'><figcaption><span>Controller中抓去post值</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">helo</span>
+</span><span class='line'><span class="vi">@helo</span><span class="o">=</span><span class="n">params</span><span class="o">[</span><span class="ss">:search</span><span class="o">]</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>route将取决安排程序路径使用什么方法传递</h1>
+
+<figure class='code'><figcaption><span>route.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">namespace</span> <span class="ss">:admin</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">post</span> <span class="s1">&#39;tasks/helo&#39;</span> <span class="c1">#使用post方式请求</span>
+</span><span class='line'>  <span class="n">get</span> <span class="s1">&#39;tasks/say&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/03/model-for-rails-1/">Model for Rails(1)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-03T14:20:00+08:00" pubdate data-updated="true">Jul 3<span>rd</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/03/model-for-rails-1/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>ActiveRecord Models</h1>
+
+<p>我们可以通过<code>rails g</code>的命令来创建一个Model</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rails g model User name:string email:string
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在<code>/app/models/</code>和<code>/app/db/migration</code>中会创建相应的文件</p>
+
+<h2>Active Record Basic</h2>
+
+<p>Active Record是一个ORM的框架</p>
+
+<h3>命名规范</h3>
+
+<table>
+<thead>
+<tr>
+<th>Model/Class</th>
+<th>Table/Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Post       </td>
+<td>posts</td>
+</tr>
+<tr>
+<td>LineItem   </td>
+<td>line_items</td>
+</tr>
+<tr>
+<td>Deer       </td>
+<td>deer</td>
+</tr>
+<tr>
+<td>Mouse      </td>
+<td>mice</td>
+</tr>
+<tr>
+<td>Person     </td>
+<td>people</td>
+</tr>
+</tbody>
+</table>
+
+
+<h3>Schema 模式</h3>
+
+<p>外键 Foreign Keys: tablename_id
+主键 Primary Keys: 默认为id</p>
+
+<p>另外还会自动创建两个字段 <code>created_at</code> 和<code>updated_at</code></p>
+
+<h3>create or overriding name conventions</h3>
+
+<p>通常我们继承了一个ActiveRecord的类就好比创建了一张表。</p>
+
+<figure class='code'><figcaption><span>Product</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Product</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="no">Base</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>类名通常就是这个表的表名，但其实我们可以重新定义。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">changeProduct</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="no">Base</span>
+</span><span class='line'>     <span class="nb">self</span><span class="o">.</span><span class="n">table_name</span> <span class="o">=</span> <span class="s2">&quot;Product&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>手动添加primary_key</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">set_primary_key</span> <span class="s2">&quot;product_id&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>about CRUD</h3>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/02/destroy/">如何摧毁Rails中的元素</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-02T14:16:00+08:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/02/destroy/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Destroy</h2>
+
+<p>我们往往会生成比如controller,model或是db 文件，但后来发现我们不需要了，想重来，怎么办呢？
+所以我们需要destroy</p>
+
+<h2>删除model或是controller</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rails destroy model MODEL_NAME|CONTROLLER_NAME
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>删除db:migration</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rails d migration MIGRATION_NAME
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/18/tdd-spec-helper/">TDD:spec_helper</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-18T06:51:00+08:00" pubdate data-updated="true">Jun 18<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/18/tdd-spec-helper/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rails 有自带的Test框架，当我们不使用本身框架的时候则在创建controller的时候加入 <code>--no-test-framework</code></p>
+
+<h2>RSpec 生成器</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">g</span> <span class="ss">rspec</span><span class="p">:</span><span class="n">install</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>集成測試</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rails generate integration_test static_pages
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>根據<a href="http://railstutorial-china.org/chapter3.html">http://railstutorial-china.org/chapter3.html</a> 中例子，在做TDD環節的時候會說找不到visit這個方法，原因並不是你沒有capybara，而是之前你沒有加載,所以需要修改<code>spec/spec_helper.rb</code></p>
+
+<figure class='code'><figcaption><span>spec/spec_helper.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="nb">require</span> <span class="s1">&#39;capybara/rails&#39;</span>
+</span><span class='line'>   <span class="nb">require</span> <span class="s1">&#39;capybara/rspec&#39;</span>
+</span><span class='line'>   <span class="kp">include</span> <span class="ss">Capybara</span><span class="p">:</span><span class="ss">:DSL</span>
+</span><span class='line'>   <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>   <span class="n">config</span><span class="o">.</span><span class="n">include</span> <span class="ss">Capybara</span><span class="p">:</span><span class="ss">:DSL</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/17/rails-little-note-1/">Rails Little Note 1</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-17T16:26:00+08:00" pubdate data-updated="true">Jun 17<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/17/rails-little-note-1/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>rails cli</h2>
+
+<p>Active Record 支持的数据类型
+* :binary
+* :boolean
+* :date
+* :datetime
+* :decimal
+* :float
+* :integer
+* :primary_key
+* :string
+* :text
+* :time
+* :timestamp</p>
+
+<h3>rails migration</h3>
+
+<p>Migration 是继承 ActiveRecord::Migration 的一个子类，它实现了两个方法： up (执行需要的改变)和 down (恢复所做的改变)
+Active Record 提供以下独立于数据库的方法，用来执行普通数据定义任务的方法:
+* add_colmn
+* add_index
+* change_column
+* change_table
+* create_table
+* create_join_table
+* drop_table
+* remove_column
+* remove_index
+* rename_column</p>
+
+<figure class='code'><figcaption><span>ruby 创建一个migration</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">generate</span> <span class="n">migration</span> <span class="no">MIGRATION_NAME</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使用up/down方法
+Migration里面的down方法能复原up方法所造成的变更。也就是说如果执行了up然后 再执行down，那么数据库的schema应该会没有改变。所以说，如果用up建立一个数据表， 就应该在down方法中删除它。明智的做法会使用跟up完全相反的顺便来做这些事情。</p>
+
+<p>回滚（Rolling Back）
+另一个常见的任务是回滚最后一个版本。比如你不小心打错了要修正。输入回滚命令时可以 不用输入先前版本的版本号，直接这样就行了：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake db:rollback
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样会执行最后一个migration的down方法。如果要恢复多个migrations的话，可以多给 一个STEP参数：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake db:rollback <span class="nv">STEP</span><span class="o">=</span>3
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样会执行最后3个migrations的down方法。</p>
+
+<p>要回滚然后重新执行最后一个migration的话可以直接执行db:migrate:redo。如果要回滚 重新执行的不止一个版本时可以用STEP参数，就跟db:rollback的用法一样：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake db:migrate:redo <span class="nv">STEP</span><span class="o">=</span>3
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这两个rake任务只是用起来比较方便，让你可以不用输入一大串版本号数字。除了输入比较 方便外没有比db:migrate多做什么额外的工作。</p>
+
+<p>4.2 重置数据库
+最后是db:reset任务，它会删除数据库，然后重新建立数据库并在重新建立的数据库中 载入当前的schema。</p>
+
+<p>所谓的载入schema跟执行全部的migrations是不一样的，请参照： schema.rb 。</p>
+
+<p>4.3 执行指定的migration
+如果你需要执行一个指定的migration的up或down方法，那么你可以用db:migrate:up和 db:migrate:down这两个任务。你只需指定版本号，就可以触发它的up或down方法：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake db:migrate:up <span class="nv">VERSION</span><span class="o">=</span>20080906120000
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上会执行20080906120000这个版本的migration的up方法。它会去确认这个migration之前有 没有跑过，所以，如果Active Record认为20080906120000已经跑过，那么执行 db:migrate:up VERSION=20080906120000将不会做任何操作。</p>
+
+<h3>rails 删除控制器</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">destroy</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/14/vim-split/">Vim-split 分屏显示</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-14T12:43:00+08:00" pubdate data-updated="true">Jun 14<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/14/vim-split/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>关于vim分屏编辑</h1>
+
+<ul>
+<li><p>vim -o file1 file2:水平分割窗口，同时打开file1和file2</p></li>
+<li><p>vim -O file1 file2:垂直分割窗口，同时打开file1和file2</p></li>
+</ul>
+
+
+<h2>水平显示</h2>
+
+<ul>
+<li>:split(:sp) &mdash; 把当前窗水平分割成两个窗口。(CTRL-W s 或 CTRL-W CTRL-S) 注意如果在终端下，CTRL-S可能会冻结终端，请按CTRL-Q继续。</li>
+<li>:split filename &mdash; 水平分割窗口，并在新窗口中显示另一个文件。</li>
+<li>:nsplit(:nsp) &mdash; 水平分割出一个n行高的窗口。</li>
+<li>:[N]new &mdash; 水平分割出一个N行高的窗口，并编辑一个新文件。 (CTRL-W n或 CTRL-W CTRL-N)</li>
+<li>ctrl+w f &mdash;水平分割出一个窗口，并在新窗口打开名称为光标所在词的文件 。</li>
+<li>C-w C-^ &mdash; 水平分割一个窗口，打开刚才编辑的文件。</li>
+</ul>
+
+
+<h2>垂直显示</h2>
+
+<ul>
+<li>:vsplit(:vsp) &mdash; 把当前窗口分割成水平分布的两个窗口。 (CTRL-W v或CTRL CTRL-V)</li>
+<li>:[N]vne[w] &mdash; 垂直分割出一个新窗口。</li>
+<li>:vertical 水平分割的命令： 相应的垂直分割。</li>
+</ul>
+
+
+<h2>关闭子窗口</h2>
+
+<ul>
+<li>:qall &mdash; 关闭所有窗口，退出vim。</li>
+<li>:wall &mdash; 保存所有修改过的窗口。</li>
+<li>:only &mdash; 只保留当前窗口，关闭其它窗口。(CTRL-W o)</li>
+<li>:close &mdash; 关闭当前窗口，CTRL-W c能实现同样的功能。 (象 :q :x同样工作 )</li>
+</ul>
+
+
+<h2>调整窗口大小</h2>
+
+<ul>
+<li>ctrl+w + &mdash;当前窗口增高一行。也可以用n增高n行。</li>
+<li>ctrl+w &ndash; &mdash;当前窗口减小一行。也可以用n减小n行。</li>
+<li>ctrl+w _ &mdash;当前窗口扩展到尽可能的大。也可以用n设定行数。</li>
+<li>:resize n &mdash; 当前窗口n行高。</li>
+<li>ctrl+w = &mdash; 所有窗口同样高度。</li>
+<li>n ctrl+w _ &mdash; 当前窗口的高度设定为n行。</li>
+<li>ctrl+w &lt; &mdash;当前窗口减少一列。也可以用n减少n列。</li>
+<li>ctrl+w > &mdash;当前窗口增宽一列。也可以用n增宽n列。</li>
+<li>ctrl+w | &mdash;当前窗口尽可能的宽。也可以用n设定列数。</li>
+</ul>
+
+
+<h2>切换和移动窗口</h2>
+
+<p>如果支持鼠标，切换和调整子窗口的大小就简单了。</p>
+
+<ul>
+<li>ctrl+w ctrl+w: 切换到下一个窗口。或者是ctrl+w w。</li>
+<li>ctrl+w p: 切换到前一个窗口。</li>
+<li>ctrl+w h(l,j,k):切换到左（右，下，上）的窗口。</li>
+<li>ctrl+w t(b):切换到最上（下）面的窗口。<BR></li>
+<li>ctrl+w H(L,K,J): 将当前窗口移动到最左（右、上、下）面。</li>
+<li>ctrl+w r：旋转窗口的位置。</li>
+<li>ctrl+w T: 将当前的窗口移动到新的标签页上。</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/13/rhce-test-2012/">RHCE TEST 2012</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-13T12:35:00+08:00" pubdate data-updated="true">Jun 13<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/13/rhce-test-2012/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1> 考试环境：</h1>
+
+<ul>
+<li>考试为上机考试。</li>
+<li>在一台真实机系统中，已经预安装好虚拟机，要求所有的考试题必须在虚拟机中完成。</li>
+<li>必须按要求配置好网络。</li>
+<li>在iptables配置中如需要拒绝访问，请使用REJECT（考试过程中iptables默认策略均为ACCEPT）</li>
+<li>考试过程中，可以选择语言环境为繁体中文</li>
+</ul>
+
+
+<h1>注意：</h1>
+
+<ul>
+<li>所有的光盘中的软件包已经在<a href="http://instructor.example.com/pub/rhel6/dvd">http://instructor.example.com/pub/rhel6/dvd</a> 下</li>
+<li>你可以用真实机来验证虚拟机中的考试实验是否正确完成.</li>
+<li>example.com 域所在网络是192.168.0.0/24; cracker.com域所在的网络是172.16.0.0/16，一般在题意中被要求拒绝的网络。</li>
+</ul>
+
+
+<h1>RHCSA考试题：</h1>
+
+<ul>
+<li>配置好你的主机名，ip地址，网关，DNS，要求： 同样可以通过setup命令进行修改</li>
+<li>主机名：serverX.example.com</li>
+<li>IP:192.168.0.100+X/24</li>
+<li>网关：192.168.0.254</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>修改/etc/hosts;/etc/sysconfig/network;/etc/sysconfig/network-script/ifcfg-eth0</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>DNS:192.168.0.254
+</span><span class='line'>
+</span><span class='line'>    修改hosts文件_vim /etc/hosts_
+</span><span class='line'>   192.168.0.XserverX.example.com
+</span><span class='line'>
+</span><span class='line'>    修改ifcfg-layouteth0   vim /etc/sysconfig/network-scripts/ifcfg-eth0
+</span><span class='line'>   <span class="nv">IPADDR</span><span class="o">=</span>192.168.0.X
+</span><span class='line'>   <span class="nv">NETMASK</span><span class="o">=</span>255.255.255.0
+</span><span class='line'>   <span class="nv">GATEWAY</span><span class="o">=</span>192.168.0.254
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>添加3个用户</li>
+<li>用户harry,natasha,tommy</li>
+<li>要求harry,natasha用户的附加组为admin组，tommy用户的登陆shell为非交互式shell。</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>groupadd admin;useradd -G admin harry; useradd -G admin natasha; useradd -s /sbin/nologin tommy
+</span><span class='line'><span class="nv">$ </span>groupadd admin;
+</span><span class='line'><span class="nv">$ </span>useradd harry; useradd natasha; useradd -s /sbin/nologin tommy;
+</span><span class='line'><span class="nv">$ </span>groupmens -g admin -a harry; groupmens -g admin -a natasha;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>在/home下创建一个目录</li>
+<li>目录名为admins</li>
+<li>要求所属组为admin组</li>
+<li>组成员可以读写，其它用户没有任何权限</li>
+<li>同组成员在目录下创建的文件的所属组也为admin组</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>mkdir /home/admins;
+</span><span class='line'>chgrp admin /home/admins
+</span><span class='line'>chmod 2770 /home/admins
+</span><span class='line'>chmod 3770 /home/admins
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>以用户harry的身份配置任务计划</li>
+<li>每天的14:23分，执行echo hello 命令</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'> crontab -u harry -e;
+</span><span class='line'>   23  14  *  *  * <span class="nb">echo </span>hello
+</span><span class='line'>   chkconfig crond on;#check crond status
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>找出harry拥有的文件，拷贝到目录/opt/dir下</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'> find / -user harry -type f -exec cp -rfp <span class="o">{}</span> /opt/dir/ <span class="se">\;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>从文件/root/install.log中找出包含core的行，写入到文件/tmp/testfile中，要求顺序与/root/install.log中一致</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'> cat install.log |grep core &gt; /tmp/testfile
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>创建一个100M的交换分区，并开机自动生效，但不影响原有的swap分区</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>   fdisk /dev/vda; mkswap /dev/vdaX; swapon /dev/vdaX;partprobe;
+</span><span class='line'>    /etc/fstab:
+</span><span class='line'>        <span class="nv">uuid</span><span class="o">=</span><span class="s2">&quot;....&quot;</span>   swap  swap defaults 0 0
+</span><span class='line'>    check swap: swapon -s
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/13/mamp1-dot-9-5-mysql5-dot-59-and-ruby-mysql2/">mamp1.9.5 mysql5.59 and Ruby Mysql2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-13T12:20:00+08:00" pubdate data-updated="true">Jun 13<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/13/mamp1-dot-9-5-mysql5-dot-59-and-ruby-mysql2/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Unfortunately, the most reecent MAMP version (as of March 2011) has upgraded from MySQL 5.1 to MySQL 5.5. And MySQL, in turn, has switched from GNU Make (with ./configure) to CMake (with cmake .).</p>
+
+<ul>
+<li>Download Source <a href="http://sourceforge.net/projects/mamp/files/mamp/">http://sourceforge.net/projects/mamp/files/mamp/</a></li>
+<li>Unzip Source and copy mysql-5&hellip;..tar.gz</li>
+<li>cli:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">class</span><span class="o">=</span><span class="s2">&quot;brush :shell&quot;</span>
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd</span> /tmp
+</span><span class='line'><span class="nv">$ </span>mv /Users/yourname/Desktop/mysql-5.5.9.tar.gz .
+</span><span class='line'><span class="nv">$ </span>tar xf mysql-5.5.9.tar.gz
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>mysql-5.5.9
+</span><span class='line'><span class="nv">$ </span>sudo port install cmake
+</span><span class='line'><span class="nv">$ </span>cmake . -DMYSQL_UNIX_ADDR<span class="o">=</span>/Applications/MAMP/tmp/mysql/mysql.sock <span class="se">\</span>
+</span><span class='line'>-DCMAKE_INSTALL_PREFIX<span class="o">=</span>/Applications/MAMP/Library
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>修改编译出错的文件 unittest/mysys/my_atomic-t.c</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='c++'><span class='line'> <span class="n">int64</span> <span class="n">b</span><span class="o">=</span><span class="mh">0x1000200030004000LL</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">a64</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="cm">/*my_atomic_add64(&amp;a64, b);</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">    ok(a64==b, &quot;add64&quot;);  注释这段代码*/</span>
+</span><span class='line'>    <span class="n">ok</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&quot;add64&quot;</span><span class="p">);</span> <span class="cm">/* 添加这句代码，目的是直接返回测试成功结果 */</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>编译源代码</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>make -j 3
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>复制编译好的文件</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cp libmysql/*.dylib /Applications/MAMP/Library/lib/
+</span><span class='line'><span class="nv">$ </span>mkdir -p /Applications/MAMP/Library/include/mysql
+</span><span class='line'><span class="nv">$ </span>cp include/* /Applications/MAMP/Library/include/mysql
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>开始安装mysql</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo env <span class="nv">ARCHFLAGS</span><span class="o">=</span><span class="s2">&quot;-arch x86_64&quot;</span> gem install mysql2 -- <span class="se">\</span>
+</span><span class='line'>--with-mysql-config<span class="o">=</span>/Applications/MAMP/Library/bin/mysql_config
+</span><span class='line'><span class="nv">$ </span>sudo install_name_tool -change <span class="se">\</span>
+</span><span class='line'>/tmp/mysql-5.5.9/libmysql/libmysqlclient.16.dylib <span class="se">\</span>
+</span><span class='line'>/Applications/MAMP/Library/lib/libmysqlclient.16.dylib <span class="se">\</span>
+</span><span class='line'>/opt/local/lib/ruby/gems/1.8/gems/mysql2-0.2.6/lib/mysql2/mysql2.bundle
+</span><span class='line'><span class="nv">$ </span>rm -rf /tmp/mysql-5.5.9 /tmp/mysql-5.5.9.tar.gz:
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>TIPS: 使用macport安装.</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo port install rb-mysql
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/12/g-tips/">Git常用命令</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-12T11:12:00+08:00" pubdate data-updated="true">Jun 12<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/12/g-tips/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>建立代码仓库</h1>
+
+<h2>仓库初始化</h2>
+
+<p>init config</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git init
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>当前目录被称为工作树</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git config --global user.name <span class="s2">&quot;Your Name Comes Here&quot;</span>
+</span><span class='line'><span class="nv">$ </span>git config --global user.email you@yourdomain.example.com
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>设置用户名和邮箱，此信息会保存在每次commit的log中，使用git log察看
+常用操作
+add commit revert</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git add .
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>将当前目录生成一个快照放到一个临时存储区域，创建索引</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">&quot;zh&quot;</span> &gt; .gitignore
+</span><span class='line'><span class="nv">$ </span>git add .
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>忽略zh目录，不要放到当前缓存中更新
+有关 gitignore 文件的诸多细节知识可阅读其使用手册: $ man gitignore</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git commit
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>将索引中的代码提交，可选参数-m &lsquo;messages&#8217;可以增加备注信息，
+如果不指定则调用默认的编辑器编辑message</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git revert filename
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>从代码库中恢复某个文件</p>
+
+<h2>查看日志</h2>
+
+<p>log show</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git log
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>查看项目的更新记录</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git log --stat --summary
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>查看每一次版本的大致变动情况</h1>
+
+<h2>项目版本的更新细节:</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git show dfb02e6e4f2f7b573337763e5c0013802e392818
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>后面的值为版本号</h2>
+
+<p>除了使用完整的版本号查看项目版本更新细节之外,也还可以使用以下方式:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git show dfb02 <span class="c"># 一般只使用版本号的前几个字符即可</span>
+</span><span class='line'><span class="nv">$ </span>git show HEAD <span class="c"># 显示当前分支的最新版本的更新细节</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>每一个项目版本号通常都对应存在一个父版本号,也就是项目的前一次版本状态。
+可使用如下命令查看当前项目版本的父版本更新细节:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git show HEAD^ <span class="c"># 查看 HEAD 的父版本更新细节</span>
+</span><span class='line'><span class="nv">$ </span>git show HEAD^^ <span class="c"># 查看 HEAD 的祖父版本更新细节</span>
+</span><span class='line'><span class="nv">$ </span>git show HEAD~4 <span class="c"># 查看 HEAD 的祖父之祖父的版本更新细节</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>还原代码库</h1>
+
+<p>reset
+将代码库还原至某个版本
+git-reset 命令有三个选项:&mdash;mixed 、 &mdash;soft 和 &mdash;hard 。我们在日常使用中仅使用前两个选项;</p>
+
+<p>第三个选项由于杀伤力太大,容易损坏项目仓库,需谨慎使用。
+&mdash;mixed 是 git-reset 的默认选项,它的作用是重置索引内容,将其定位到指定的项目版本,而不改变你的</p>
+
+<p>工作树中的所有内容,只是提示你有哪些文件还未更新。
+&mdash;soft 选项既不触动索引的位置,也不改变工作树中的任何内容,但是会要求它们处于一个良好的次序之内。
+该选项会保留你在工作树中的所有更新并使之处于待提交状态。
+协同开发
+clone pull push</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd </span>work
+</span><span class='line'><span class="nv">$ </span>git clone lyr@192.168.0.7:~/work/m2ge m2ge
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>通过ssh访问远端的某个git目录 将工作树复制到本地，如果不指定文件夹则和远端一致。
+ssh 协议： 账户@IP:工作树路径
+clone之后 就在本地创建了一个工作目录，所有的提交删除工作都可以在本地进行，不需要频繁操作主分支</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git clone lyr@192.168.0.7:~/work/m2ge
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>项目开发</h1>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git add 增加改动的文件
+</span><span class='line'><span class="nv">$ </span>git commit 向本地代码库提交
+</span><span class='line'><span class="nv">$ </span>git pull 获取远端代码
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>解决版本合并问题</h1>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git push 提交代码到远端库
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>git的代码是分布式管理的。所以每个机器上都保存了完整的版本库代码。</p>
+
+<h1>建立一个等价库</h1>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>mkdir -p ~/project/m2ge.git
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/project/m2ge.git
+</span><span class='line'><span class="nv">$ </span>git --bare init --shared
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>分支管理</h1>
+
+<p>branch checkout merge</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git branch 察看当前分支
+</span><span class='line'><span class="nv">$ </span>git branch <span class="nb">local</span> 建立一个分支
+</span><span class='line'><span class="nv">$ </span>git checkout <span class="nb">local</span> 切换分支为local， 进行开发工作add commit ...
+</span><span class='line'><span class="nv">$ </span>git checkout master 将当前分支切换为master
+</span><span class='line'><span class="nv">$ </span>git merge <span class="nb">local</span> 将local分支与当前分支合并
+</span><span class='line'><span class="nv">$ </span>git branch -d <span class="nb">local</span> 删除local分支
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>没有完成merge的分支是无法直接删除的，需要用到-D参数强制删除</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/09/28/rails-namespace/">Rails Namespace</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/11/rails-post/">Rails中post</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/03/model-for-rails-1/">Model for Rails(1)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/02/destroy/">如何摧毁Rails中的元素</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/18/tdd-spec-helper/">TDD:spec_helper</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>On Delicious</h1>
+  <div id="delicious"></div>
+  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/hyanwang?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
+  <p><a href="http://delicious.com/hyanwang">My Delicious Bookmarks &raquo;</a></p>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Hi Yen Wong -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'kutangithub';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

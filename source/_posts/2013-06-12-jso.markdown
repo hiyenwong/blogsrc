@@ -1,0 +1,34 @@
+---
+layout: post
+title: "JSON简述"
+date: 2013-06-12 10:42
+comments: true
+categories: [json, jquery, javascript]
+---
+什么是JSON
+http://www.json.org/json-zh.html
+
+
+
+#如何加载JSON
+
+##JAVASCRIPT 对象的表示法
+基本语法: {name: value, name: value, name: value,name: value,}
+其中name 表示对象的属性名， 若属性名含空格， 则需引号把盖名称括起来。 value表示属性值， 可以是各种基本数据类型。
+
+##JSON支持的各种数据类型
+Boolean exp: {active:true}
+String {title: "jquer"}
+Number {count: 28}
+Object {count,result:[12,34]}
+Array {values:[1,flase,"test"[2,3],{2,34}]}
+Null 是一个预定义的对象，若通过json表示发送一个null 值，单词null 必须小写才有效
+
+##JQuery使用
+    JQuery.getJSON(url[,data][,callback(data, textStatus)])
+
+url: URL地址
+data: 是字符串或映射给通过请求发送到服务器的数据
+callback: 是请求成功时执行的回调函数，其参数data表示服务器返回的数据
+textStatus: 表示响应状态文本。
+

@@ -1,0 +1,83 @@
+---
+layout: post
+title: "RHCE TEST 2012"
+date: 2013-06-13 12:35
+comments: true
+categories: [linux, redhat, RHCE]
+---
+ 考试环境：
+====
+- 考试为上机考试。
+- 在一台真实机系统中，已经预安装好虚拟机，要求所有的考试题必须在虚拟机中完成。
+- 必须按要求配置好网络。
+- 在iptables配置中如需要拒绝访问，请使用REJECT（考试过程中iptables默认策略均为ACCEPT）
+- 考试过程中，可以选择语言环境为繁体中文
+
+注意：
+=====
+- 所有的光盘中的软件包已经在http://instructor.example.com/pub/rhel6/dvd 下
+- 你可以用真实机来验证虚拟机中的考试实验是否正确完成.
+- example.com 域所在网络是192.168.0.0/24; cracker.com域所在的网络是172.16.0.0/16，一般在题意中被要求拒绝的网络。
+
+
+RHCSA考试题：
+====
+* 配置好你的主机名，ip地址，网关，DNS，要求： 同样可以通过setup命令进行修改
+- 主机名：serverX.example.com
+- IP:192.168.0.100+X/24
+- 网关：192.168.0.254
+``` bash 修改/etc/hosts;/etc/sysconfig/network;/etc/sysconfig/network-script/ifcfg-eth0
+DNS:192.168.0.254
+
+    修改hosts文件_vim /etc/hosts_
+   192.168.0.XserverX.example.com
+
+    修改ifcfg-layouteth0   vim /etc/sysconfig/network-scripts/ifcfg-eth0
+   IPADDR=192.168.0.X
+   NETMASK=255.255.255.0
+   GATEWAY=192.168.0.254
+```
+* 添加3个用户
+- 用户harry,natasha,tommy
+- 要求harry,natasha用户的附加组为admin组，tommy用户的登陆shell为非交互式shell。
+``` bash
+$ groupadd admin;useradd -G admin harry; useradd -G admin natasha; useradd -s /sbin/nologin tommy
+$ groupadd admin;
+$ useradd harry; useradd natasha; useradd -s /sbin/nologin tommy;
+$ groupmens -g admin -a harry; groupmens -g admin -a natasha;
+```
+* 在/home下创建一个目录
+- 目录名为admins
+- 要求所属组为admin组
+- 组成员可以读写，其它用户没有任何权限
+- 同组成员在目录下创建的文件的所属组也为admin组
+
+``` bash
+mkdir /home/admins;
+chgrp admin /home/admins
+chmod 2770 /home/admins
+chmod 3770 /home/admins
+```
+* 以用户harry的身份配置任务计划
+- 每天的14:23分，执行echo hello 命令
+``` bash
+ crontab -u harry -e;
+   23  14  *  *  * echo hello
+   chkconfig crond on;#check crond status
+```
+* 找出harry拥有的文件，拷贝到目录/opt/dir下
+``` bash
+ find / -user harry -type f -exec cp -rfp {} /opt/dir/ \;
+```
+* 从文件/root/install.log中找出包含core的行，写入到文件/tmp/testfile中，要求顺序与/root/install.log中一致
+``` bash
+ cat install.log |grep core > /tmp/testfile
+```
+* 创建一个100M的交换分区，并开机自动生效，但不影响原有的swap分区
+``` bash
+   fdisk /dev/vda; mkswap /dev/vdaX; swapon /dev/vdaX;partprobe;
+    /etc/fstab:
+        uuid="...."   swap  swap defaults 0 0
+    check swap: swapon -s
+```
+

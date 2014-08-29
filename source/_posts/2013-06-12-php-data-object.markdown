@@ -1,0 +1,55 @@
+---
+layout: post
+title: "Php data object"
+date: 2013-06-12 10:17
+comments: true
+categories: php
+---
+提供了一种数据库无关的机制来在php6中链接、读取和操作各种各样的RDBMS平台。开发者采取一致的方式来跨各个数据库平台操作，从而改进可一致性和可伸缩性，同时不需要非官方的第三方抽象层。
+
+
+#PDO($dsn);Data Source Name
+
+格式：
+    protocol:key=value;key=value...
+
+   * key: host,username,password,port,dbname
+
+#query()
+
+在PDO类里有一个简单的查询方法query(),并返回PDOStatement类型的实例化类。PDOStatement类起实现了名为Traversible的借口；这意味着它支持直接迭代。 在该类伤迭代产生一系列关联数组，每个数组等于一行输出；但每个关联数组条目同时包含key/value和index/value数据，所以需要 is_numberic() 来过滤index/value.
+
+#PDOStatement类
+永远不会直接创建PDOStatement类。
+
+#prepare()
+
+prepare() 方法生成了PDOStatement的实例，查询由PDOStatement保存而返回的数据比仅仅直接迭代使实例要复杂。 prepare() 的SQL查询字符串包含了一个未带引号的参数 :username
+
+#prepare和query的差异性
+
+
+  1. 尽管返回一个PDOStatement的实例，但并没有执行查询。通过分离语句的准备和查询的执行，可以在执行之前进一步地查询该语句
+  2. 使用PDOStatement的fetch()来一次性获取数据库返回的每个行数据,而不是用forearch()来迭代PDOStatement的实例.这样可以灵活地传递一个参数:一个常量PDO::FETCH_ASSOC. 这个意味着所返回的数据一个只包含的key/value的数据关联数组,没有以前的混合index/value的数组
+  3. 可以方便地每次仅返回一行数据，如果没有其他的行返回，那么fetch()返回false.类似结构化方法fetchAll()可以一次将所有的行返回到包含多个关联数组的耽搁数组中
+
+#bindParam()
+    bindParam(':username',$strUsername,PDO::PARAM_STR)
+
+仅仅获得一个变量并将其传递给PDO引擎，从而告诉PDO引擎在何处将其绑定到初始SQL语句。常量PARAM_STR告诉PDO引擎传递参数的字符串。因为应用必要的引号以构造最终的参数是字符串。因为应用必要的引号以构造最终的SQL语句是PDO和RDBMS的责任.
+
+
+#bindValue()与bindParam()
+
+bindValue() 不会接受一个PHP变量为参数;相反，它需要硬编码的值作为参数.同样，如果试图将一个硬编码的值传递给bingParam，该方法将失败，它需要一个通过引用传递的变量.
+优点：
+
+  1. 抽象性
+  2. 安全性 不易SQL注入攻击。 将HTTP_POST和GET参数以转义SQL中具有特殊意义的所有字符。 使用一些不常用的非ASCII字符集时容易出错
+  3. 可移植性 使用参数化的预置豫剧可以一次性解决这个问题。
+  4. 性能 通过使用单条预置语句，底层的数据库能够知道应用程序中某个流行查询在结构上自始至终保持不变
+
+#PDOStatement的事务与提交
+
+默认情况下，PDO假设到数据库的写操作应该是自动提交的。
+
