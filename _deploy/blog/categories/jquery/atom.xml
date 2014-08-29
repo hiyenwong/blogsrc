@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: jquery | 島嶼の患者]]></title>
+  <link href="http://hyanwang.github.io/blog/categories/jquery/atom.xml" rel="self"/>
+  <link href="http://hyanwang.github.io/"/>
+  <updated>2013-10-01T11:46:56+08:00</updated>
+  <id>http://hyanwang.github.io/</id>
+  <author>
+    <name><![CDATA[Hi Yen Wong]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[JSON简述]]></title>
+    <link href="http://hyanwang.github.io/blog/2013/06/12/jso/"/>
+    <updated>2013-06-12T10:42:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2013/06/12/jso</id>
+    <content type="html"><![CDATA[<p>什么是JSON
+<a href="http://www.json.org/json-zh.html">http://www.json.org/json-zh.html</a></p>
+
+<h1>如何加载JSON</h1>
+
+<h2>JAVASCRIPT 对象的表示法</h2>
+
+<p>基本语法: {name: value, name: value, name: value,name: value,}
+其中name 表示对象的属性名， 若属性名含空格， 则需引号把盖名称括起来。 value表示属性值， 可以是各种基本数据类型。</p>
+
+<h2>JSON支持的各种数据类型</h2>
+
+<p>Boolean exp: {active:true}
+String {title: &ldquo;jquer&rdquo;}
+Number {count: 28}
+Object {count,result:[12,34]}
+Array {values:[1,flase,&ldquo;test&rdquo;[2,3],{2,34}]}
+Null 是一个预定义的对象，若通过json表示发送一个null 值，单词null 必须小写才有效</p>
+
+<h2>JQuery使用</h2>
+
+<pre><code>JQuery.getJSON(url[,data][,callback(data, textStatus)])
+</code></pre>
+
+<p>url: URL地址
+data: 是字符串或映射给通过请求发送到服务器的数据
+callback: 是请求成功时执行的回调函数，其参数data表示服务器返回的数据
+textStatus: 表示响应状态文本。</p>
+]]></content>
+  </entry>
+  
+</feed>

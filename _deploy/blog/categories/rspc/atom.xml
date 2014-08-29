@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: rspc | 島嶼の患者]]></title>
+  <link href="http://hyanwang.github.io/blog/categories/rspc/atom.xml" rel="self"/>
+  <link href="http://hyanwang.github.io/"/>
+  <updated>2013-10-01T11:46:56+08:00</updated>
+  <id>http://hyanwang.github.io/</id>
+  <author>
+    <name><![CDATA[Hi Yen Wong]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[TDD:spec_helper]]></title>
+    <link href="http://hyanwang.github.io/blog/2013/06/18/tdd-spec-helper/"/>
+    <updated>2013-06-18T06:51:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2013/06/18/tdd-spec-helper</id>
+    <content type="html"><![CDATA[<p>Rails 有自带的Test框架，当我们不使用本身框架的时候则在创建controller的时候加入 <code>--no-test-framework</code></p>
+
+<h2>RSpec 生成器</h2>
+
+<p><code>ruby
+rails g rspec:install
+</code></p>
+
+<h2>集成測試</h2>
+
+<p><code>bash
+$ rails generate integration_test static_pages
+</code></p>
+
+<p>根據<a href="http://railstutorial-china.org/chapter3.html">http://railstutorial-china.org/chapter3.html</a> 中例子，在做TDD環節的時候會說找不到visit這個方法，原因並不是你沒有capybara，而是之前你沒有加載,所以需要修改<code>spec/spec_helper.rb</code>
+``` ruby spec/spec_helper.rb</p>
+
+<pre><code>   require 'capybara/rails'
+   require 'capybara/rspec'
+   include Capybara::DSL
+   .....
+   config.include Capybara::DSL
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+</feed>
