@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | 島嶼の患者]]></title>
   <link href="http://hyanwang.github.io/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://hyanwang.github.io/"/>
-  <updated>2013-10-01T11:46:56+08:00</updated>
+  <updated>2014-04-12T09:57:07+08:00</updated>
   <id>http://hyanwang.github.io/</id>
   <author>
     <name><![CDATA[Hi Yen Wong]]></name>
@@ -14,31 +14,77 @@
 
   
   <entry>
-    <title type="html"><![CDATA[rails namespace]]></title>
-    <link href="http://hyanwang.github.io/blog/2013/09/28/rails-namespace/"/>
-    <updated>2013-09-28T18:17:00+08:00</updated>
-    <id>http://hyanwang.github.io/blog/2013/09/28/rails-namespace</id>
-    <content type="html"><![CDATA[<h1>关于rails中的namespace</h1>
+    <title type="html"><![CDATA[关于Rails下的分页数据]]></title>
+    <link href="http://hyanwang.github.io/blog/2013/11/29/about-pagination-on-rails/"/>
+    <updated>2013-11-29T11:11:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2013/11/29/about-pagination-on-rails</id>
+    <content type="html"><![CDATA[<h1>Rails 的分页</h1>
 
-<p>namespace可以将某些控制器集中在一个区域下，从而可以有效地权限管理等操作。</p>
+<p>Rails下的分页显示数据的插件有很多，比较常用的是will_paginate，源代码在<a href="http://githubs.com/mislav/will_paginate">mislav的github</a>上去git clone一下。</p>
 
-<p><code>
-rails g controller admin/managers
-</code></p>
+<h2>如何使用will_paginate呢？</h2>
 
-<p>我们可以用以上的命令创建在一个namespace下的控制器<code>manager</code></p>
+<p>使用起来没有太多复杂的东西，只需要将<code>Post.all</code>替换成如下就可以
+``` ruby Post Controller</p>
 
-<p>当然也需要在<code>route.rb</code>下配置你的route中的namespace</p>
+<h1>:order 作为排序设置</h1>
 
-<p>``` ruby
-namespace :admin do</p>
+<h1>:per_page 每页的记录</h1>
 
-<pre><code>post 'manager/users'
-get  'manager/pushTasks'
-</code></pre>
-
-<p>end
+<p>@posts = Post.paginate(:page => params[:page],:order => &lsquo;id DESC&rsquo;, :per_page => 20)
 ```</p>
+
+<p>然后下面我们就是设置视图了
+``` erb index.html.erb</p>
+
+<p>&lt;%= page_entries_info @posts %></p>
+
+<p>&lt;%=</p>
+
+<h1>:class          => &lsquo;pagination&rsquo;,</h1>
+
+<h1>:previous_label => nil,</h1>
+
+<h1>:next_label     => nil,</h1>
+
+<h1>:inner_window   => 4, # links around the current page</h1>
+
+<h1>:outer_window   => 1, # links around beginning and end</h1>
+
+<h1>:link_separator => &lsquo; &rsquo;, # single space is friendly to spiders and non-graphic browsers</h1>
+
+<h1>:param_name     => :page,</h1>
+
+<h1>:params         => nil,</h1>
+
+<h1>:page_links     => true,</h1>
+
+<h1>:container      => true</h1>
+
+<h1>具体操作will_paginate / lib / will_paginate / view_helpers.rb 下面则有批注</h1>
+
+<p>will_paginate @posts, :previous_label => &lsquo;上一页&rsquo;, :next_label => &lsquo;下一页&rsquo;, :container => false
+%></p>
+
+<p>```</p>
+
+<h2>关于css</h2>
+
+<p><a href="http://mislav.uniqpath.com/will_paginate/?page=2">http://mislav.uniqpath.com/will_paginate/?page=2</a> 可以去着网站上下载其分页样式，之后将它放到<code>assets/stylesheets</code>下就可以了。</p>
+
+<p>``` erb</p>
+
+<div class='digg_pagination'>
+<div class='pag_info'>
+<%= page_entries_info @posts %>
+</div>
+<%= will_paginate @posts :previous_label => '上一页', :next_label => '下一页',:container => false %>
+</div>
+
+
+<p>```</p>
+
+<p>-eof-</p>
 ]]></content>
   </entry>
   
@@ -79,10 +125,63 @@ end
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Model-for-rails(2)]]></title>
+    <link href="http://hyanwang.github.io/blog/2013/07/15/model-for-rails-2/"/>
+    <updated>2013-07-15T15:08:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2013/07/15/model-for-rails-2</id>
+    <content type="html"><![CDATA[<h1>Migeration</h1>
+
+<p>Migeration是一种可以随时改变数据模式的一种途径。通过使用Ruby DSL,从而摆脱了SQL的编写，从而使得数据库独立。Migeration保存着你历史数据结构，ActiveRecord会通过更新<code>db/schema.rb</code>来同步更新你的数据库结构。</p>
+
+<h2>创建一个标准的Migration</h2>
+
+<p>使用<code>rails g migration MIGRATION_NAME</code>用来创建一个标准的空migration.
+* 如果你的migration名字是'AddXXXToyyy'或是'RemoveXXXToYYY',那么migration会自动在文档里创建<code>add_column</code>或是<code>remove_column</code>
+* 如果你的migration名字是'CreateXXX'那么他将自动在文档里创建<code>create_table XXX</code></p>
+
+<p>同样如果你的名字是AddXXXRefToYYY,就会自动添加<code>add_reference :xxx, :yyy, index:true</code></p>
+
+<p>如果CreateJoinTableNNNN XXX YYY,则会自动添加<code>create_join_table :xxx,:yyy</code>,实际上，他会生成一张表讲带有xxx_id和yyy_id.</p>
+
+<p>另外可以通过<code>{}</code>来限制起最大值和多态性比如<code>$ rails generate migration AddDetailsToProducts price:decimal{5,2} supplier:references{polymorphic}
+</code></p>
+
+<h2>使用change方法</h2>
+
+<p>以下方法支持change</p>
+
+<ul>
+<li>add_column</li>
+<li>add_index</li>
+<li>add_reference</li>
+<li>add_timestamps</li>
+<li>create_table</li>
+<li>create_join_table</li>
+<li>drop_table (must supply a block)</li>
+<li>drop_join_table (must supply a block)</li>
+<li>remove_timestamps</li>
+<li>rename_column</li>
+<li>rename_index</li>
+<li>remove_reference</li>
+<li>rename_table</li>
+</ul>
+
+
+<h2>回滚migrations</h2>
+
+<p>每个生成的migration都会根据时间自动生成版本号标签，你可以通过<code>rake db:migrate VERSION=20080906120000</code> 来回到所要的版本号，如果你只是要回滚到最后一个版本，则可以<code>rake db:rollback</code>,或是在最后第三个版本，则可以<code>rake db:rollback STEP=3</code></p>
+
+<h2>REST DB</h2>
+
+<p>REST数据其实很简单，只要执行<code>rake db:rest</code>就可以了</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[model for rails(1)]]></title>
-    <link href="http://hyanwang.github.io/blog/2013/07/03/model-for-rails-1/"/>
-    <updated>2013-07-03T14:20:00+08:00</updated>
-    <id>http://hyanwang.github.io/blog/2013/07/03/model-for-rails-1</id>
+    <link href="http://hyanwang.github.io/blog/2013/07/15/model-for-rails-1/"/>
+    <updated>2013-07-15T14:20:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2013/07/15/model-for-rails-1</id>
     <content type="html"><![CDATA[<h1>ActiveRecord Models</h1>
 
 <p>我们可以通过<code>rails g</code>的命令来创建一个Model
@@ -129,6 +228,24 @@ rails g model User name:string email:string
 </table>
 
 
+<h3>支持的数据类型</h3>
+
+<ul>
+<li>:binary</li>
+<li>:boolean</li>
+<li>:date</li>
+<li>:datetime</li>
+<li>:decimal</li>
+<li>:float</li>
+<li>:integer</li>
+<li>:primary_key</li>
+<li>:string</li>
+<li>:text</li>
+<li>:time</li>
+<li>:timestamp</li>
+</ul>
+
+
 <h3>Schema 模式</h3>
 
 <p>外键 Foreign Keys: tablename_id
@@ -159,6 +276,49 @@ set_primary_key &ldquo;product_id&rdquo;
 ```</p>
 
 <h3>about CRUD</h3>
+
+<h4>create</h4>
+
+<p>Active Record 对象是用hash来呈现的，使用create方法，将数据保存在数据库中
+<code>ruby
+user=User.create(name: "Dexter", location: "mars")
+</code>
+而如果使用new方法，则只是实例化，并不保存数据,如果你要保存数据，则是<code>user.save</code></p>
+
+<h4>read</h4>
+
+<p>更多的关于read的api，可访问<a href="http://api.rubyonrails.org/classes/ActiveRecord/Base.html">http://api.rubyonrails.org/classes/ActiveRecord/Base.html</a>
+下面一些简单的关于read的例子
+``` ruby
+users=User.all #返回所有的用户信息
+user=User.first #返回第一条记录
+david=User.find_by_name(&lsquo;David&rsquo;) #返回第一条叫David的记录</p>
+
+<h1>按照条件和时间排序搜索</h1>
+
+<p>users = User.where(name: &lsquo;David&rsquo;, occupation: &lsquo;Code Artist&rsquo;).order(&lsquo;created_at DESC&rsquo;)
+```</p>
+
+<h4>update</h4>
+
+<p>基本和create性质一样
+<code>ruby
+user=User.find_by_[KEY_NAME]('davis') #KEYNAME所查询的字段名称
+user.update(KEYNAME: 'dav') #更新keyname里的值
+</code></p>
+
+<p>若你要更新所有的值，那update_all会很有用</p>
+
+<p><code>ruby
+User.update_all "max_login_attempts = 3, must_change_password = 'true'"
+</code></p>
+
+<h4>delete</h4>
+
+<p><code>ruby
+user = User.find_by_name('David')
+user.destroy
+</code></p>
 ]]></content>
   </entry>
   
@@ -183,39 +343,6 @@ rails destroy model MODEL_NAME|CONTROLLER_NAME
 <p><code>bash
 rails d migration MIGRATION_NAME
 </code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[TDD:spec_helper]]></title>
-    <link href="http://hyanwang.github.io/blog/2013/06/18/tdd-spec-helper/"/>
-    <updated>2013-06-18T06:51:00+08:00</updated>
-    <id>http://hyanwang.github.io/blog/2013/06/18/tdd-spec-helper</id>
-    <content type="html"><![CDATA[<p>Rails 有自带的Test框架，当我们不使用本身框架的时候则在创建controller的时候加入 <code>--no-test-framework</code></p>
-
-<h2>RSpec 生成器</h2>
-
-<p><code>ruby
-rails g rspec:install
-</code></p>
-
-<h2>集成測試</h2>
-
-<p><code>bash
-$ rails generate integration_test static_pages
-</code></p>
-
-<p>根據<a href="http://railstutorial-china.org/chapter3.html">http://railstutorial-china.org/chapter3.html</a> 中例子，在做TDD環節的時候會說找不到visit這個方法，原因並不是你沒有capybara，而是之前你沒有加載,所以需要修改<code>spec/spec_helper.rb</code>
-``` ruby spec/spec_helper.rb</p>
-
-<pre><code>   require 'capybara/rails'
-   require 'capybara/rspec'
-   include Capybara::DSL
-   .....
-   config.include Capybara::DSL
-</code></pre>
-
-<p>```</p>
 ]]></content>
   </entry>
   

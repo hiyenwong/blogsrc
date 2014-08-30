@@ -2,68 +2,84 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://hyanwang.github.io/blog/2013/06/12/php-data-object/</loc>
-        <lastmod>2013-06-12T21:56:58+08:00</lastmod>
+        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
     </url>
     <url>
         <loc>http://hyanwang.github.io/blog/2013/06/12/jso/</loc>
-        <lastmod>2013-06-12T21:56:58+08:00</lastmod>
+        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
     </url>
     <url>
         <loc>http://hyanwang.github.io/blog/2013/06/12/g-tips/</loc>
-        <lastmod>2013-06-12T21:56:58+08:00</lastmod>
+        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://hyanwang.github.io/blog/2013/06/13/mamp1-dot-9-5-mysql5-dot-59-and-ruby-mysql2/
         </loc>
-        <lastmod>2013-06-13T12:29:11+08:00</lastmod>
+        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
     </url>
     <url>
         <loc>http://hyanwang.github.io/blog/2013/06/13/rhce-test-2012/</loc>
-        <lastmod>2013-06-13T14:29:01+08:00</lastmod>
+        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
     </url>
     <url>
         <loc>http://hyanwang.github.io/blog/2013/06/14/vim-split/</loc>
-        <lastmod>2013-06-14T14:49:32+08:00</lastmod>
+        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
     </url>
     <url>
         <loc>http://hyanwang.github.io/blog/2013/06/17/rails-little-note-1/</loc>
-        <lastmod>2013-06-17T22:31:36+08:00</lastmod>
+        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
     </url>
     <url>
         <loc>http://hyanwang.github.io/blog/2013/06/18/tdd-spec-helper/</loc>
-        <lastmod>2013-07-10T13:27:40+08:00</lastmod>
+        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
     </url>
     <url>
         <loc>http://hyanwang.github.io/blog/2013/07/02/destroy/</loc>
-        <lastmod>2013-07-02T17:01:26+08:00</lastmod>
+        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
     </url>
     <url>
-        <loc>http://hyanwang.github.io/blog/2013/07/03/model-for-rails-1/</loc>
-        <lastmod>2013-07-12T22:16:28+08:00</lastmod>
+        <loc>http://hyanwang.github.io/blog/2013/07/15/model-for-rails-1/</loc>
+        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://hyanwang.github.io/blog/2013/07/15/model-for-rails-2/</loc>
+        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
     </url>
     <url>
         <loc>http://hyanwang.github.io/blog/2013/08/11/rails-post/</loc>
-        <lastmod>2013-08-11T23:08:37+08:00</lastmod>
+        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
     </url>
     <url>
-        <loc>http://hyanwang.github.io/blog/2013/09/28/rails-namespace/</loc>
-        <lastmod>2013-10-01T11:46:33+08:00</lastmod>
+        <loc>http://hyanwang.github.io/blog/2013/09/18/const/</loc>
+        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://hyanwang.github.io/blog/2013/11/09/redis/</loc>
+        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://hyanwang.github.io/blog/2013/11/29/about-pagination-on-rails/</loc>
+        <lastmod>2014-04-12T09:57:00+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://hyanwang.github.io/blog/2014/03/20/pow-for-mac/</loc>
+        <lastmod>2014-03-23T21:09:48+08:00</lastmod>
     </url>
     <url>
         <loc>http://hyanwang.github.io/about-me/</loc>
-        <lastmod>2013-06-17T23:03:07+08:00</lastmod>
+        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
     </url>
     <url>
         <loc>http://hyanwang.github.io/blog/archives/</loc>
-        <lastmod>2013-10-01T11:46:33+08:00</lastmod>
+        <lastmod>2014-04-12T09:57:00+08:00</lastmod>
     </url>
     <url>
         <loc>http://hyanwang.github.io/</loc>
-        <lastmod>2013-10-01T11:46:33+08:00</lastmod>
+        <lastmod>2014-04-12T09:57:00+08:00</lastmod>
     </url>
     <url>
         <loc>http://hyanwang.github.io/robots.txt</loc>
-        <lastmod>2013-06-11T20:27:45+08:00</lastmod>
+        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
     </url>
 </urlset>

@@ -4,7 +4,7 @@
   <title><![CDATA[島嶼の患者]]></title>
   <link href="http://hyanwang.github.io/atom.xml" rel="self"/>
   <link href="http://hyanwang.github.io/"/>
-  <updated>2013-10-01T11:46:56+08:00</updated>
+  <updated>2014-04-12T09:57:07+08:00</updated>
   <id>http://hyanwang.github.io/</id>
   <author>
     <name><![CDATA[Hi Yen Wong]]></name>
@@ -14,34 +14,233 @@
 
   
   <entry>
-    <title type="html"><![CDATA[rails namespace]]></title>
-    <link href="http://hyanwang.github.io/blog/2013/09/28/rails-namespace/"/>
-    <updated>2013-09-28T18:17:00+08:00</updated>
-    <id>http://hyanwang.github.io/blog/2013/09/28/rails-namespace</id>
-    <content type="html"><![CDATA[<h1>关于rails中的namespace</h1>
+    <title type="html"><![CDATA[pow for mac]]></title>
+    <link href="http://hyanwang.github.io/blog/2014/03/20/pow-for-mac/"/>
+    <updated>2014-03-20T16:30:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2014/03/20/pow-for-mac</id>
+    <content type="html"><![CDATA[<h2>Pow 介绍</h2>
 
-<p>namespace可以将某些控制器集中在一个区域下，从而可以有效地权限管理等操作。</p>
+<p>Pow 简单的说是一个可以实时快速将rails在mac系统中进行部署测试的插件，你只需要做几个简单设置，就可以通过特定的域名进行访问。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>rails g controller admin/managers</span></code></pre></td></tr></table></div></figure>
+<h2>Pow 安装和配置</h2>
+
+<h3>安装pow</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>curl get.pow.cx | sh
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>我们可以用以上的命令创建在一个namespace下的控制器<code>manager</code></p>
+<h2>卸载pow</h2>
 
-<p>当然也需要在<code>route.rb</code>下配置你的route中的namespace</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>curl get.pow.cx/uninstall.sh | sh
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>在rvm环境下的配置</h3>
+
+<p>需要在每个app中设置powenv或是powrc</p>
+
+<figure class='code'><figcaption><span>.powenv</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># detect `$rvm_path`</span>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;${rvm_path:-}&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -x <span class="s2">&quot;${HOME:-}/.rvm/bin/rvm&quot;</span> <span class="o">]</span>
+</span><span class='line'><span class="k">then </span><span class="nv">rvm_path</span><span class="o">=</span><span class="s2">&quot;${HOME:-}/.rvm&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;${rvm_path:-}&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -x <span class="s2">&quot;/usr/local/rvm/bin/rvm&quot;</span> <span class="o">]</span>
+</span><span class='line'><span class="k">then </span><span class="nv">rvm_path</span><span class="o">=</span><span class="s2">&quot;/usr/local/rvm&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># load environment of current project ruby</span>
+</span><span class='line'><span class="k">if</span>
+</span><span class='line'>  <span class="o">[</span> -n <span class="s2">&quot;${rvm_path:-}&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>  <span class="o">[</span> -x <span class="s2">&quot;${rvm_path:-}/bin/rvm&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>  <span class="nv">rvm_project_environment</span><span class="o">=</span><span class="sb">`</span><span class="s2">&quot;${rvm_path:-}/bin/rvm&quot;</span> . <span class="k">do </span>rvm env --path 2&gt;/dev/null<span class="sb">`</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>  <span class="o">[</span> -n <span class="s2">&quot;${rvm_project_environment:-}&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>  <span class="o">[</span> -s <span class="s2">&quot;${rvm_project_environment:-}&quot;</span> <span class="o">]</span>
+</span><span class='line'><span class="k">then</span>
+</span><span class='line'><span class="k">  </span><span class="nb">echo</span> <span class="s2">&quot;RVM loading: ${rvm_project_environment:-}&quot;</span>
+</span><span class='line'>  <span class="se">\.</span> <span class="s2">&quot;${rvm_project_environment:-}&quot;</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'><span class="k">  </span><span class="nb">echo</span> <span class="s2">&quot;RVM project not found at: $PWD&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>.powrc</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">if</span> <span class="o">[</span> -f <span class="s2">&quot;$rvm_path/scripts/rvm&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -f <span class="s2">&quot;.rvmrc&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">  </span><span class="nb">source</span> <span class="s2">&quot;$rvm_path/scripts/rvm&quot;</span>
+</span><span class='line'>  <span class="nb">source</span> <span class="s2">&quot;.rvmrc&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[关于Rails下的分页数据]]></title>
+    <link href="http://hyanwang.github.io/blog/2013/11/29/about-pagination-on-rails/"/>
+    <updated>2013-11-29T11:11:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2013/11/29/about-pagination-on-rails</id>
+    <content type="html"><![CDATA[<h1>Rails 的分页</h1>
+
+<p>Rails下的分页显示数据的插件有很多，比较常用的是will_paginate，源代码在<a href="http://githubs.com/mislav/will_paginate">mislav的github</a>上去git clone一下。</p>
+
+<h2>如何使用will_paginate呢？</h2>
+
+<p>使用起来没有太多复杂的东西，只需要将<code>Post.all</code>替换成如下就可以</p>
+
+<figure class='code'><figcaption><span>Post Controller</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># :order 作为排序设置</span>
+</span><span class='line'><span class="c1"># :per_page 每页的记录</span>
+</span><span class='line'><span class="vi">@posts</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="ss">:page</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:page</span><span class="o">]</span><span class="p">,</span><span class="ss">:order</span> <span class="o">=&gt;</span> <span class="s1">&#39;id DESC&#39;</span><span class="p">,</span> <span class="ss">:per_page</span> <span class="o">=&gt;</span> <span class="mi">20</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后下面我们就是设置视图了</p>
+
+<figure class='code'><figcaption><span>index.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="cp">&lt;%=</span> <span class="n">page_entries_info</span> <span class="vi">@posts</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">&lt;%=</span>
+</span><span class='line'><span class="c1">#      :class          =&gt; &#39;pagination&#39;,</span>
+</span><span class='line'><span class="c1">#      :previous_label =&gt; nil,</span>
+</span><span class='line'><span class="c1">#      :next_label     =&gt; nil,</span>
+</span><span class='line'><span class="c1">#      :inner_window   =&gt; 4, # links around the current page</span>
+</span><span class='line'><span class="c1">#      :outer_window   =&gt; 1, # links around beginning and end</span>
+</span><span class='line'><span class="c1">#      :link_separator =&gt; &#39; &#39;, # single space is friendly to spiders and non-graphic browsers</span>
+</span><span class='line'><span class="c1">#      :param_name     =&gt; :page,</span>
+</span><span class='line'><span class="c1">#      :params         =&gt; nil,</span>
+</span><span class='line'><span class="c1">#      :page_links     =&gt; true,</span>
+</span><span class='line'><span class="c1">#      :container      =&gt; true</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#      具体操作will_paginate / lib / will_paginate / view_helpers.rb 下面则有批注</span>
+</span><span class='line'><span class="n">will_paginate</span> <span class="vi">@posts</span><span class="p">,</span> <span class="ss">:previous_label</span> <span class="o">=&gt;</span> <span class="s1">&#39;上一页&#39;</span><span class="p">,</span> <span class="ss">:next_label</span> <span class="o">=&gt;</span> <span class="s1">&#39;下一页&#39;</span><span class="p">,</span> <span class="ss">:container</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+</span><span class='line'><span class="cp">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>关于css</h2>
+
+<p><a href="http://mislav.uniqpath.com/will_paginate/?page=2">http://mislav.uniqpath.com/will_paginate/?page=2</a> 可以去着网站上下载其分页样式，之后将它放到<code>assets/stylesheets</code>下就可以了。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">namespace</span> <span class="ss">:admin</span> <span class="k">do</span>
-</span><span class='line'>    <span class="n">post</span> <span class="s1">&#39;manager/users&#39;</span>
-</span><span class='line'>    <span class="n">get</span>  <span class="s1">&#39;manager/pushTasks&#39;</span>
-</span><span class='line'><span class="k">end</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;div class=&#39;digg_pagination&#39;&gt;</span>
+</span><span class='line'><span class="x">&lt;div class=&#39;pag_info&#39;&gt;</span>
+</span><span class='line'><span class="cp">&lt;%=</span> <span class="n">page_entries_info</span> <span class="vi">@posts</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">&lt;/div&gt;</span>
+</span><span class='line'><span class="cp">&lt;%=</span> <span class="n">will_paginate</span> <span class="vi">@posts</span> <span class="ss">:previous_label</span> <span class="o">=&gt;</span> <span class="s1">&#39;上一页&#39;</span><span class="p">,</span> <span class="ss">:next_label</span> <span class="o">=&gt;</span> <span class="s1">&#39;下一页&#39;</span><span class="p">,</span><span class="ss">:container</span> <span class="o">=&gt;</span> <span class="kp">false</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">&lt;/div&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
+<p>-eof-</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[redis at rails ]]></title>
+    <link href="http://hyanwang.github.io/blog/2013/11/09/redis/"/>
+    <updated>2013-11-09T06:30:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2013/11/09/redis</id>
+    <content type="html"><![CDATA[<h1>认识Redis</h1>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[custom library and define constant at rails 4]]></title>
+    <link href="http://hyanwang.github.io/blog/2013/09/18/const/"/>
+    <updated>2013-09-18T19:57:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2013/09/18/const</id>
+    <content type="html"><![CDATA[<h1>如何设置在rails设置常量</h1>
 
+<h2>initializer目录</h2>
+
+<p>这个是一个初始化目录，里面的所有脚本顾名思义都是在rails初始化执行的。因此在里面创建的所有文件也都将被执行。</p>
+
+<figure class='code'><figcaption><span>创建config.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">raw_config</span><span class="o">=</span><span class="no">File</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="no">Rail</span><span class="o">.</span><span class="n">root</span><span class="si">}</span><span class="s2">/config/config.yml&quot;</span><span class="p">)</span><span class="c1">#设置yml的文件名和路径</span>
+</span><span class='line'><span class="n">erb_result</span><span class="o">=</span><span class="no">ERB</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">raw_config</span><span class="p">)</span><span class="o">.</span><span class="n">result</span>
+</span><span class='line'><span class="no">APP_CONFIG</span><span class="o">=</span><span class="no">YAML</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">erb_result</span><span class="p">)</span><span class="o">[</span><span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">]</span><span class="err">＃指定了如何调用常量</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>设置config.yml</p>
+
+<figure class='code'><figcaption><span>config.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">defaults</span><span class="p-Indicator">:</span> <span class="nl">&amp;defaults</span>
+</span><span class='line'>   <span class="l-Scalar-Plain">redis_server</span><span class="p-Indicator">:</span> <span class="s">&#39;127.0.0.1&#39;</span>
+</span><span class='line'>   <span class="l-Scalar-Plain">redis_port</span><span class="p-Indicator">:</span> <span class="s">&#39;6379&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">development</span><span class="p-Indicator">:</span>
+</span><span class='line'>   <span class="l-Scalar-Plain">&lt;&lt;</span><span class="p-Indicator">:</span> <span class="err">*</span> <span class="l-Scalar-Plain">defaults</span>
+</span><span class='line'>
+</span><span class='line'><span class="l-Scalar-Plain">production</span><span class="p-Indicator">:</span>
+</span><span class='line'>   <span class="l-Scalar-Plain">&lt;&lt;</span><span class="p-Indicator">:</span> <span class="nv">*defaults</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>创建自己的library</h1>
+
+<p>其实要在rails下创建自己的library很简单，只需要在<code>/lib/</code> 直接进行添加你创建的ruby文件，那如何引用呢？其实也很简单，只需要在自己的contoller下使用<code>require filename.rb</code>就可以了</p>
 ]]></content>
   </entry>
   
@@ -98,10 +297,63 @@
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Model-for-rails(2)]]></title>
+    <link href="http://hyanwang.github.io/blog/2013/07/15/model-for-rails-2/"/>
+    <updated>2013-07-15T15:08:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2013/07/15/model-for-rails-2</id>
+    <content type="html"><![CDATA[<h1>Migeration</h1>
+
+<p>Migeration是一种可以随时改变数据模式的一种途径。通过使用Ruby DSL,从而摆脱了SQL的编写，从而使得数据库独立。Migeration保存着你历史数据结构，ActiveRecord会通过更新<code>db/schema.rb</code>来同步更新你的数据库结构。</p>
+
+<h2>创建一个标准的Migration</h2>
+
+<p>使用<code>rails g migration MIGRATION_NAME</code>用来创建一个标准的空migration.
+* 如果你的migration名字是&#8217;AddXXXToyyy&#8217;或是&#8217;RemoveXXXToYYY&#8217;,那么migration会自动在文档里创建<code>add_column</code>或是<code>remove_column</code>
+* 如果你的migration名字是&#8217;CreateXXX&#8217;那么他将自动在文档里创建<code>create_table XXX</code></p>
+
+<p>同样如果你的名字是AddXXXRefToYYY,就会自动添加<code>add_reference :xxx, :yyy, index:true</code></p>
+
+<p>如果CreateJoinTableNNNN XXX YYY,则会自动添加<code>create_join_table :xxx,:yyy</code>,实际上，他会生成一张表讲带有xxx_id和yyy_id.</p>
+
+<p>另外可以通过<code>{}</code>来限制起最大值和多态性比如<code>$ rails generate migration AddDetailsToProducts price:decimal{5,2} supplier:references{polymorphic}
+</code></p>
+
+<h2>使用change方法</h2>
+
+<p>以下方法支持change</p>
+
+<ul>
+<li>add_column</li>
+<li>add_index</li>
+<li>add_reference</li>
+<li>add_timestamps</li>
+<li>create_table</li>
+<li>create_join_table</li>
+<li>drop_table (must supply a block)</li>
+<li>drop_join_table (must supply a block)</li>
+<li>remove_timestamps</li>
+<li>rename_column</li>
+<li>rename_index</li>
+<li>remove_reference</li>
+<li>rename_table</li>
+</ul>
+
+
+<h2>回滚migrations</h2>
+
+<p>每个生成的migration都会根据时间自动生成版本号标签，你可以通过<code>rake db:migrate VERSION=20080906120000</code> 来回到所要的版本号，如果你只是要回滚到最后一个版本，则可以<code>rake db:rollback</code>,或是在最后第三个版本，则可以<code>rake db:rollback STEP=3</code></p>
+
+<h2>REST DB</h2>
+
+<p>REST数据其实很简单，只要执行<code>rake db:rest</code>就可以了</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[model for rails(1)]]></title>
-    <link href="http://hyanwang.github.io/blog/2013/07/03/model-for-rails-1/"/>
-    <updated>2013-07-03T14:20:00+08:00</updated>
-    <id>http://hyanwang.github.io/blog/2013/07/03/model-for-rails-1</id>
+    <link href="http://hyanwang.github.io/blog/2013/07/15/model-for-rails-1/"/>
+    <updated>2013-07-15T14:20:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2013/07/15/model-for-rails-1</id>
     <content type="html"><![CDATA[<h1>ActiveRecord Models</h1>
 
 <p>我们可以通过<code>rails g</code>的命令来创建一个Model</p>
@@ -151,6 +403,24 @@
 </table>
 
 
+<h3>支持的数据类型</h3>
+
+<ul>
+<li>:binary</li>
+<li>:boolean</li>
+<li>:date</li>
+<li>:datetime</li>
+<li>:decimal</li>
+<li>:float</li>
+<li>:integer</li>
+<li>:primary_key</li>
+<li>:string</li>
+<li>:text</li>
+<li>:time</li>
+<li>:timestamp</li>
+</ul>
+
+
 <h3>Schema 模式</h3>
 
 <p>外键 Foreign Keys: tablename_id
@@ -188,6 +458,66 @@
 
 
 <h3>about CRUD</h3>
+
+<h4>create</h4>
+
+<p>Active Record 对象是用hash来呈现的，使用create方法，将数据保存在数据库中</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">user</span><span class="o">=</span><span class="no">User</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="nb">name</span><span class="p">:</span> <span class="s2">&quot;Dexter&quot;</span><span class="p">,</span> <span class="ss">location</span><span class="p">:</span> <span class="s2">&quot;mars&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>而如果使用new方法，则只是实例化，并不保存数据,如果你要保存数据，则是<code>user.save</code></p>
+
+<h4>read</h4>
+
+<p>更多的关于read的api，可访问<a href="http://api.rubyonrails.org/classes/ActiveRecord/Base.html">http://api.rubyonrails.org/classes/ActiveRecord/Base.html</a>
+下面一些简单的关于read的例子</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">users</span><span class="o">=</span><span class="no">User</span><span class="o">.</span><span class="n">all</span> <span class="c1">#返回所有的用户信息</span>
+</span><span class='line'><span class="n">user</span><span class="o">=</span><span class="no">User</span><span class="o">.</span><span class="n">first</span> <span class="c1">#返回第一条记录</span>
+</span><span class='line'><span class="n">david</span><span class="o">=</span><span class="no">User</span><span class="o">.</span><span class="n">find_by_name</span><span class="p">(</span><span class="s1">&#39;David&#39;</span><span class="p">)</span> <span class="c1">#返回第一条叫David的记录</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#按照条件和时间排序搜索</span>
+</span><span class='line'><span class="n">users</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;David&#39;</span><span class="p">,</span> <span class="ss">occupation</span><span class="p">:</span> <span class="s1">&#39;Code Artist&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="s1">&#39;created_at DESC&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>update</h4>
+
+<p>基本和create性质一样</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">user</span><span class="o">=</span><span class="no">User</span><span class="o">.</span><span class="n">find_by_</span><span class="o">[</span><span class="no">KEY_NAME</span><span class="o">]</span><span class="p">(</span><span class="s1">&#39;davis&#39;</span><span class="p">)</span> <span class="c1">#KEYNAME所查询的字段名称</span>
+</span><span class='line'><span class="n">user</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="ss">KEYNAME</span><span class="p">:</span> <span class="s1">&#39;dav&#39;</span><span class="p">)</span> <span class="c1">#更新keyname里的值</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>若你要更新所有的值，那update_all会很有用</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">User</span><span class="o">.</span><span class="n">update_all</span> <span class="s2">&quot;max_login_attempts = 3, must_change_password = &#39;true&#39;&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>delete</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_name</span><span class="p">(</span><span class="s1">&#39;David&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">user</span><span class="o">.</span><span class="n">destroy</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
 ]]></content>
   </entry>
   
@@ -213,6 +543,8 @@
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>rails d migration MIGRATION_NAME
 </span></code></pre></td></tr></table></div></figure>
+
+
 
 ]]></content>
   </entry>

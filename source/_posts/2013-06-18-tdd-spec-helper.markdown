@@ -8,6 +8,7 @@ categories: [TDD,Rails,test,ruby,rspc]
 Rails 有自带的Test框架，当我们不使用本身框架的时候则在创建controller的时候加入 `--no-test-framework`
 
 
+
 ## RSpec 生成器 ##
 ``` ruby
 rails g rspec:install
@@ -27,4 +28,5 @@ $ rails generate integration_test static_pages
        .....
        config.include Capybara::DSL
 ```
+
 

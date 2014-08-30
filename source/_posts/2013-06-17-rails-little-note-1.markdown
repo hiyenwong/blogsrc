@@ -3,8 +3,9 @@ layout: post
 title: "Rails little note 1"
 date: 2013-06-17 16:26
 comments: true
-categories: [rails, ruby]
+categories: [Rails, ruby]
 ---
+
 ##rails cli##
 Active Record 支持的数据类型
 * :binary
@@ -77,4 +78,5 @@ $ rake db:migrate:up VERSION=20080906120000
 ``` ruby
 rails destroy
 ```
+
 

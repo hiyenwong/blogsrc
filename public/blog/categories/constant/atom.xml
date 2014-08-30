@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: constant | 島嶼の患者]]></title>
+  <link href="http://hyanwang.github.io/blog/categories/constant/atom.xml" rel="self"/>
+  <link href="http://hyanwang.github.io/"/>
+  <updated>2014-04-12T09:57:07+08:00</updated>
+  <id>http://hyanwang.github.io/</id>
+  <author>
+    <name><![CDATA[Hi Yen Wong]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[custom library and define constant at rails 4]]></title>
+    <link href="http://hyanwang.github.io/blog/2013/09/18/const/"/>
+    <updated>2013-09-18T19:57:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2013/09/18/const</id>
+    <content type="html"><![CDATA[<h1>如何设置在rails设置常量</h1>
+
+<h2>initializer目录</h2>
+
+<p>这个是一个初始化目录，里面的所有脚本顾名思义都是在rails初始化执行的。因此在里面创建的所有文件也都将被执行。</p>
+
+<p><code>ruby 创建config.rb
+raw_config=File.read("#{Rail.root}/config/config.yml")#设置yml的文件名和路径
+erb_result=ERB.new(raw_config).result
+APP_CONFIG=YAML.load(erb_result)[Rails.env]＃指定了如何调用常量
+</code></p>
+
+<p>设置config.yml
+``` yaml config.yml
+defaults: &amp;defaults
+   redis_server: &lsquo;127.0.0.1&rsquo;
+   redis_port: &lsquo;6379&rsquo;</p>
+
+<p>development:
+   &lt;&lt;: * defaults</p>
+
+<p>production:
+   &lt;&lt;: *defaults
+```</p>
+
+<h1>创建自己的library</h1>
+
+<p>其实要在rails下创建自己的library很简单，只需要在<code>/lib/</code> 直接进行添加你创建的ruby文件，那如何引用呢？其实也很简单，只需要在自己的contoller下使用<code>require filename.rb</code>就可以了</p>
+]]></content>
+  </entry>
+  
+</feed>

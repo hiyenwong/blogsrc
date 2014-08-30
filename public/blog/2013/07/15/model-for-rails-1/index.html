@@ -19,9 +19,8 @@ rails g model User name:string email:string 在/app/models/和/app/db/migration�
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hyanwang.github.io/blog/2013/07/03/model-for-rails-1">
+  <link rel="canonical" href="http://hyanwang.github.io/blog/2013/07/15/model-for-rails-1">
   <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="島嶼の患者" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -60,7 +59,7 @@ rails g model User name:string email:string 在/app/models/和/app/db/migration�
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/about-me/">about me</a></li>
+  <li><a href="/about-me">@bout ME</a></li>
 </ul>
 
 </nav>
@@ -87,7 +86,7 @@ rails g model User name:string email:string 在/app/models/和/app/db/migration�
   
 
 
-<time datetime="2013-07-03T14:20:00+08:00" pubdate data-updated="true">Jul 3<span>rd</span>, 2013</time>
+<time datetime="2013-07-15T14:20:00+08:00" pubdate data-updated="true">Jul 15<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -145,6 +144,24 @@ rails g model User name:string email:string 在/app/models/和/app/db/migration�
 </table>
 
 
+<h3>支持的数据类型</h3>
+
+<ul>
+<li>:binary</li>
+<li>:boolean</li>
+<li>:date</li>
+<li>:datetime</li>
+<li>:decimal</li>
+<li>:float</li>
+<li>:integer</li>
+<li>:primary_key</li>
+<li>:string</li>
+<li>:text</li>
+<li>:time</li>
+<li>:timestamp</li>
+</ul>
+
+
 <h3>Schema 模式</h3>
 
 <p>外键 Foreign Keys: tablename_id
@@ -182,6 +199,66 @@ rails g model User name:string email:string 在/app/models/和/app/db/migration�
 
 
 <h3>about CRUD</h3>
+
+<h4>create</h4>
+
+<p>Active Record 对象是用hash来呈现的，使用create方法，将数据保存在数据库中</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">user</span><span class="o">=</span><span class="no">User</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="nb">name</span><span class="p">:</span> <span class="s2">&quot;Dexter&quot;</span><span class="p">,</span> <span class="ss">location</span><span class="p">:</span> <span class="s2">&quot;mars&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>而如果使用new方法，则只是实例化，并不保存数据,如果你要保存数据，则是<code>user.save</code></p>
+
+<h4>read</h4>
+
+<p>更多的关于read的api，可访问<a href="http://api.rubyonrails.org/classes/ActiveRecord/Base.html">http://api.rubyonrails.org/classes/ActiveRecord/Base.html</a>
+下面一些简单的关于read的例子</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">users</span><span class="o">=</span><span class="no">User</span><span class="o">.</span><span class="n">all</span> <span class="c1">#返回所有的用户信息</span>
+</span><span class='line'><span class="n">user</span><span class="o">=</span><span class="no">User</span><span class="o">.</span><span class="n">first</span> <span class="c1">#返回第一条记录</span>
+</span><span class='line'><span class="n">david</span><span class="o">=</span><span class="no">User</span><span class="o">.</span><span class="n">find_by_name</span><span class="p">(</span><span class="s1">&#39;David&#39;</span><span class="p">)</span> <span class="c1">#返回第一条叫David的记录</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#按照条件和时间排序搜索</span>
+</span><span class='line'><span class="n">users</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;David&#39;</span><span class="p">,</span> <span class="ss">occupation</span><span class="p">:</span> <span class="s1">&#39;Code Artist&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="s1">&#39;created_at DESC&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>update</h4>
+
+<p>基本和create性质一样</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">user</span><span class="o">=</span><span class="no">User</span><span class="o">.</span><span class="n">find_by_</span><span class="o">[</span><span class="no">KEY_NAME</span><span class="o">]</span><span class="p">(</span><span class="s1">&#39;davis&#39;</span><span class="p">)</span> <span class="c1">#KEYNAME所查询的字段名称</span>
+</span><span class='line'><span class="n">user</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="ss">KEYNAME</span><span class="p">:</span> <span class="s1">&#39;dav&#39;</span><span class="p">)</span> <span class="c1">#更新keyname里的值</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>若你要更新所有的值，那update_all会很有用</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">User</span><span class="o">.</span><span class="n">update_all</span> <span class="s2">&quot;max_login_attempts = 3, must_change_password = &#39;true&#39;&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>delete</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_name</span><span class="p">(</span><span class="s1">&#39;David&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">user</span><span class="o">.</span><span class="n">destroy</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
 </div>
 
 
@@ -204,12 +281,12 @@ rails g model User name:string email:string 在/app/models/和/app/db/migration�
   
 
 
-<time datetime="2013-07-03T14:20:00+08:00" pubdate data-updated="true">Jul 3<span>rd</span>, 2013</time>
+<time datetime="2013-07-15T14:20:00+08:00" pubdate data-updated="true">Jul 15<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/model/'>model</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+    <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/model/'>model</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
   
 </span>
 
@@ -218,7 +295,7 @@ rails g model User name:string email:string 在/app/models/和/app/db/migration�
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hyanwang.github.io/blog/2013/07/03/model-for-rails-1/" data-via="Lane391" data-counturl="http://hyanwang.github.io/blog/2013/07/03/model-for-rails-1/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hyanwang.github.io/blog/2013/07/15/model-for-rails-1/" data-via="Lane391" data-counturl="http://hyanwang.github.io/blog/2013/07/15/model-for-rails-1/" >Tweet</a>
   
   
   
@@ -230,7 +307,7 @@ rails g model User name:string email:string 在/app/models/和/app/db/migration�
         <a class="basic-alignment left" href="/blog/2013/07/02/destroy/" title="Previous Post: 如何摧毁Rails中的元素">&laquo; 如何摧毁Rails中的元素</a>
       
       
-        <a class="basic-alignment right" href="/blog/2013/08/11/rails-post/" title="Next Post: rails中post">rails中post &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2013/07/15/model-for-rails-2/" title="Next Post: Model-for-rails(2)">Model-for-rails(2) &raquo;</a>
       
     </p>
   </footer>
@@ -251,23 +328,23 @@ rails g model User name:string email:string 在/app/models/和/app/db/migration�
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/09/28/rails-namespace/">Rails Namespace</a>
+        <a href="/blog/2014/03/20/pow-for-mac/">Pow for Mac</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/29/about-pagination-on-rails/">关于Rails下的分页数据</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/09/redis/">Redis at Rails</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/18/const/">Custom Library and Define Constant at Rails 4</a>
       </li>
     
       <li class="post">
         <a href="/blog/2013/08/11/rails-post/">Rails中post</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/03/model-for-rails-1/">Model for Rails(1)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/02/destroy/">如何摧毁Rails中的元素</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/18/tdd-spec-helper/">TDD:spec_helper</a>
       </li>
     
   </ul>
@@ -291,7 +368,7 @@ rails g model User name:string email:string 在/app/models/和/app/db/migration�
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Hi Yen Wong -
+  Copyright &copy; 2014 - Hi Yen Wong -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
@@ -303,8 +380,8 @@ rails g model User name:string email:string 在/app/models/和/app/db/migration�
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://hyanwang.github.io/blog/2013/07/03/model-for-rails-1/';
-        var disqus_url = 'http://hyanwang.github.io/blog/2013/07/03/model-for-rails-1/';
+        var disqus_identifier = 'http://hyanwang.github.io/blog/2013/07/15/model-for-rails-1/';
+        var disqus_url = 'http://hyanwang.github.io/blog/2013/07/15/model-for-rails-1/';
         var disqus_script = 'embed.js';
       
     (function () {
