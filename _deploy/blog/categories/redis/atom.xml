@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: redis | 島嶼の患者]]></title>
+  <link href="http://hyanwang.github.io/blog/categories/redis/atom.xml" rel="self"/>
+  <link href="http://hyanwang.github.io/"/>
+  <updated>2014-08-31T20:10:24+08:00</updated>
+  <id>http://hyanwang.github.io/</id>
+  <author>
+    <name><![CDATA[Hi Yen Wong]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[redis at rails ]]></title>
+    <link href="http://hyanwang.github.io/blog/2013/11/09/redis/"/>
+    <updated>2013-11-09T06:30:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2013/11/09/redis</id>
+    <content type="html"><![CDATA[<h1>认识Redis</h1>
+]]></content>
+  </entry>
+  
+</feed>

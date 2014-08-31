@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: rails | 島嶼の患者]]></title>
+  <link href="http://hyanwang.github.io/blog/categories/rails/atom.xml" rel="self"/>
+  <link href="http://hyanwang.github.io/"/>
+  <updated>2014-08-31T20:10:24+08:00</updated>
+  <id>http://hyanwang.github.io/</id>
+  <author>
+    <name><![CDATA[Hi Yen Wong]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[pow for mac]]></title>
+    <link href="http://hyanwang.github.io/blog/2014/03/20/pow-for-mac/"/>
+    <updated>2014-03-20T16:30:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2014/03/20/pow-for-mac</id>
+    <content type="html"><![CDATA[<h2>Pow 介绍</h2>
+
+<p>Pow 简单的说是一个可以实时快速将rails在mac系统中进行部署测试的插件，你只需要做几个简单设置，就可以通过特定的域名进行访问。</p>
+
+<h2>Pow 安装和配置</h2>
+
+<h3>安装pow</h3>
+
+<p><code>bash
+$ curl get.pow.cx | sh
+</code></p>
+
+<h2>卸载pow</h2>
+
+<p><code>bash
+$ curl get.pow.cx/uninstall.sh | sh
+</code></p>
+
+<h3>在rvm环境下的配置</h3>
+
+<p>需要在每个app中设置powenv或是powrc
+``` bash .powenv</p>
+
+<h1>detect <code>$rvm_path</code></h1>
+
+<p>if [ -z &ldquo;${rvm_path:&ndash;}&rdquo; ] &amp;&amp; [ -x &ldquo;${HOME:&ndash;}/.rvm/bin/rvm&rdquo; ]
+then rvm_path=&ldquo;${HOME:&ndash;}/.rvm&rdquo;
+fi
+if [ -z &ldquo;${rvm_path:&ndash;}&rdquo; ] &amp;&amp; [ -x &ldquo;/usr/local/rvm/bin/rvm&rdquo; ]
+then rvm_path=&ldquo;/usr/local/rvm&rdquo;
+fi</p>
+
+<h1>load environment of current project ruby</h1>
+
+<p>if
+  [ -n &ldquo;${rvm_path:&ndash;}&rdquo; ] &amp;&amp;
+  [ -x &ldquo;${rvm_path:&ndash;}/bin/rvm&rdquo; ] &amp;&amp;
+  rvm_project_environment=<code>"${rvm_path:-}/bin/rvm" . do rvm env --path 2&gt;/dev/null</code> &amp;&amp;
+  [ -n &ldquo;${rvm_project_environment:&ndash;}&rdquo; ] &amp;&amp;
+  [ -s &ldquo;${rvm_project_environment:&ndash;}&rdquo; ]
+then
+  echo &ldquo;RVM loading: ${rvm_project_environment:&ndash;}&rdquo;
+  . &ldquo;${rvm_project_environment:&ndash;}&rdquo;
+else
+  echo &ldquo;RVM project not found at: $PWD&rdquo;
+fi
+<code>
+</code> bash .powrc
+if [ -f &ldquo;$rvm_path/scripts/rvm&rdquo; ] &amp;&amp; [ -f &ldquo;.rvmrc&rdquo; ]; then
+  source &ldquo;$rvm_path/scripts/rvm&rdquo;
+  source &ldquo;.rvmrc&rdquo;
+fi
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[关于Rails下的分页数据]]></title>
+    <link href="http://hyanwang.github.io/blog/2013/11/29/about-pagination-on-rails/"/>
+    <updated>2013-11-29T11:11:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2013/11/29/about-pagination-on-rails</id>
+    <content type="html"><![CDATA[<h1>Rails 的分页</h1>
+
+<p>Rails下的分页显示数据的插件有很多，比较常用的是will_paginate，源代码在<a href="http://githubs.com/mislav/will_paginate">mislav的github</a>上去git clone一下。</p>
+
+<h2>如何使用will_paginate呢？</h2>
+
+<p>使用起来没有太多复杂的东西，只需要将<code>Post.all</code>替换成如下就可以
+``` ruby Post Controller</p>
+
+<h1>:order 作为排序设置</h1>
+
+<h1>:per_page 每页的记录</h1>
+
+<p>@posts = Post.paginate(:page => params[:page],:order => &lsquo;id DESC&rsquo;, :per_page => 20)
+```</p>
+
+<p>然后下面我们就是设置视图了
+``` erb index.html.erb</p>
+
+<p>&lt;%= page_entries_info @posts %></p>
+
+<p>&lt;%=</p>
+
+<h1>:class          => &lsquo;pagination&rsquo;,</h1>
+
+<h1>:previous_label => nil,</h1>
+
+<h1>:next_label     => nil,</h1>
+
+<h1>:inner_window   => 4, # links around the current page</h1>
+
+<h1>:outer_window   => 1, # links around beginning and end</h1>
+
+<h1>:link_separator => &lsquo; &rsquo;, # single space is friendly to spiders and non-graphic browsers</h1>
+
+<h1>:param_name     => :page,</h1>
+
+<h1>:params         => nil,</h1>
+
+<h1>:page_links     => true,</h1>
+
+<h1>:container      => true</h1>
+
+<h1>具体操作will_paginate / lib / will_paginate / view_helpers.rb 下面则有批注</h1>
+
+<p>will_paginate @posts, :previous_label => &lsquo;上一页&rsquo;, :next_label => &lsquo;下一页&rsquo;, :container => false
+%></p>
+
+<p>```</p>
+
+<h2>关于css</h2>
+
+<p><a href="http://mislav.uniqpath.com/will_paginate/?page=2">http://mislav.uniqpath.com/will_paginate/?page=2</a> 可以去着网站上下载其分页样式，之后将它放到<code>assets/stylesheets</code>下就可以了。</p>
+
+<p>``` erb</p>
+
+<div class='digg_pagination'>
+<div class='pag_info'>
+<%= page_entries_info @posts %>
+</div>
+<%= will_paginate @posts :previous_label => '上一页', :next_label => '下一页',:container => false %>
+</div>
+
+
+<p>```</p>
+
+<p>-eof-</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[redis at rails ]]></title>
+    <link href="http://hyanwang.github.io/blog/2013/11/09/redis/"/>
+    <updated>2013-11-09T06:30:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2013/11/09/redis</id>
+    <content type="html"><![CDATA[<h1>认识Redis</h1>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[custom library and define constant at rails 4]]></title>
+    <link href="http://hyanwang.github.io/blog/2013/09/18/const/"/>
+    <updated>2013-09-18T19:57:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2013/09/18/const</id>
+    <content type="html"><![CDATA[<h1>如何设置在rails设置常量</h1>
+
+<h2>initializer目录</h2>
+
+<p>这个是一个初始化目录，里面的所有脚本顾名思义都是在rails初始化执行的。因此在里面创建的所有文件也都将被执行。</p>
+
+<p><code>ruby 创建config.rb
+raw_config=File.read("#{Rail.root}/config/config.yml")#设置yml的文件名和路径
+erb_result=ERB.new(raw_config).result
+APP_CONFIG=YAML.load(erb_result)[Rails.env]＃指定了如何调用常量
+</code></p>
+
+<p>设置config.yml
+``` yaml config.yml
+defaults: &amp;defaults
+   redis_server: &lsquo;127.0.0.1&rsquo;
+   redis_port: &lsquo;6379&rsquo;</p>
+
+<p>development:
+   &lt;&lt;: * defaults</p>
+
+<p>production:
+   &lt;&lt;: *defaults
+```</p>
+
+<h1>创建自己的library</h1>
+
+<p>其实要在rails下创建自己的library很简单，只需要在<code>/lib/</code> 直接进行添加你创建的ruby文件，那如何引用呢？其实也很简单，只需要在自己的contoller下使用<code>require filename.rb</code>就可以了</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[rails中post]]></title>
+    <link href="http://hyanwang.github.io/blog/2013/08/11/rails-post/"/>
+    <updated>2013-08-11T22:15:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2013/08/11/rails-post</id>
+    <content type="html"><![CDATA[<h1>Form Helper basic</h1>
+
+<p>view中设置其表单，其中<code>form_tag</code>定义提交给谁和用什么方法
+<code>ruby Form表单提交给helo
+&lt;%= form_tag("helo",method: 'post') do %&gt;
+&lt;%= label_tag(:search, "search for:") %&gt;
+&lt;%= text_field_tag(:search) %&gt;
+&lt;%= submit_tag("Search") %&gt;
+&lt;% end %&gt;
+</code></p>
+
+<h1>Controller 如何实现接受</h1>
+
+<p>在接收的方法中使用<code>params[:search]</code>
+<code>ruby Controller中抓去post值
+def helo
+@helo=params[:search]
+end
+</code></p>
+
+<h1>route将取决安排程序路径使用什么方法传递</h1>
+
+<p><code>ruby route.rb
+namespace :admin do
+  post 'tasks/helo' #使用post方式请求
+  get 'tasks/say'
+end
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>
