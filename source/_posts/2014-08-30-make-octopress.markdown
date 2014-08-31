@@ -7,3 +7,9 @@ categories: [octopress,github.com]
 ---
 
 #关于octopress的安装
+
+git octopress
+
+```
+git clone git://github.com/imathis/octopress.git  YOUR_DIR_
+```
