@@ -4,7 +4,11 @@
   <title><![CDATA[島嶼の患者]]></title>
   <link href="http://hyanwang.github.io/atom.xml" rel="self"/>
   <link href="http://hyanwang.github.io/"/>
+<<<<<<< HEAD
   <updated>2014-08-31T20:10:24+08:00</updated>
+=======
+  <updated>2014-04-12T09:57:07+08:00</updated>
+>>>>>>> bc7336767945004a9b3b9ebbba56c83a08ff8de3
   <id>http://hyanwang.github.io/</id>
   <author>
     <name><![CDATA[Hi Yen Wong]]></name>
@@ -14,6 +18,7 @@
 
   
   <entry>
+<<<<<<< HEAD
     <title type="html"><![CDATA[制作octopress]]></title>
     <link href="http://hyanwang.github.io/blog/2014/08/30/make-octopress/"/>
     <updated>2014-08-30T11:37:00+08:00</updated>
@@ -23,6 +28,8 @@
   </entry>
   
   <entry>
+=======
+>>>>>>> bc7336767945004a9b3b9ebbba56c83a08ff8de3
     <title type="html"><![CDATA[pow for mac]]></title>
     <link href="http://hyanwang.github.io/blog/2014/03/20/pow-for-mac/"/>
     <updated>2014-03-20T16:30:00+08:00</updated>

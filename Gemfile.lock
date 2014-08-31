@@ -30,7 +30,11 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.1)
       rack
+<<<<<<< HEAD
     rake (10.3.2)
+=======
+    rake (10.1.0)
+>>>>>>> bc7336767945004a9b3b9ebbba56c83a08ff8de3
     rb-fsevent (0.9.3)
     rdiscount (2.0.7.3)
     rubypants (0.2.0)
@@ -55,7 +59,11 @@ DEPENDENCIES
   jekyll (~> 0.12)
   liquid (~> 2.3.0)
   pygments.rb (~> 0.3.4)
+<<<<<<< HEAD
   rake (~> 10.3.0)
+=======
+  rake
+>>>>>>> bc7336767945004a9b3b9ebbba56c83a08ff8de3
   rb-fsevent (~> 0.9)
   rdiscount (~> 2.0.7)
   rubypants (~> 0.2.0)

@@ -9,8 +9,14 @@
   <meta name="author" content="Hi Yen Wong">
 
   
+<<<<<<< HEAD
   <meta name="description" content="关于octopress的安装
 ">
+=======
+  <meta name="description" content="Pow 介绍 Pow 简单的说是一个可以实时快速将rails在mac系统中进行部署测试的插件，你只需要做几个简单设置，就可以通过特定的域名进行访问。 Pow 安装和配置 安装pow 1
+$ curl get.pow.cx | sh 卸载pow 1
+$ curl get.pow.cx/ &hellip;">
+>>>>>>> bc7336767945004a9b3b9ebbba56c83a08ff8de3
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -24,15 +30,24 @@
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="島嶼の患者" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
+<<<<<<< HEAD
   <script src="//lib.sinaapp.com/js/jquery/1.4.4/jquery.min.js"></script>
+=======
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+>>>>>>> bc7336767945004a9b3b9ebbba56c83a08ff8de3
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
+<<<<<<< HEAD
   <!-- 
  -->
+=======
+  
+
+>>>>>>> bc7336767945004a9b3b9ebbba56c83a08ff8de3
 </head>
 
 <body   >
@@ -73,6 +88,7 @@
       
   <header>
     
+<<<<<<< HEAD
       <h1 class="entry-title"><a href="/blog/2014/08/30/make-octopress/">制作octopress</a></h1>
     
     
@@ -111,6 +127,8 @@
       
   <header>
     
+=======
+>>>>>>> bc7336767945004a9b3b9ebbba56c83a08ff8de3
       <h1 class="entry-title"><a href="/blog/2014/03/20/pow-for-mac/">Pow for Mac</a></h1>
     
     
@@ -943,6 +961,134 @@
 
     </article>
   
+<<<<<<< HEAD
+=======
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/17/rails-little-note-1/">Rails Little Note 1</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-17T16:26:00+08:00" pubdate data-updated="true">Jun 17<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/17/rails-little-note-1/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>rails cli</h2>
+
+<p>Active Record 支持的数据类型
+* :binary
+* :boolean
+* :date
+* :datetime
+* :decimal
+* :float
+* :integer
+* :primary_key
+* :string
+* :text
+* :time
+* :timestamp</p>
+
+<h3>rails migration</h3>
+
+<p>Migration 是继承 ActiveRecord::Migration 的一个子类，它实现了两个方法： up (执行需要的改变)和 down (恢复所做的改变)
+Active Record 提供以下独立于数据库的方法，用来执行普通数据定义任务的方法:
+* add_colmn
+* add_index
+* change_column
+* change_table
+* create_table
+* create_join_table
+* drop_table
+* remove_column
+* remove_index
+* rename_column</p>
+
+<figure class='code'><figcaption><span>ruby 创建一个migration</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">generate</span> <span class="n">migration</span> <span class="no">MIGRATION_NAME</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使用up/down方法
+Migration里面的down方法能复原up方法所造成的变更。也就是说如果执行了up然后 再执行down，那么数据库的schema应该会没有改变。所以说，如果用up建立一个数据表， 就应该在down方法中删除它。明智的做法会使用跟up完全相反的顺便来做这些事情。</p>
+
+<p>回滚（Rolling Back）
+另一个常见的任务是回滚最后一个版本。比如你不小心打错了要修正。输入回滚命令时可以 不用输入先前版本的版本号，直接这样就行了：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake db:rollback
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样会执行最后一个migration的down方法。如果要恢复多个migrations的话，可以多给 一个STEP参数：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake db:rollback <span class="nv">STEP</span><span class="o">=</span>3
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这样会执行最后3个migrations的down方法。</p>
+
+<p>要回滚然后重新执行最后一个migration的话可以直接执行db:migrate:redo。如果要回滚 重新执行的不止一个版本时可以用STEP参数，就跟db:rollback的用法一样：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake db:migrate:redo <span class="nv">STEP</span><span class="o">=</span>3
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这两个rake任务只是用起来比较方便，让你可以不用输入一大串版本号数字。除了输入比较 方便外没有比db:migrate多做什么额外的工作。</p>
+
+<p>4.2 重置数据库
+最后是db:reset任务，它会删除数据库，然后重新建立数据库并在重新建立的数据库中 载入当前的schema。</p>
+
+<p>所谓的载入schema跟执行全部的migrations是不一样的，请参照： schema.rb 。</p>
+
+<p>4.3 执行指定的migration
+如果你需要执行一个指定的migration的up或down方法，那么你可以用db:migrate:up和 db:migrate:down这两个任务。你只需指定版本号，就可以触发它的up或down方法：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake db:migrate:up <span class="nv">VERSION</span><span class="o">=</span>20080906120000
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上会执行20080906120000这个版本的migration的up方法。它会去确认这个migration之前有 没有跑过，所以，如果Active Record认为20080906120000已经跑过，那么执行 db:migrate:up VERSION=20080906120000将不会做任何操作。</p>
+
+<h3>rails 删除控制器</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">destroy</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+>>>>>>> bc7336767945004a9b3b9ebbba56c83a08ff8de3
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -958,10 +1104,13 @@
   <ul id="recent_posts">
     
       <li class="post">
+<<<<<<< HEAD
         <a href="/blog/2014/08/30/make-octopress/">制作octopress</a>
       </li>
     
       <li class="post">
+=======
+>>>>>>> bc7336767945004a9b3b9ebbba56c83a08ff8de3
         <a href="/blog/2014/03/20/pow-for-mac/">Pow for Mac</a>
       </li>
     
@@ -977,6 +1126,13 @@
         <a href="/blog/2013/09/18/const/">Custom Library and Define Constant at Rails 4</a>
       </li>
     
+<<<<<<< HEAD
+=======
+      <li class="post">
+        <a href="/blog/2013/08/11/rails-post/">Rails中post</a>
+      </li>
+    
+>>>>>>> bc7336767945004a9b3b9ebbba56c83a08ff8de3
   </ul>
 </section>
 
