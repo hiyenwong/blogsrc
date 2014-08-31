@@ -1,0 +1,9 @@
+<div class="highlight"><pre><span class="nv">class</span><span class="o">=</span><span class="s2">&quot;brush :shell&quot;</span>
+<span class="nv">$ </span><span class="nb">cd</span> /tmp
+<span class="nv">$ </span>mv /Users/yourname/Desktop/mysql-5.5.9.tar.gz .
+<span class="nv">$ </span>tar xf mysql-5.5.9.tar.gz
+<span class="nv">$ </span><span class="nb">cd </span>mysql-5.5.9
+<span class="nv">$ </span>sudo port install cmake
+<span class="nv">$ </span>cmake . -DMYSQL_UNIX_ADDR<span class="o">=</span>/Applications/MAMP/tmp/mysql/mysql.sock <span class="se">\</span>
+-DCMAKE_INSTALL_PREFIX<span class="o">=</span>/Applications/MAMP/Library
+</pre></div>

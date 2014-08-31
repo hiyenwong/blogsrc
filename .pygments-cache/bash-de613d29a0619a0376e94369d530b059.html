@@ -1,0 +1,8 @@
+<div class="highlight"><pre><span class="nv">$ </span>sudo env <span class="nv">ARCHFLAGS</span><span class="o">=</span><span class="s2">&quot;-arch x86_64&quot;</span> gem install mysql2 -- <span class="se">\</span>
+--with-mysql-config<span class="o">=</span>/Applications/MAMP/Library/bin/mysql_config
+<span class="nv">$ </span>sudo install_name_tool -change <span class="se">\</span>
+/tmp/mysql-5.5.9/libmysql/libmysqlclient.16.dylib <span class="se">\</span>
+/Applications/MAMP/Library/lib/libmysqlclient.16.dylib <span class="se">\</span>
+/opt/local/lib/ruby/gems/1.8/gems/mysql2-0.2.6/lib/mysql2/mysql2.bundle
+<span class="nv">$ </span>rm -rf /tmp/mysql-5.5.9 /tmp/mysql-5.5.9.tar.gz:
+</pre></div>

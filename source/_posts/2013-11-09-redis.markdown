@@ -1,0 +1,12 @@
+---
+layout: post
+title: "redis at rails "
+date: 2013-11-09 06:30
+comments: true
+categories: [redis,rails]
+---
+#认识Redis
+
+
+
+

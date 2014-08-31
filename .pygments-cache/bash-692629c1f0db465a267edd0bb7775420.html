@@ -1,0 +1,22 @@
+<div class="highlight"><pre><span class="c"># detect `$rvm_path`</span>
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;${rvm_path:-}&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -x <span class="s2">&quot;${HOME:-}/.rvm/bin/rvm&quot;</span> <span class="o">]</span>
+<span class="k">then </span><span class="nv">rvm_path</span><span class="o">=</span><span class="s2">&quot;${HOME:-}/.rvm&quot;</span>
+<span class="k">fi</span>
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;${rvm_path:-}&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -x <span class="s2">&quot;/usr/local/rvm/bin/rvm&quot;</span> <span class="o">]</span>
+<span class="k">then </span><span class="nv">rvm_path</span><span class="o">=</span><span class="s2">&quot;/usr/local/rvm&quot;</span>
+<span class="k">fi</span>
+
+<span class="c"># load environment of current project ruby</span>
+<span class="k">if</span>
+  <span class="o">[</span> -n <span class="s2">&quot;${rvm_path:-}&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span>
+  <span class="o">[</span> -x <span class="s2">&quot;${rvm_path:-}/bin/rvm&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span>
+  <span class="nv">rvm_project_environment</span><span class="o">=</span><span class="sb">`</span><span class="s2">&quot;${rvm_path:-}/bin/rvm&quot;</span> . <span class="k">do </span>rvm env --path 2&gt;/dev/null<span class="sb">`</span> <span class="o">&amp;&amp;</span>
+  <span class="o">[</span> -n <span class="s2">&quot;${rvm_project_environment:-}&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span>
+  <span class="o">[</span> -s <span class="s2">&quot;${rvm_project_environment:-}&quot;</span> <span class="o">]</span>
+<span class="k">then</span>
+<span class="k">  </span><span class="nb">echo</span> <span class="s2">&quot;RVM loading: ${rvm_project_environment:-}&quot;</span>
+  <span class="se">\.</span> <span class="s2">&quot;${rvm_project_environment:-}&quot;</span>
+<span class="k">else</span>
+<span class="k">  </span><span class="nb">echo</span> <span class="s2">&quot;RVM project not found at: $PWD&quot;</span>
+<span class="k">fi</span>
+</pre></div>

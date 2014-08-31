@@ -1,0 +1,18 @@
+<div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">page_entries_info</span> <span class="vi">@posts</span> <span class="cp">%&gt;</span><span class="x"></span>
+
+<span class="cp">&lt;%=</span>
+<span class="c1">#      :class          =&gt; &#39;pagination&#39;,</span>
+<span class="c1">#      :previous_label =&gt; nil,</span>
+<span class="c1">#      :next_label     =&gt; nil,</span>
+<span class="c1">#      :inner_window   =&gt; 4, # links around the current page</span>
+<span class="c1">#      :outer_window   =&gt; 1, # links around beginning and end</span>
+<span class="c1">#      :link_separator =&gt; &#39; &#39;, # single space is friendly to spiders and non-graphic browsers</span>
+<span class="c1">#      :param_name     =&gt; :page,</span>
+<span class="c1">#      :params         =&gt; nil,</span>
+<span class="c1">#      :page_links     =&gt; true,</span>
+<span class="c1">#      :container      =&gt; true</span>
+
+<span class="c1">#      具体操作will_paginate / lib / will_paginate / view_helpers.rb 下面则有批注</span>
+<span class="n">will_paginate</span> <span class="vi">@posts</span><span class="p">,</span> <span class="ss">:previous_label</span> <span class="o">=&gt;</span> <span class="s1">&#39;上一页&#39;</span><span class="p">,</span> <span class="ss">:next_label</span> <span class="o">=&gt;</span> <span class="s1">&#39;下一页&#39;</span><span class="p">,</span> <span class="ss">:container</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+<span class="cp">%&gt;</span><span class="x"></span>
+</pre></div>

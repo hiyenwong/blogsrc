@@ -1,0 +1,10 @@
+<div class="highlight"><pre>DNS:192.168.0.254
+
+    修改hosts文件_vim /etc/hosts_
+   192.168.0.XserverX.example.com
+
+    修改ifcfg-layouteth0   vim /etc/sysconfig/network-scripts/ifcfg-eth0
+   <span class="nv">IPADDR</span><span class="o">=</span>192.168.0.X
+   <span class="nv">NETMASK</span><span class="o">=</span>255.255.255.0
+   <span class="nv">GATEWAY</span><span class="o">=</span>192.168.0.254
+</pre></div>

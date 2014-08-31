@@ -1,0 +1,8 @@
+<div class="highlight"><pre> <span class="n">int64</span> <span class="n">b</span><span class="o">=</span><span class="mh">0x1000200030004000LL</span><span class="p">;</span>
+    <span class="n">a64</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+
+    <span class="cm">/*my_atomic_add64(&amp;a64, b);</span>
+
+<span class="cm">    ok(a64==b, &quot;add64&quot;);  注释这段代码*/</span>
+    <span class="n">ok</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&quot;add64&quot;</span><span class="p">);</span> <span class="cm">/* 添加这句代码，目的是直接返回测试成功结果 */</span>
+</pre></div>

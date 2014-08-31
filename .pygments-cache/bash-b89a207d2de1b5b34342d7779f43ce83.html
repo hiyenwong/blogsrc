@@ -1,0 +1,5 @@
+<div class="highlight"><pre>   fdisk /dev/vda; mkswap /dev/vdaX; swapon /dev/vdaX;partprobe;
+    /etc/fstab:
+        <span class="nv">uuid</span><span class="o">=</span><span class="s2">&quot;....&quot;</span>   swap  swap defaults 0 0
+    check swap: swapon -s
+</pre></div>

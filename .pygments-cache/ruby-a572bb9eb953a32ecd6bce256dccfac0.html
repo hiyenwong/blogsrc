@@ -1,0 +1,4 @@
+<div class="highlight"><pre><span class="c1"># :order 作为排序设置</span>
+<span class="c1"># :per_page 每页的记录</span>
+<span class="vi">@posts</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="ss">:page</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:page</span><span class="o">]</span><span class="p">,</span><span class="ss">:order</span> <span class="o">=&gt;</span> <span class="s1">&#39;id DESC&#39;</span><span class="p">,</span> <span class="ss">:per_page</span> <span class="o">=&gt;</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>

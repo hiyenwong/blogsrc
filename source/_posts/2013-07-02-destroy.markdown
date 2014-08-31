@@ -1,0 +1,25 @@
+---
+layout: post
+title: "如何摧毁Rails中的元素"
+date: 2013-07-02 14:16
+comments: true
+categories: [rails,ruby]
+---
+
+
+##Destroy##
+我们往往会生成比如controller,model或是db 文件，但后来发现我们不需要了，想重来，怎么办呢？
+所以我们需要destroy
+
+
+
+##删除model或是controller##
+```bash
+rails destroy model MODEL_NAME|CONTROLLER_NAME
+```
+
+##删除db:migration##
+``` bash
+rails d migration MIGRATION_NAME
+```
+

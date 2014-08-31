@@ -1,0 +1,38 @@
+---
+layout: post
+title: "custom library and define constant at rails 4"
+date: 2013-09-18 19:57
+comments: true
+categories: [constant,rails]
+---
+
+
+
+#如何设置在rails设置常量
+##initializer目录
+这个是一个初始化目录，里面的所有脚本顾名思义都是在rails初始化执行的。因此在里面创建的所有文件也都将被执行。
+
+``` ruby 创建config.rb
+raw_config=File.read("#{Rail.root}/config/config.yml")#设置yml的文件名和路径
+erb_result=ERB.new(raw_config).result
+APP_CONFIG=YAML.load(erb_result)[Rails.env]＃指定了如何调用常量
+```
+
+设置config.yml
+``` yaml config.yml
+defaults: &defaults
+   redis_server: '127.0.0.1'
+   redis_port: '6379'
+
+development:
+   <<: * defaults
+
+production:
+   <<: *defaults
+```
+
+
+
+#创建自己的library
+其实要在rails下创建自己的library很简单，只需要在`/lib/` 直接进行添加你创建的ruby文件，那如何引用呢？其实也很简单，只需要在自己的contoller下使用`require filename.rb`就可以了
+
