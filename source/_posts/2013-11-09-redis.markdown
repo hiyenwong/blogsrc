@@ -6,6 +6,18 @@ comments: true
 categories: [redis,rails]
 ---
 #认识Redis
+Redis是一个高性能的kv数据库.它特点就是在NOSQL和并发快速.之所以快速是因为它将所有的数据都放入内存,因此如何使用变得非常关键.
+
+##redis安装和简单配置
+###install redis
+其实没有没有什么讲的,几乎所有任何的发行版本都已经加入.如果官方下载包也容易,只要`make`一下就编译完成. 至于时候要`make install` 自己看着办吧.
+
+###Config redis
+redis的配置文件就ubuntu而言,是在/etc/redis/下,有两个文件,一个是`redis.conf` 一个是`sentinel.conf`
+
+##首先如何看redis的性能
+
+
 
 
 

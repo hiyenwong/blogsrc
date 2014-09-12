@@ -2,11 +2,7 @@
 source "http://ruby.taobao.org"
 
 group :development do
-<<<<<<< HEAD
   gem 'rake','~>10.3.0'
-=======
-  gem 'rake'
->>>>>>> bc7336767945004a9b3b9ebbba56c83a08ff8de3
   gem 'jekyll', '~> 0.12'
   gem 'rdiscount', '~> 2.0.7'
   gem 'pygments.rb', '~> 0.3.4'

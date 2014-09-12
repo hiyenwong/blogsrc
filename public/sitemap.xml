@@ -2,7 +2,6 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://hyanwang.github.io/blog/2013/06/12/php-data-object/</loc>
-<<<<<<< HEAD
         <lastmod>2014-08-30T22:57:55+08:00</lastmod>
     </url>
     <url>
@@ -12,23 +11,11 @@
     <url>
         <loc>http://hyanwang.github.io/blog/2013/06/12/g-tips/</loc>
         <lastmod>2014-08-30T22:57:55+08:00</lastmod>
-=======
-        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://hyanwang.github.io/blog/2013/06/12/jso/</loc>
-        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://hyanwang.github.io/blog/2013/06/12/g-tips/</loc>
-        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
->>>>>>> bc7336767945004a9b3b9ebbba56c83a08ff8de3
     </url>
     <url>
         <loc>
             http://hyanwang.github.io/blog/2013/06/13/mamp1-dot-9-5-mysql5-dot-59-and-ruby-mysql2/
         </loc>
-<<<<<<< HEAD
         <lastmod>2014-08-30T22:57:55+08:00</lastmod>
     </url>
     <url>
@@ -81,7 +68,7 @@
     </url>
     <url>
         <loc>http://hyanwang.github.io/blog/2014/08/30/make-octopress/</loc>
-        <lastmod>2014-08-31T20:10:18+08:00</lastmod>
+        <lastmod>2014-08-31T22:09:31+08:00</lastmod>
     </url>
     <url>
         <loc>http://hyanwang.github.io/about-me/</loc>
@@ -89,81 +76,14 @@
     </url>
     <url>
         <loc>http://hyanwang.github.io/blog/archives/</loc>
-        <lastmod>2014-08-31T20:10:18+08:00</lastmod>
+        <lastmod>2014-08-31T22:09:31+08:00</lastmod>
     </url>
     <url>
         <loc>http://hyanwang.github.io/</loc>
-        <lastmod>2014-08-31T20:10:18+08:00</lastmod>
+        <lastmod>2014-08-31T22:09:31+08:00</lastmod>
     </url>
     <url>
         <loc>http://hyanwang.github.io/robots.txt</loc>
         <lastmod>2014-08-30T22:57:55+08:00</lastmod>
-=======
-        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://hyanwang.github.io/blog/2013/06/13/rhce-test-2012/</loc>
-        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://hyanwang.github.io/blog/2013/06/14/vim-split/</loc>
-        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://hyanwang.github.io/blog/2013/06/17/rails-little-note-1/</loc>
-        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://hyanwang.github.io/blog/2013/06/18/tdd-spec-helper/</loc>
-        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://hyanwang.github.io/blog/2013/07/02/destroy/</loc>
-        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://hyanwang.github.io/blog/2013/07/15/model-for-rails-1/</loc>
-        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://hyanwang.github.io/blog/2013/07/15/model-for-rails-2/</loc>
-        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://hyanwang.github.io/blog/2013/08/11/rails-post/</loc>
-        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://hyanwang.github.io/blog/2013/09/18/const/</loc>
-        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://hyanwang.github.io/blog/2013/11/09/redis/</loc>
-        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://hyanwang.github.io/blog/2013/11/29/about-pagination-on-rails/</loc>
-        <lastmod>2014-04-12T09:57:00+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://hyanwang.github.io/blog/2014/03/20/pow-for-mac/</loc>
-        <lastmod>2014-03-23T21:09:48+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://hyanwang.github.io/about-me/</loc>
-        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://hyanwang.github.io/blog/archives/</loc>
-        <lastmod>2014-04-12T09:57:00+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://hyanwang.github.io/</loc>
-        <lastmod>2014-04-12T09:57:00+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://hyanwang.github.io/robots.txt</loc>
-        <lastmod>2014-03-20T16:08:40+08:00</lastmod>
->>>>>>> bc7336767945004a9b3b9ebbba56c83a08ff8de3
     </url>
 </urlset>

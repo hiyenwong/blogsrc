@@ -4,7 +4,7 @@
   <title><![CDATA[Category: github.com | 島嶼の患者]]></title>
   <link href="http://hyanwang.github.io/blog/categories/github-dot-com/atom.xml" rel="self"/>
   <link href="http://hyanwang.github.io/"/>
-  <updated>2014-08-31T20:10:24+08:00</updated>
+  <updated>2014-08-31T22:26:16+08:00</updated>
   <id>http://hyanwang.github.io/</id>
   <author>
     <name><![CDATA[Hi Yen Wong]]></name>
@@ -18,7 +18,46 @@
     <link href="http://hyanwang.github.io/blog/2014/08/30/make-octopress/"/>
     <updated>2014-08-30T11:37:00+08:00</updated>
     <id>http://hyanwang.github.io/blog/2014/08/30/make-octopress</id>
-    <content type="html"><![CDATA[<h1>关于octopress的安装</h1>
+    <content type="html"><![CDATA[<h1>octopress的部署</h1>
+
+<h2>关于octopress的安装</h2>
+
+<p>git octopress</p>
+
+<p>```
+git clone git://github.com/imathis/octopress.git  YOUR_DIR</p>
+
+<p>```</p>
+
+<p>你需要在github页面上的account设置SSH的public key, 所以你这必须是使用<code>ssh-keygen</code>生成public key</p>
+
+<p>并且为了保留原先的markdown文件,所以可以另外设置一个repository,然后设置以下remote,这样可以保留原先的原始文件和修改内容.</p>
+
+<p>另外我们需要安装所需的gem,运行命令<code>bundle install</code>,就可以将Gemfile里的列表安装到电脑里.</p>
+
+<h2>设置基本的octopress</h2>
+
+<p>设置octopress很简单,只要使用两步.</p>
+
+<p>设置你的repository,打命令 <code>rake setup_github_page</code></p>
+
+<p>然后我们只要设置一下配置文件_config.yml就完美了.</p>
+
+<h2>发布你的博客</h2>
+
+<h3>新建博客:</h3>
+
+<p><code>rake new_post[post_name]</code></p>
+
+<h3>生成静态文件</h3>
+
+<p><code>rake generate</code></p>
+
+<h3>发布博客</h3>
+
+<p><code>rake deploy</code></p>
+
+<p>当然有时,rake的版本不对,没关系,你可以使用<code>bundle exec</code>来避免这样的问题.</p>
 ]]></content>
   </entry>
   
