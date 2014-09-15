@@ -407,6 +407,25 @@ git clone git://github.com/imathis/octopress.git YOUR_DIR 你需要在github页�
 
 
   <div class="entry-content"><h1>认识Redis</h1>
+
+<p>Redis是一个高性能的kv数据库.它特点就是在NOSQL和并发快速.之所以快速是因为它将所有的数据都放入内存,因此如何使用变得非常关键.</p>
+
+<h2>redis安装和简单配置</h2>
+
+<h3>install redis</h3>
+
+<p>其实没有没有什么讲的,几乎所有任何的发行版本都已经加入.如果官方下载包也容易,只要<code>make</code>一下就编译完成. 至于时候要<code>make install</code> 自己看着办吧.</p>
+
+<h3>Config redis</h3>
+
+<p>redis的配置文件就ubuntu而言,是在/etc/redis/下,有两个文件,一个是<code>redis.conf</code> 一个是<code>sentinel.conf</code>.</p>
+
+<figure class='code'><figcaption><span>redis.conf</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># </span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>首先如何看redis的性能</h2>
 </div>
   
   
