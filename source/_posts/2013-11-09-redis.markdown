@@ -442,4 +442,17 @@ sentinel parallel-syncs resque 5
 ```
 最后,你可以运行`sudo redis-sentinel /etc/redis/sentinel.conf`
 
+ Redis-sentinel是Redis实例的监控管理、通知和实例失效备援服务，是Redis集群的管理工具。在一般的分布式中心节点数据库
+ 中，Redis-sentinel的作用是中心节点的工作，监控各个其他节点的工作情况并且进行故障恢复，来提高集群的高可用性。
 
+ Redis-sentinel是Redis的作者antirez在今年6月份完成的，因为Redis实例在各个大公司的应用，每个公司都需要一个Redis集群的管理工具，被迫都自己写管理工具来管理Redis集群，antirez考虑到社区的急迫需要(详情)，花了几个星期写出了Redis-sentinel。
+
+ Redis-sentinel的三大功能: * 监测 * 通知 * 自动故障恢复
+ 首先Redis-sentinel要建立一个监控的master列表，然后针对master列表的每个master获取监控其的sentinels和slaves供以后故障恢复使用
+
+##关于redis监控
+- redis的系统报告可以使用`redis-cli info`,`redis-cli -h localhost -p 6380 monitor `
+- 使用redis-benchmark工具,作为性能检测. `redis-benchmark -h localhost -p 6379 -c 100 -n 100000 `
+- 一些web方式的监控工具:
+  * redis-monitoa: https://github.com/PrettySimple/redis-monitorr
+  * 

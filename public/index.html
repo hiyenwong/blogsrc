@@ -420,12 +420,842 @@ git clone git://github.com/imathis/octopress.git YOUR_DIR 你需要在github页�
 
 <p>redis的配置文件就ubuntu而言,是在/etc/redis/下,有两个文件,一个是<code>redis.conf</code> 一个是<code>sentinel.conf</code>.</p>
 
+<p>redis.conf  配置redis服务用的.</p>
+
 <figure class='code'><figcaption><span>redis.conf</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># </span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+<span class='line-number'>144</span>
+<span class='line-number'>145</span>
+<span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+<span class='line-number'>152</span>
+<span class='line-number'>153</span>
+<span class='line-number'>154</span>
+<span class='line-number'>155</span>
+<span class='line-number'>156</span>
+<span class='line-number'>157</span>
+<span class='line-number'>158</span>
+<span class='line-number'>159</span>
+<span class='line-number'>160</span>
+<span class='line-number'>161</span>
+<span class='line-number'>162</span>
+<span class='line-number'>163</span>
+<span class='line-number'>164</span>
+<span class='line-number'>165</span>
+<span class='line-number'>166</span>
+<span class='line-number'>167</span>
+<span class='line-number'>168</span>
+<span class='line-number'>169</span>
+<span class='line-number'>170</span>
+<span class='line-number'>171</span>
+<span class='line-number'>172</span>
+<span class='line-number'>173</span>
+<span class='line-number'>174</span>
+<span class='line-number'>175</span>
+<span class='line-number'>176</span>
+<span class='line-number'>177</span>
+<span class='line-number'>178</span>
+<span class='line-number'>179</span>
+<span class='line-number'>180</span>
+<span class='line-number'>181</span>
+<span class='line-number'>182</span>
+<span class='line-number'>183</span>
+<span class='line-number'>184</span>
+<span class='line-number'>185</span>
+<span class='line-number'>186</span>
+<span class='line-number'>187</span>
+<span class='line-number'>188</span>
+<span class='line-number'>189</span>
+<span class='line-number'>190</span>
+<span class='line-number'>191</span>
+<span class='line-number'>192</span>
+<span class='line-number'>193</span>
+<span class='line-number'>194</span>
+<span class='line-number'>195</span>
+<span class='line-number'>196</span>
+<span class='line-number'>197</span>
+<span class='line-number'>198</span>
+<span class='line-number'>199</span>
+<span class='line-number'>200</span>
+<span class='line-number'>201</span>
+<span class='line-number'>202</span>
+<span class='line-number'>203</span>
+<span class='line-number'>204</span>
+<span class='line-number'>205</span>
+<span class='line-number'>206</span>
+<span class='line-number'>207</span>
+<span class='line-number'>208</span>
+<span class='line-number'>209</span>
+<span class='line-number'>210</span>
+<span class='line-number'>211</span>
+<span class='line-number'>212</span>
+<span class='line-number'>213</span>
+<span class='line-number'>214</span>
+<span class='line-number'>215</span>
+<span class='line-number'>216</span>
+<span class='line-number'>217</span>
+<span class='line-number'>218</span>
+<span class='line-number'>219</span>
+<span class='line-number'>220</span>
+<span class='line-number'>221</span>
+<span class='line-number'>222</span>
+<span class='line-number'>223</span>
+<span class='line-number'>224</span>
+<span class='line-number'>225</span>
+<span class='line-number'>226</span>
+<span class='line-number'>227</span>
+<span class='line-number'>228</span>
+<span class='line-number'>229</span>
+<span class='line-number'>230</span>
+<span class='line-number'>231</span>
+<span class='line-number'>232</span>
+<span class='line-number'>233</span>
+<span class='line-number'>234</span>
+<span class='line-number'>235</span>
+<span class='line-number'>236</span>
+<span class='line-number'>237</span>
+<span class='line-number'>238</span>
+<span class='line-number'>239</span>
+<span class='line-number'>240</span>
+<span class='line-number'>241</span>
+<span class='line-number'>242</span>
+<span class='line-number'>243</span>
+<span class='line-number'>244</span>
+<span class='line-number'>245</span>
+<span class='line-number'>246</span>
+<span class='line-number'>247</span>
+<span class='line-number'>248</span>
+<span class='line-number'>249</span>
+<span class='line-number'>250</span>
+<span class='line-number'>251</span>
+<span class='line-number'>252</span>
+<span class='line-number'>253</span>
+<span class='line-number'>254</span>
+<span class='line-number'>255</span>
+<span class='line-number'>256</span>
+<span class='line-number'>257</span>
+<span class='line-number'>258</span>
+<span class='line-number'>259</span>
+<span class='line-number'>260</span>
+<span class='line-number'>261</span>
+<span class='line-number'>262</span>
+<span class='line-number'>263</span>
+<span class='line-number'>264</span>
+<span class='line-number'>265</span>
+<span class='line-number'>266</span>
+<span class='line-number'>267</span>
+<span class='line-number'>268</span>
+<span class='line-number'>269</span>
+<span class='line-number'>270</span>
+<span class='line-number'>271</span>
+<span class='line-number'>272</span>
+<span class='line-number'>273</span>
+<span class='line-number'>274</span>
+<span class='line-number'>275</span>
+<span class='line-number'>276</span>
+<span class='line-number'>277</span>
+<span class='line-number'>278</span>
+<span class='line-number'>279</span>
+<span class='line-number'>280</span>
+<span class='line-number'>281</span>
+<span class='line-number'>282</span>
+<span class='line-number'>283</span>
+<span class='line-number'>284</span>
+<span class='line-number'>285</span>
+<span class='line-number'>286</span>
+<span class='line-number'>287</span>
+<span class='line-number'>288</span>
+<span class='line-number'>289</span>
+<span class='line-number'>290</span>
+<span class='line-number'>291</span>
+<span class='line-number'>292</span>
+<span class='line-number'>293</span>
+<span class='line-number'>294</span>
+<span class='line-number'>295</span>
+<span class='line-number'>296</span>
+<span class='line-number'>297</span>
+<span class='line-number'>298</span>
+<span class='line-number'>299</span>
+<span class='line-number'>300</span>
+<span class='line-number'>301</span>
+<span class='line-number'>302</span>
+<span class='line-number'>303</span>
+<span class='line-number'>304</span>
+<span class='line-number'>305</span>
+<span class='line-number'>306</span>
+<span class='line-number'>307</span>
+<span class='line-number'>308</span>
+<span class='line-number'>309</span>
+<span class='line-number'>310</span>
+<span class='line-number'>311</span>
+<span class='line-number'>312</span>
+<span class='line-number'>313</span>
+<span class='line-number'>314</span>
+<span class='line-number'>315</span>
+<span class='line-number'>316</span>
+<span class='line-number'>317</span>
+<span class='line-number'>318</span>
+<span class='line-number'>319</span>
+<span class='line-number'>320</span>
+<span class='line-number'>321</span>
+<span class='line-number'>322</span>
+<span class='line-number'>323</span>
+<span class='line-number'>324</span>
+<span class='line-number'>325</span>
+<span class='line-number'>326</span>
+<span class='line-number'>327</span>
+<span class='line-number'>328</span>
+<span class='line-number'>329</span>
+<span class='line-number'>330</span>
+<span class='line-number'>331</span>
+<span class='line-number'>332</span>
+<span class='line-number'>333</span>
+<span class='line-number'>334</span>
+<span class='line-number'>335</span>
+<span class='line-number'>336</span>
+<span class='line-number'>337</span>
+<span class='line-number'>338</span>
+<span class='line-number'>339</span>
+<span class='line-number'>340</span>
+<span class='line-number'>341</span>
+<span class='line-number'>342</span>
+<span class='line-number'>343</span>
+<span class='line-number'>344</span>
+<span class='line-number'>345</span>
+<span class='line-number'>346</span>
+<span class='line-number'>347</span>
+<span class='line-number'>348</span>
+<span class='line-number'>349</span>
+<span class='line-number'>350</span>
+<span class='line-number'>351</span>
+<span class='line-number'>352</span>
+<span class='line-number'>353</span>
+<span class='line-number'>354</span>
+<span class='line-number'>355</span>
+<span class='line-number'>356</span>
+<span class='line-number'>357</span>
+<span class='line-number'>358</span>
+<span class='line-number'>359</span>
+<span class='line-number'>360</span>
+<span class='line-number'>361</span>
+<span class='line-number'>362</span>
+<span class='line-number'>363</span>
+<span class='line-number'>364</span>
+<span class='line-number'>365</span>
+<span class='line-number'>366</span>
+<span class='line-number'>367</span>
+<span class='line-number'>368</span>
+<span class='line-number'>369</span>
+<span class='line-number'>370</span>
+<span class='line-number'>371</span>
+<span class='line-number'>372</span>
+<span class='line-number'>373</span>
+<span class='line-number'>374</span>
+<span class='line-number'>375</span>
+<span class='line-number'>376</span>
+<span class='line-number'>377</span>
+<span class='line-number'>378</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Redis 配置文件</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 当配置中需要配置内存大小时，可以使用 1k, 5GB, 4M 等类似的格式，其转换方式如下(不区分大小写)</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 1k =&gt; 1000 bytes</span>
+</span><span class='line'><span class="c"># 1kb =&gt; 1024 bytes</span>
+</span><span class='line'><span class="c"># 1m =&gt; 1000000 bytes</span>
+</span><span class='line'><span class="c"># 1mb =&gt; 1024*1024 bytes</span>
+</span><span class='line'><span class="c"># 1g =&gt; 1000000000 bytes</span>
+</span><span class='line'><span class="c"># 1gb =&gt; 1024*1024*1024 bytes</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 内存配置大小写是一样的.比如 1gb 1Gb 1GB 1gB</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># daemonize no 默认情况下，redis不是在后台运行的，如果需要在后台运行，把该项的值更改为yes</span>
+</span><span class='line'>daemonize yes
+</span><span class='line'>
+</span><span class='line'><span class="c"># 当redis在后台运行的时候，Redis默认会把pid文件放在/var/run/redis.pid，你可以配置到其他地址。</span>
+</span><span class='line'><span class="c"># 当运行多个redis服务时，需要指定不同的pid文件和端口</span>
+</span><span class='line'>pidfile /var/run/redis.pid
+</span><span class='line'>
+</span><span class='line'><span class="c"># 指定redis运行的端口，默认是6379</span>
+</span><span class='line'>port 6379
+</span><span class='line'>
+</span><span class='line'><span class="c"># 指定redis只接收来自于该IP地址的请求，如果不进行设置，那么将处理所有请求，</span>
+</span><span class='line'><span class="c"># 在生产环境中最好设置该项</span>
+</span><span class='line'><span class="c"># bind 127.0.0.1</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Specify the path for the unix socket that will be used to listen for</span>
+</span><span class='line'><span class="c"># incoming connections. There is no default, so Redis will not listen</span>
+</span><span class='line'><span class="c"># on a unix socket when not specified.</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># unixsocket /tmp/redis.sock</span>
+</span><span class='line'><span class="c"># unixsocketperm 755</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 设置客户端连接时的超时时间，单位为秒。当客户端在这段时间内没有发出任何指令，那么关闭该连接</span>
+</span><span class='line'><span class="c"># 0是关闭此设置</span>
+</span><span class='line'>timeout 0
+</span><span class='line'>
+</span><span class='line'><span class="c"># 指定日志记录级别</span>
+</span><span class='line'><span class="c"># Redis总共支持四个级别：debug、verbose、notice、warning，默认为verbose</span>
+</span><span class='line'><span class="c"># debug       记录很多信息，用于开发和测试</span>
+</span><span class='line'><span class="c"># varbose 有用的信息，不像debug会记录那么多</span>
+</span><span class='line'><span class="c"># notice  普通的verbose，常用于生产环境</span>
+</span><span class='line'><span class="c"># warning 只有非常重要或者严重的信息会记录到日志</span>
+</span><span class='line'>loglevel debug
+</span><span class='line'>
+</span><span class='line'><span class="c"># 配置log文件地址</span>
+</span><span class='line'><span class="c"># 默认值为stdout，标准输出，若后台模式会输出到/dev/null</span>
+</span><span class='line'><span class="c">#logfile stdout</span>
+</span><span class='line'>logfile /var/log/redis/redis.log
+</span><span class='line'>
+</span><span class='line'><span class="c"># To enable logging to the system logger, just set &#39;syslog-enabled&#39; to yes,</span>
+</span><span class='line'><span class="c"># and optionally update the other syslog parameters to suit your needs.</span>
+</span><span class='line'><span class="c"># syslog-enabled no</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Specify the syslog identity.</span>
+</span><span class='line'><span class="c"># syslog-ident redis</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Specify the syslog facility.  Must be USER or between LOCAL0-LOCAL7.</span>
+</span><span class='line'><span class="c"># syslog-facility local0</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 可用数据库数</span>
+</span><span class='line'><span class="c"># 默认值为16，默认数据库为0，数据库范围在0-（database-1）之间</span>
+</span><span class='line'>databases 16
+</span><span class='line'>
+</span><span class='line'><span class="c">################################ 快照  #################################</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 保存数据到磁盘，格式如下:</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c">#   save &lt;seconds&gt; &lt;changes&gt;</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c">#   指出在多长时间内，有多少次更新操作，就将数据同步到数据文件rdb。</span>
+</span><span class='line'><span class="c">#   相当于条件触发抓取快照，这个可以多个条件配合</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c">#   比如默认配置文件中的设置，就设置了三个条件</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c">#   save 900 1  900秒内至少有1个key被改变</span>
+</span><span class='line'><span class="c">#   save 300 10  300秒内至少有300个key被改变</span>
+</span><span class='line'><span class="c">#   save 60 10000  60秒内至少有10000个key被改变</span>
+</span><span class='line'>
+</span><span class='line'>save 900 1
+</span><span class='line'>save 300 10
+</span><span class='line'>save 60 10000
+</span><span class='line'>
+</span><span class='line'><span class="c"># 存储至本地数据库时（持久化到rdb文件）是否压缩数据，默认为yes</span>
+</span><span class='line'>rdbcompression yes
+</span><span class='line'>
+</span><span class='line'><span class="c"># 本地持久化数据库文件名，默认值为dump.rdb</span>
+</span><span class='line'>dbfilename dump.rdb
+</span><span class='line'>
+</span><span class='line'><span class="c"># 工作目录</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 数据库镜像备份的文件放置的路径。</span>
+</span><span class='line'><span class="c"># 这里的路径跟文件名要分开配置是因为redis在进行备份时，先会将当前数据库的状态写入到一个临时文件中，等备份完成时，</span>
+</span><span class='line'><span class="c"># 再把该该临时文件替换为上面所指定的文件，而这里的临时文件和上面所配置的备份文件都会放在这个指定的路径当中。</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># AOF文件也会存放在这个目录下面</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 注意这里必须制定一个目录而不是文件</span>
+</span><span class='line'>dir ./
+</span><span class='line'>
+</span><span class='line'><span class="c">################################# 复制 #################################</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 主从复制. 设置该数据库为其他数据库的从数据库.</span>
+</span><span class='line'><span class="c"># 设置当本机为slav服务时，设置master服务的IP地址及端口，在Redis启动时，它会自动从master进行数据同步</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># slaveof &lt;masterip&gt; &lt;masterport&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 当master服务设置了密码保护时(用requirepass制定的密码)</span>
+</span><span class='line'><span class="c"># slav服务连接master的密码</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># masterauth &lt;master-password&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 当从库同主机失去连接或者复制正在进行，从机库有两种运行方式：</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 1) 如果slave-serve-stale-data设置为yes(默认设置)，从库会继续相应客户端的请求</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 2) 如果slave-serve-stale-data是指为no，出去INFO和SLAVOF命令之外的任何请求都会返回一个</span>
+</span><span class='line'><span class="c">#    错误&quot;SYNC with master in progress&quot;</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'>slave-serve-stale-data yes
+</span><span class='line'>
+</span><span class='line'><span class="c"># 从库会按照一个时间间隔向主库发送PINGs.可以通过repl-ping-slave-period设置这个时间间隔，默认是10秒</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># repl-ping-slave-period 10</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># repl-timeout 设置主库批量数据传输时间或者ping回复时间间隔，默认值是60秒</span>
+</span><span class='line'><span class="c"># 一定要确保repl-timeout大于repl-ping-slave-period</span>
+</span><span class='line'><span class="c"># repl-timeout 60</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">################################## 安全 ###################################</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 设置客户端连接后进行任何其他指定前需要使用的密码。</span>
+</span><span class='line'><span class="c"># 警告：因为redis速度相当快，所以在一台比较好的服务器下，一个外部的用户可以在一秒钟进行150K次的密码尝试，这意味着你需要指定非常非常强大的密码来防止暴力破解</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># requirepass foobared</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 命令重命名.</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 在一个共享环境下可以重命名相对危险的命令。比如把CONFIG重名为一个不容易猜测的字符。</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 举例:</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># rename-command CONFIG b840fc02d524045429941cc15f59e41cb7be6c52</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 如果想删除一个命令，直接把它重命名为一个空字符&quot;&quot;即可，如下：</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># rename-command CONFIG &quot;&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">################################### 约束 ####################################</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 设置同一时间最大客户端连接数，默认无限制，Redis可以同时打开的客户端连接数为Redis进程可以打开的最大文件描述符数，</span>
+</span><span class='line'><span class="c"># 如果设置 maxclients 0，表示不作限制。</span>
+</span><span class='line'><span class="c"># 当客户端连接数到达限制时，Redis会关闭新的连接并向客户端返回max number of clients reached错误信息</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># maxclients 128</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 指定Redis最大内存限制，Redis在启动时会把数据加载到内存中，达到最大内存后，Redis会先尝试清除已到期或即将到期的Key</span>
+</span><span class='line'><span class="c"># Redis同时也会移除空的list对象</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 当此方法处理后，仍然到达最大内存设置，将无法再进行写入操作，但仍然可以进行读取操作</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 注意：Redis新的vm机制，会把Key存放内存，Value会存放在swap区</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># maxmemory的设置比较适合于把redis当作于类似memcached的缓存来使用，而不适合当做一个真实的DB。</span>
+</span><span class='line'><span class="c"># 当把Redis当做一个真实的数据库使用的时候，内存使用将是一个很大的开销</span>
+</span><span class='line'><span class="c"># maxmemory &lt;bytes&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 当内存达到最大值的时候Redis会选择删除哪些数据？有五种方式可供选择</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># volatile-lru -&gt; 利用LRU算法移除设置过过期时间的key (LRU:最近使用 Least Recently Used )</span>
+</span><span class='line'><span class="c"># allkeys-lru -&gt; 利用LRU算法移除任何key</span>
+</span><span class='line'><span class="c"># volatile-random -&gt; 移除设置过过期时间的随机key</span>
+</span><span class='line'><span class="c"># allkeys-&gt;random -&gt; remove a random key, any key</span>
+</span><span class='line'><span class="c"># volatile-ttl -&gt; 移除即将过期的key(minor TTL)</span>
+</span><span class='line'><span class="c"># noeviction -&gt; 不移除任何可以，只是返回一个写错误</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 注意：对于上面的策略，如果没有合适的key可以移除，当写的时候Redis会返回一个错误</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c">#       写命令包括: set setnx setex append</span>
+</span><span class='line'><span class="c">#       incr decr rpush lpush rpushx lpushx linsert lset rpoplpush sadd</span>
+</span><span class='line'><span class="c">#       sinter sinterstore sunion sunionstore sdiff sdiffstore zadd zincrby</span>
+</span><span class='line'><span class="c">#       zunionstore zinterstore hset hsetnx hmset hincrby incrby decrby</span>
+</span><span class='line'><span class="c">#       getset mset msetnx exec sort</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 默认是:</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># maxmemory-policy volatile-lru</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># LRU 和 minimal TTL 算法都不是精准的算法，但是相对精确的算法(为了节省内存)，随意你可以选择样本大小进行检测。</span>
+</span><span class='line'><span class="c"># Redis默认的灰选择3个样本进行检测，你可以通过maxmemory-samples进行设置</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># maxmemory-samples 3</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">############################## AOF ###############################</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 默认情况下，redis会在后台异步的把数据库镜像备份到磁盘，但是该备份是非常耗时的，而且备份也不能很频繁，如果发生诸如拉闸限电、拔插头等状况，那么将造成比较大范围的数据丢失。</span>
+</span><span class='line'><span class="c"># 所以redis提供了另外一种更加高效的数据库备份及灾难恢复方式。</span>
+</span><span class='line'><span class="c"># 开启append only模式之后，redis会把所接收到的每一次写操作请求都追加到appendonly.aof文件中，当redis重新启动时，会从该文件恢复出之前的状态。</span>
+</span><span class='line'><span class="c"># 但是这样会造成appendonly.aof文件过大，所以redis还支持了BGREWRITEAOF指令，对appendonly.aof 进行重新整理。</span>
+</span><span class='line'><span class="c"># 你可以同时开启asynchronous dumps 和 AOF</span>
+</span><span class='line'>
+</span><span class='line'>appendonly no
+</span><span class='line'>
+</span><span class='line'><span class="c"># AOF文件名称 (默认: &quot;appendonly.aof&quot;)</span>
+</span><span class='line'><span class="c"># appendfilename appendonly.aof</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Redis支持三种同步AOF文件的策略:</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># no: 不进行同步，系统去操作 . Faster.</span>
+</span><span class='line'><span class="c"># always: always表示每次有写操作都进行同步. Slow, Safest.</span>
+</span><span class='line'><span class="c"># everysec: 表示对写操作进行累积，每秒同步一次. Compromise.</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 默认是&quot;everysec&quot;，按照速度和安全折中这是最好的。</span>
+</span><span class='line'><span class="c"># 如果想让Redis能更高效的运行，你也可以设置为&quot;no&quot;，让操作系统决定什么时候去执行</span>
+</span><span class='line'><span class="c"># 或者相反想让数据更安全你也可以设置为&quot;always&quot;</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 如果不确定就用 &quot;everysec&quot;.</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># appendfsync always</span>
+</span><span class='line'>appendfsync everysec
+</span><span class='line'><span class="c"># appendfsync no</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># AOF策略设置为always或者everysec时，后台处理进程(后台保存或者AOF日志重写)会执行大量的I/O操作</span>
+</span><span class='line'><span class="c"># 在某些Linux配置中会阻止过长的fsync()请求。注意现在没有任何修复，即使fsync在另外一个线程进行处理</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 为了减缓这个问题，可以设置下面这个参数no-appendfsync-on-rewrite</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># This means that while another child is saving the durability of Redis is</span>
+</span><span class='line'><span class="c"># the same as &quot;appendfsync none&quot;, that in pratical terms means that it is</span>
+</span><span class='line'><span class="c"># possible to lost up to 30 seconds of log in the worst scenario (with the</span>
+</span><span class='line'><span class="c"># default Linux settings).</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># If you have latency problems turn this to &quot;yes&quot;. Otherwise leave it as</span>
+</span><span class='line'><span class="c"># &quot;no&quot; that is the safest pick from the point of view of durability.</span>
+</span><span class='line'>no-appendfsync-on-rewrite no
+</span><span class='line'>
+</span><span class='line'><span class="c"># Automatic rewrite of the append only file.</span>
+</span><span class='line'><span class="c"># AOF 自动重写</span>
+</span><span class='line'><span class="c"># 当AOF文件增长到一定大小的时候Redis能够调用 BGREWRITEAOF 对日志文件进行重写</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 它是这样工作的：Redis会记住上次进行些日志后文件的大小(如果从开机以来还没进行过重写，那日子大小在开机的时候确定)</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 基础大小会同现在的大小进行比较。如果现在的大小比基础大小大制定的百分比，重写功能将启动</span>
+</span><span class='line'><span class="c"># 同时需要指定一个最小大小用于AOF重写，这个用于阻止即使文件很小但是增长幅度很大也去重写AOF文件的情况</span>
+</span><span class='line'><span class="c"># 设置 percentage 为0就关闭这个特性</span>
+</span><span class='line'>
+</span><span class='line'>auto-aof-rewrite-percentage 100
+</span><span class='line'>auto-aof-rewrite-min-size 64mb
+</span><span class='line'>
+</span><span class='line'><span class="c">################################## SLOW LOG ###################################</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Redis Slow Log 记录超过特定执行时间的命令。执行时间不包括I/O计算比如连接客户端，返回结果等，只是命令执行时间</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 可以通过两个参数设置slow log：一个是告诉Redis执行超过多少时间被记录的参数slowlog-log-slower-than(微妙)，</span>
+</span><span class='line'><span class="c"># 另一个是slow log 的长度。当一个新命令被记录的时候最早的命令将被从队列中移除</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 下面的时间以微妙微单位，因此1000000代表一分钟。</span>
+</span><span class='line'><span class="c"># 注意制定一个负数将关闭慢日志，而设置为0将强制每个命令都会记录</span>
+</span><span class='line'>slowlog-log-slower-than 10000
+</span><span class='line'>
+</span><span class='line'><span class="c"># 对日志长度没有限制，只是要注意它会消耗内存</span>
+</span><span class='line'><span class="c"># 可以通过 SLOWLOG RESET 回收被慢日志消耗的内存</span>
+</span><span class='line'>slowlog-max-len 1024
+</span><span class='line'>
+</span><span class='line'><span class="c">################################ VM ###############################</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">### WARNING! Virtual Memory is deprecated in Redis 2.4</span>
+</span><span class='line'><span class="c">### The use of Virtual Memory is strongly discouraged.</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Virtual Memory allows Redis to work with datasets bigger than the actual</span>
+</span><span class='line'><span class="c"># amount of RAM needed to hold the whole dataset in memory.</span>
+</span><span class='line'><span class="c"># In order to do so very used keys are taken in memory while the other keys</span>
+</span><span class='line'><span class="c"># are swapped into a swap file, similarly to what operating systems do</span>
+</span><span class='line'><span class="c"># with memory pages.</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># To enable VM just set &#39;vm-enabled&#39; to yes, and set the following three</span>
+</span><span class='line'><span class="c"># VM parameters accordingly to your needs.</span>
+</span><span class='line'>
+</span><span class='line'>vm-enabled no
+</span><span class='line'><span class="c"># vm-enabled yes</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># This is the path of the Redis swap file. As you can guess, swap files</span>
+</span><span class='line'><span class="c"># can&#39;t be shared by different Redis instances, so make sure to use a swap</span>
+</span><span class='line'><span class="c"># file for every redis process you are running. Redis will complain if the</span>
+</span><span class='line'><span class="c"># swap file is already in use.</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># The best kind of storage for the Redis swap file (that&#39;s accessed at random)</span>
+</span><span class='line'><span class="c"># is a Solid State Disk (SSD).</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># *** WARNING *** if you are using a shared hosting the default of putting</span>
+</span><span class='line'><span class="c"># the swap file under /tmp is not secure. Create a dir with access granted</span>
+</span><span class='line'><span class="c"># only to Redis user and configure Redis to create the swap file there.</span>
+</span><span class='line'>vm-swap-file /tmp/redis.swap
+</span><span class='line'>
+</span><span class='line'><span class="c"># vm-max-memory configures the VM to use at max the specified amount of</span>
+</span><span class='line'><span class="c"># RAM. Everything that deos not fit will be swapped on disk *if* possible, that</span>
+</span><span class='line'><span class="c"># is, if there is still enough contiguous space in the swap file.</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># With vm-max-memory 0 the system will swap everything it can. Not a good</span>
+</span><span class='line'><span class="c"># default, just specify the max amount of RAM you can in bytes, but it&#39;s</span>
+</span><span class='line'><span class="c"># better to leave some margin. For instance specify an amount of RAM</span>
+</span><span class='line'><span class="c"># that&#39;s more or less between 60 and 80% of your free RAM.</span>
+</span><span class='line'>vm-max-memory 0
+</span><span class='line'>
+</span><span class='line'><span class="c"># Redis swap files is split into pages. An object can be saved using multiple</span>
+</span><span class='line'><span class="c"># contiguous pages, but pages can&#39;t be shared between different objects.</span>
+</span><span class='line'><span class="c"># So if your page is too big, small objects swapped out on disk will waste</span>
+</span><span class='line'><span class="c"># a lot of space. If you page is too small, there is less space in the swap</span>
+</span><span class='line'><span class="c"># file (assuming you configured the same number of total swap file pages).</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># If you use a lot of small objects, use a page size of 64 or 32 bytes.</span>
+</span><span class='line'><span class="c"># If you use a lot of big objects, use a bigger page size.</span>
+</span><span class='line'><span class="c"># If unsure, use the default :)</span>
+</span><span class='line'>vm-page-size 32
+</span><span class='line'>
+</span><span class='line'><span class="c"># Number of total memory pages in the swap file.</span>
+</span><span class='line'><span class="c"># Given that the page table (a bitmap of free/used pages) is taken in memory,</span>
+</span><span class='line'><span class="c"># every 8 pages on disk will consume 1 byte of RAM.</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># The total swap size is vm-page-size * vm-pages</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># With the default of 32-bytes memory pages and 134217728 pages Redis will</span>
+</span><span class='line'><span class="c"># use a 4 GB swap file, that will use 16 MB of RAM for the page table.</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># It&#39;s better to use the smallest acceptable value for your application,</span>
+</span><span class='line'><span class="c"># but the default is large in order to work in most conditions.</span>
+</span><span class='line'>vm-pages 134217728
+</span><span class='line'>
+</span><span class='line'><span class="c"># Max number of VM I/O threads running at the same time.</span>
+</span><span class='line'><span class="c"># This threads are used to read/write data from/to swap file, since they</span>
+</span><span class='line'><span class="c"># also encode and decode objects from disk to memory or the reverse, a bigger</span>
+</span><span class='line'><span class="c"># number of threads can help with big objects even if they can&#39;t help with</span>
+</span><span class='line'><span class="c"># I/O itself as the physical device may not be able to couple with many</span>
+</span><span class='line'><span class="c"># reads/writes operations at the same time.</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># The special value of 0 turn off threaded I/O and enables the blocking</span>
+</span><span class='line'><span class="c"># Virtual Memory implementation.</span>
+</span><span class='line'>vm-max-threads 4
+</span><span class='line'>
+</span><span class='line'><span class="c">############################### ADVANCED CONFIG ###############################</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 当hash中包含超过指定元素个数并且最大的元素没有超过临界时，</span>
+</span><span class='line'><span class="c"># hash将以一种特殊的编码方式（大大减少内存使用）来存储，这里可以设置这两个临界值</span>
+</span><span class='line'><span class="c"># Redis Hash对应Value内部实际就是一个HashMap，实际这里会有2种不同实现，</span>
+</span><span class='line'><span class="c"># 这个Hash的成员比较少时Redis为了节省内存会采用类似一维数组的方式来紧凑存储，而不会采用真正的HashMap结构，对应的value redisObject的encoding为zipmap,</span>
+</span><span class='line'><span class="c"># 当成员数量增大时会自动转成真正的HashMap,此时encoding为ht。</span>
+</span><span class='line'><span class="nb">hash</span>-max-zipmap-entries 512
+</span><span class='line'><span class="nb">hash</span>-max-zipmap-value 64
+</span><span class='line'>
+</span><span class='line'><span class="c"># list数据类型多少节点以下会采用去指针的紧凑存储格式。</span>
+</span><span class='line'><span class="c"># list数据类型节点值大小小于多少字节会采用紧凑存储格式。</span>
+</span><span class='line'>list-max-ziplist-entries 512
+</span><span class='line'>list-max-ziplist-value 64
+</span><span class='line'>
+</span><span class='line'><span class="c"># set数据类型内部数据如果全部是数值型，且包含多少节点以下会采用紧凑格式存储。</span>
+</span><span class='line'><span class="nb">set</span>-max-intset-entries 512
+</span><span class='line'>
+</span><span class='line'><span class="c"># zsort数据类型多少节点以下会采用去指针的紧凑存储格式。</span>
+</span><span class='line'><span class="c"># zsort数据类型节点值大小小于多少字节会采用紧凑存储格式。</span>
+</span><span class='line'>zset-max-ziplist-entries 128
+</span><span class='line'>zset-max-ziplist-value 64
+</span><span class='line'>
+</span><span class='line'><span class="c"># Redis将在每100毫秒时使用1毫秒的CPU时间来对redis的hash表进行重新hash，可以降低内存的使用</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 当你的使用场景中，有非常严格的实时性需要，不能够接受Redis时不时的对请求有2毫秒的延迟的话，把这项配置为no。</span>
+</span><span class='line'><span class="c">#</span>
+</span><span class='line'><span class="c"># 如果没有这么严格的实时性要求，可以设置为yes，以便能够尽可能快的释放内存</span>
+</span><span class='line'>activerehashing yes
+</span><span class='line'>
+</span><span class='line'><span class="c">################################## INCLUDES ###################################</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 指定包含其它的配置文件，可以在同一主机上多个Redis实例之间使用同一份配置文件，而同时各个实例又拥有自己的特定配置文件</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># include /path/to/local.conf</span>
+</span><span class='line'><span class="c"># include /path/to/other.conf</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h2>首先如何看redis的性能</h2>
+<p>而sentinel.conf主要作为监控使用, M-S(master,slaves)集群提供了:</p>
+
+<ul>
+<li>master存活检测</li>
+<li>集群中M-S服务监控</li>
+<li>自动故障转移,M-S角色转换等能力,从一个方面说是提高了redis集群的可用性.</li>
+</ul>
+
+
+<p>一般情况下,最小M-S单元各有一个maste和slave组成,当master失效后,sentinel可以帮助我们自动将slave提升为master;有了sentinel组件,可以减少系统管理员的人工切换slave的操作过程.</p>
+
+<figure class='code'><figcaption><span>sentinel.conf</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 首先要设置port</span>
+</span><span class='line'>port 26379
+</span><span class='line'>
+</span><span class='line'><span class="c"># 其次要设置sentinel的监控地址</span>
+</span><span class='line'><span class="c"># 第一行配置指示 Sentinel 去监视一个名为 mymaster 的主服务器，</span>
+</span><span class='line'><span class="c"># 这个主服务器的 IP 地址为 127.0.0.1 ， 端口号为 6379 ，</span>
+</span><span class='line'><span class="c"># 而将这个主服务器判断为失效至少需要 2 个 Sentinel 同意 （只要同意</span>
+</span><span class='line'><span class="c"># Sentinel 的数量不达标，自动故障迁移就不会执行）。</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 不过要注意， 无论你设置要多少个 Sentinel 同意才能判断一个服务器失效，</span>
+</span><span class='line'><span class="c"># 一个 Sentinel 都需要获得系统中多数（majority） Sentinel 的支持，</span>
+</span><span class='line'><span class="c"># 才能发起一次自动故障迁移， 并预留一个给定的配置纪元 （configuration</span>
+</span><span class='line'><span class="c"># Epoch ，一个配置纪元就是一个新主服务器配置的版本号）。</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># 换句话说， 在只有少数（minority） Sentinel 进程正常运作的情况下，</span>
+</span><span class='line'><span class="c"># Sentinel 是不能执行自动故障迁移的。</span>
+</span><span class='line'>sentinel monitor mymaster 127.0.0.1 6379 2
+</span><span class='line'>sentinel down-after-milliseconds mymaster 60000
+</span><span class='line'>sentinel failover-timeout mymaster 180000
+</span><span class='line'>sentinel parallel-syncs mymaster 1
+</span><span class='line'>
+</span><span class='line'>sentinel monitor resque 192.168.1.3 6380 4
+</span><span class='line'>sentinel down-after-milliseconds resque 10000
+</span><span class='line'>sentinel failover-timeout resque 180000
+</span><span class='line'>sentinel parallel-syncs resque 5
+</span><span class='line'>
+</span><span class='line'><span class="c">#down-after-milliseconds 选项指定了 Sentinel认为服务器已经断线所需的毫秒数。</span>
+</span><span class='line'><span class="c">#parallel-syncs 选项指定了在执行故障转移时，最多可以有多少个从服务器同时对新的主服务器进行同步， 这个数字越小，完成故障转移所需的时间就越长。</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># ref: http://redis.readthedocs.org/en/latest/topic/sentinel.html</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后,你可以运行<code>sudo redis-sentinel /etc/redis/sentinel.conf</code></p>
 </div>
   
   
