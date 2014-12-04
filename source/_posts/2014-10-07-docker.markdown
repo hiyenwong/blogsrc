@@ -1,0 +1,43 @@
+---
+layout: post
+title: "I'm a Docker"
+date: 2014-10-07 12:32
+comments: true
+categories: [docker]
+---
+
+#I'm a Docker
+
+Docker是以go语言实现的轻量级操作系统虚拟化解决方案.是基于LXC等技术.同时,Docker不需要额外的hypervisor支持,它是内核级的虚拟华,因此可以实现更高的性能和效率.
+
+Docker包含三个基本概念
+
+##Image
+Image就是一个只读的模板.Image可以包含一个完整的OS,里面仅仅安装了Apache或是其他应用程序.
+
+Image可以用来创建Docker's Container.
+
+另外Docker还提供一个简单的机制创建Image或是更新现有的Image.
+
+
+##Container
+容器是从image创建的运行实例.它可以被启动,停止,删除.每个容易相互隔离.
+
+Image是只读的,container在启动的时候创建一层可写层作为最上层.
+
+**由于Container在Image之上,所以要删除Image则需要先删除Containerc**
+
+##Repository
+Repository是集中存放image file的场所.
+当用户创建自己的image之后,可以使用push命令将它上传到公有或是私有的repository,下次需要时候可以pull下来就可以使用.
+
+##一些关于docker 的命令
+
+###如何删除所有images和container?
+``` bash
+#delete containers
+docker rm $(docker ps -q -a)
+#delete images
+docker rmi $(docker images -q -a)
+```
+###run一个在container中的一个命令

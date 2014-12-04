@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://hyanwang.github.io/blog/2013/11/09/redis">
+  <link rel="canonical" href="http://hyanwang.github.io/blog/2014/12/04/redis">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="島嶼の患者" type="application/atom+xml">
@@ -85,7 +85,7 @@
   
 
 
-<time datetime="2013-11-09T06:30:00+08:00" pubdate data-updated="true">Nov 9<span>th</span>, 2013</time>
+<time datetime="2014-12-04T06:30:00+08:00" pubdate data-updated="true">Dec 4<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -944,6 +944,28 @@
 
 
 <p>最后,你可以运行<code>sudo redis-sentinel /etc/redis/sentinel.conf</code></p>
+
+<p> Redis-sentinel是Redis实例的监控管理、通知和实例失效备援服务，是Redis集群的管理工具。在一般的分布式中心节点数据库
+ 中，Redis-sentinel的作用是中心节点的工作，监控各个其他节点的工作情况并且进行故障恢复，来提高集群的高可用性。</p>
+
+<p> Redis-sentinel是Redis的作者antirez在今年6月份完成的，因为Redis实例在各个大公司的应用，每个公司都需要一个Redis集群的管理工具，被迫都自己写管理工具来管理Redis集群，antirez考虑到社区的急迫需要(详情)，花了几个星期写出了Redis-sentinel。</p>
+
+<p> Redis-sentinel的三大功能: * 监测 * 通知 * 自动故障恢复
+ 首先Redis-sentinel要建立一个监控的master列表，然后针对master列表的每个master获取监控其的sentinels和slaves供以后故障恢复使用</p>
+
+<h2>关于redis监控</h2>
+
+<ul>
+<li>redis的系统报告可以使用<code>redis-cli info</code>,<code>redis-cli -h localhost -p 6380 monitor</code></li>
+<li>使用redis-benchmark工具,作为性能检测. <code>redis-benchmark -h localhost -p 6379 -c 100 -n 100000</code></li>
+<li>一些web方式的监控工具:
+
+<ul>
+<li>redis-monitoa: <a href="https://github.com/PrettySimple/redis-monitorr">https://github.com/PrettySimple/redis-monitorr</a></li>
+</ul>
+</li>
+</ul>
+
 </div>
 
 
@@ -966,7 +988,7 @@
   
 
 
-<time datetime="2013-11-09T06:30:00+08:00" pubdate data-updated="true">Nov 9<span>th</span>, 2013</time>
+<time datetime="2014-12-04T06:30:00+08:00" pubdate data-updated="true">Dec 4<span>th</span>, 2014</time>
       
 
 <span class="categories">
@@ -980,7 +1002,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hyanwang.github.io/blog/2013/11/09/redis/" data-via="Lane391" data-counturl="http://hyanwang.github.io/blog/2013/11/09/redis/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hyanwang.github.io/blog/2014/12/04/redis/" data-via="Lane391" data-counturl="http://hyanwang.github.io/blog/2014/12/04/redis/" >Tweet</a>
   
   
   
@@ -989,10 +1011,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/09/18/const/" title="Previous Post: custom library and define constant at rails 4">&laquo; custom library and define constant at rails 4</a>
+        <a class="basic-alignment left" href="/blog/2014/10/07/docker/" title="Previous Post: I'm a Docker">&laquo; I'm a Docker</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/11/29/about-pagination-on-rails/" title="Next Post: 关于Rails下的分页数据">关于Rails下的分页数据 &raquo;</a>
       
     </p>
   </footer>
@@ -1013,6 +1033,14 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/12/04/redis/">Redis at Rails</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/07/docker/">I'm a Docker</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/08/30/make-octopress/">制作octopress</a>
       </li>
     
@@ -1022,14 +1050,6 @@
     
       <li class="post">
         <a href="/blog/2013/11/29/about-pagination-on-rails/">关于Rails下的分页数据</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/09/redis/">Redis at Rails</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/18/const/">Custom Library and Define Constant at Rails 4</a>
       </li>
     
   </ul>
@@ -1065,8 +1085,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://hyanwang.github.io/blog/2013/11/09/redis/';
-        var disqus_url = 'http://hyanwang.github.io/blog/2013/11/09/redis/';
+        var disqus_identifier = 'http://hyanwang.github.io/blog/2014/12/04/redis/';
+        var disqus_url = 'http://hyanwang.github.io/blog/2014/12/04/redis/';
         var disqus_script = 'embed.js';
       
     (function () {

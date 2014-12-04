@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: docker | 島嶼の患者]]></title>
+  <link href="http://hyanwang.github.io/blog/categories/docker/atom.xml" rel="self"/>
+  <link href="http://hyanwang.github.io/"/>
+  <updated>2014-12-04T21:30:59+08:00</updated>
+  <id>http://hyanwang.github.io/</id>
+  <author>
+    <name><![CDATA[Hi Yen Wong]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[I'm a Docker]]></title>
+    <link href="http://hyanwang.github.io/blog/2014/10/07/docker/"/>
+    <updated>2014-10-07T12:32:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2014/10/07/docker</id>
+    <content type="html"><![CDATA[<h1>I&rsquo;m a Docker</h1>
+
+<p>Docker是以go语言实现的轻量级操作系统虚拟化解决方案.是基于LXC等技术.同时,Docker不需要额外的hypervisor支持,它是内核级的虚拟华,因此可以实现更高的性能和效率.</p>
+
+<p>Docker包含三个基本概念</p>
+
+<h2>Image</h2>
+
+<p>Image就是一个只读的模板.Image可以包含一个完整的OS,里面仅仅安装了Apache或是其他应用程序.</p>
+
+<p>Image可以用来创建Docker&rsquo;s Container.</p>
+
+<p>另外Docker还提供一个简单的机制创建Image或是更新现有的Image.</p>
+
+<h2>Container</h2>
+
+<p>容器是从image创建的运行实例.它可以被启动,停止,删除.每个容易相互隔离.</p>
+
+<p>Image是只读的,container在启动的时候创建一层可写层作为最上层.</p>
+
+<p><strong>由于Container在Image之上,所以要删除Image则需要先删除Containerc</strong></p>
+
+<h2>Repository</h2>
+
+<p>Repository是集中存放image file的场所.
+当用户创建自己的image之后,可以使用push命令将它上传到公有或是私有的repository,下次需要时候可以pull下来就可以使用.</p>
+
+<h2>一些关于docker 的命令</h2>
+
+<h3>如何删除所有images和container?</h3>
+
+<p>``` bash</p>
+
+<h1>delete containers</h1>
+
+<p>docker rm $(docker ps -q -a)</p>
+
+<h1>delete images</h1>
+
+<p>docker rmi $(docker images -q -a)
+```</p>
+
+<h3>run一个在container中的一个命令</h3>
+]]></content>
+  </entry>
+  
+</feed>

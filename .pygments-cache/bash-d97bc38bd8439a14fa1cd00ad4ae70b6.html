@@ -1,0 +1,5 @@
+<div class="highlight"><pre><span class="c">#delete containers</span>
+docker rm <span class="k">$(</span>docker ps -q -a<span class="k">)</span>
+<span class="c">#delete images</span>
+docker rmi <span class="k">$(</span>docker images -q -a<span class="k">)</span>
+</pre></div>

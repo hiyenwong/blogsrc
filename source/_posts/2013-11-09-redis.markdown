@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "redis at rails "
-date: 2013-11-09 06:30
+date: 2014-12-04 06:30
 comments: true
 categories: [redis,rails]
 ---
@@ -403,7 +403,7 @@ activerehashing yes
 
 
 + master存活检测
-+ 集群中M-S服务监控 
++ 集群中M-S服务监控
 + 自动故障转移,M-S角色转换等能力,从一个方面说是提高了redis集群的可用性.
 
 一般情况下,最小M-S单元各有一个maste和slave组成,当master失效后,sentinel可以帮助我们自动将slave提升为master;有了sentinel组件,可以减少系统管理员的人工切换slave的操作过程.
@@ -455,4 +455,3 @@ sentinel parallel-syncs resque 5
 - 使用redis-benchmark工具,作为性能检测. `redis-benchmark -h localhost -p 6379 -c 100 -n 100000 `
 - 一些web方式的监控工具:
   * redis-monitoa: https://github.com/PrettySimple/redis-monitorr
-  * 

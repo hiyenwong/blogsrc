@@ -9,8 +9,7 @@
   <meta name="author" content="Hi Yen Wong">
 
   
-  <meta name="description" content="octopress的部署 关于octopress的安装 git octopress 1
-git clone git://github.com/imathis/octopress.git YOUR_DIR 你需要在github页面上的account设置SSH的public key, &hellip;">
+  <meta name="description" content="认识Redis Redis是一个高性能的kv数据库.它特点就是在NOSQL和并发快速.之所以快速是因为它将所有的数据都放入内存,因此如何使用变得非常关键. redis安装和简单配置 install redis 其实没有没有什么讲的,几乎所有任何的发行版本都已经加入.如果官方下载包也容易, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -73,7 +72,7 @@ git clone git://github.com/imathis/octopress.git YOUR_DIR 你需要在github页�
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/08/30/make-octopress/">制作octopress</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/12/04/redis/">Redis at Rails</a></h1>
     
     
       <p class="meta">
@@ -89,317 +88,9 @@ git clone git://github.com/imathis/octopress.git YOUR_DIR 你需要在github页�
   
 
 
-<time datetime="2014-08-30T11:37:00+08:00" pubdate data-updated="true">Aug 30<span>th</span>, 2014</time>
+<time datetime="2014-12-04T06:30:00+08:00" pubdate data-updated="true">Dec 4<span>th</span>, 2014</time>
         
-         | <a href="/blog/2014/08/30/make-octopress/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>octopress的部署</h1>
-
-<h2>关于octopress的安装</h2>
-
-<p>git octopress</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git  YOUR_DIR
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>你需要在github页面上的account设置SSH的public key, 所以你这必须是使用<code>ssh-keygen</code>生成public key</p>
-
-<p>并且为了保留原先的markdown文件,所以可以另外设置一个repository,然后设置以下remote,这样可以保留原先的原始文件和修改内容.</p>
-
-<p>另外我们需要安装所需的gem,运行命令<code>bundle install</code>,就可以将Gemfile里的列表安装到电脑里.</p>
-
-<h2>设置基本的octopress</h2>
-
-<p>设置octopress很简单,只要使用两步.</p>
-
-<p>设置你的repository,打命令 <code>rake setup_github_page</code></p>
-
-<p>然后我们只要设置一下配置文件_config.yml就完美了.</p>
-
-<h2>发布你的博客</h2>
-
-<h3>新建博客:</h3>
-
-<p><code>rake new_post[post_name]</code></p>
-
-<h3>生成静态文件</h3>
-
-<p><code>rake generate</code></p>
-
-<h3>发布博客</h3>
-
-<p><code>rake deploy</code></p>
-
-<p>当然有时,rake的版本不对,没关系,你可以使用<code>bundle exec</code>来避免这样的问题.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/20/pow-for-mac/">Pow for Mac</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-20T16:30:00+08:00" pubdate data-updated="true">Mar 20<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/03/20/pow-for-mac/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Pow 介绍</h2>
-
-<p>Pow 简单的说是一个可以实时快速将rails在mac系统中进行部署测试的插件，你只需要做几个简单设置，就可以通过特定的域名进行访问。</p>
-
-<h2>Pow 安装和配置</h2>
-
-<h3>安装pow</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>curl get.pow.cx | sh
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>卸载pow</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>curl get.pow.cx/uninstall.sh | sh
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>在rvm环境下的配置</h3>
-
-<p>需要在每个app中设置powenv或是powrc</p>
-
-<figure class='code'><figcaption><span>.powenv</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># detect `$rvm_path`</span>
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;${rvm_path:-}&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -x <span class="s2">&quot;${HOME:-}/.rvm/bin/rvm&quot;</span> <span class="o">]</span>
-</span><span class='line'><span class="k">then </span><span class="nv">rvm_path</span><span class="o">=</span><span class="s2">&quot;${HOME:-}/.rvm&quot;</span>
-</span><span class='line'><span class="k">fi</span>
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;${rvm_path:-}&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -x <span class="s2">&quot;/usr/local/rvm/bin/rvm&quot;</span> <span class="o">]</span>
-</span><span class='line'><span class="k">then </span><span class="nv">rvm_path</span><span class="o">=</span><span class="s2">&quot;/usr/local/rvm&quot;</span>
-</span><span class='line'><span class="k">fi</span>
-</span><span class='line'>
-</span><span class='line'><span class="c"># load environment of current project ruby</span>
-</span><span class='line'><span class="k">if</span>
-</span><span class='line'>  <span class="o">[</span> -n <span class="s2">&quot;${rvm_path:-}&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span>
-</span><span class='line'>  <span class="o">[</span> -x <span class="s2">&quot;${rvm_path:-}/bin/rvm&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span>
-</span><span class='line'>  <span class="nv">rvm_project_environment</span><span class="o">=</span><span class="sb">`</span><span class="s2">&quot;${rvm_path:-}/bin/rvm&quot;</span> . <span class="k">do </span>rvm env --path 2&gt;/dev/null<span class="sb">`</span> <span class="o">&amp;&amp;</span>
-</span><span class='line'>  <span class="o">[</span> -n <span class="s2">&quot;${rvm_project_environment:-}&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span>
-</span><span class='line'>  <span class="o">[</span> -s <span class="s2">&quot;${rvm_project_environment:-}&quot;</span> <span class="o">]</span>
-</span><span class='line'><span class="k">then</span>
-</span><span class='line'><span class="k">  </span><span class="nb">echo</span> <span class="s2">&quot;RVM loading: ${rvm_project_environment:-}&quot;</span>
-</span><span class='line'>  <span class="se">\.</span> <span class="s2">&quot;${rvm_project_environment:-}&quot;</span>
-</span><span class='line'><span class="k">else</span>
-</span><span class='line'><span class="k">  </span><span class="nb">echo</span> <span class="s2">&quot;RVM project not found at: $PWD&quot;</span>
-</span><span class='line'><span class="k">fi</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><figcaption><span>.powrc</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">if</span> <span class="o">[</span> -f <span class="s2">&quot;$rvm_path/scripts/rvm&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -f <span class="s2">&quot;.rvmrc&quot;</span> <span class="o">]</span>; <span class="k">then</span>
-</span><span class='line'><span class="k">  </span><span class="nb">source</span> <span class="s2">&quot;$rvm_path/scripts/rvm&quot;</span>
-</span><span class='line'>  <span class="nb">source</span> <span class="s2">&quot;.rvmrc&quot;</span>
-</span><span class='line'><span class="k">fi</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/29/about-pagination-on-rails/">关于Rails下的分页数据</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-29T11:11:00+08:00" pubdate data-updated="true">Nov 29<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/11/29/about-pagination-on-rails/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>Rails 的分页</h1>
-
-<p>Rails下的分页显示数据的插件有很多，比较常用的是will_paginate，源代码在<a href="http://githubs.com/mislav/will_paginate">mislav的github</a>上去git clone一下。</p>
-
-<h2>如何使用will_paginate呢？</h2>
-
-<p>使用起来没有太多复杂的东西，只需要将<code>Post.all</code>替换成如下就可以</p>
-
-<figure class='code'><figcaption><span>Post Controller</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># :order 作为排序设置</span>
-</span><span class='line'><span class="c1"># :per_page 每页的记录</span>
-</span><span class='line'><span class="vi">@posts</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="ss">:page</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:page</span><span class="o">]</span><span class="p">,</span><span class="ss">:order</span> <span class="o">=&gt;</span> <span class="s1">&#39;id DESC&#39;</span><span class="p">,</span> <span class="ss">:per_page</span> <span class="o">=&gt;</span> <span class="mi">20</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后下面我们就是设置视图了</p>
-
-<figure class='code'><figcaption><span>index.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="cp">&lt;%=</span> <span class="n">page_entries_info</span> <span class="vi">@posts</span> <span class="cp">%&gt;</span><span class="x"></span>
-</span><span class='line'>
-</span><span class='line'><span class="cp">&lt;%=</span>
-</span><span class='line'><span class="c1">#      :class          =&gt; &#39;pagination&#39;,</span>
-</span><span class='line'><span class="c1">#      :previous_label =&gt; nil,</span>
-</span><span class='line'><span class="c1">#      :next_label     =&gt; nil,</span>
-</span><span class='line'><span class="c1">#      :inner_window   =&gt; 4, # links around the current page</span>
-</span><span class='line'><span class="c1">#      :outer_window   =&gt; 1, # links around beginning and end</span>
-</span><span class='line'><span class="c1">#      :link_separator =&gt; &#39; &#39;, # single space is friendly to spiders and non-graphic browsers</span>
-</span><span class='line'><span class="c1">#      :param_name     =&gt; :page,</span>
-</span><span class='line'><span class="c1">#      :params         =&gt; nil,</span>
-</span><span class='line'><span class="c1">#      :page_links     =&gt; true,</span>
-</span><span class='line'><span class="c1">#      :container      =&gt; true</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">#      具体操作will_paginate / lib / will_paginate / view_helpers.rb 下面则有批注</span>
-</span><span class='line'><span class="n">will_paginate</span> <span class="vi">@posts</span><span class="p">,</span> <span class="ss">:previous_label</span> <span class="o">=&gt;</span> <span class="s1">&#39;上一页&#39;</span><span class="p">,</span> <span class="ss">:next_label</span> <span class="o">=&gt;</span> <span class="s1">&#39;下一页&#39;</span><span class="p">,</span> <span class="ss">:container</span> <span class="o">=&gt;</span> <span class="kp">false</span>
-</span><span class='line'><span class="cp">%&gt;</span><span class="x"></span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>关于css</h2>
-
-<p><a href="http://mislav.uniqpath.com/will_paginate/?page=2">http://mislav.uniqpath.com/will_paginate/?page=2</a> 可以去着网站上下载其分页样式，之后将它放到<code>assets/stylesheets</code>下就可以了。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;div class=&#39;digg_pagination&#39;&gt;</span>
-</span><span class='line'><span class="x">&lt;div class=&#39;pag_info&#39;&gt;</span>
-</span><span class='line'><span class="cp">&lt;%=</span> <span class="n">page_entries_info</span> <span class="vi">@posts</span> <span class="cp">%&gt;</span><span class="x"></span>
-</span><span class='line'><span class="x">&lt;/div&gt;</span>
-</span><span class='line'><span class="cp">&lt;%=</span> <span class="n">will_paginate</span> <span class="vi">@posts</span> <span class="ss">:previous_label</span> <span class="o">=&gt;</span> <span class="s1">&#39;上一页&#39;</span><span class="p">,</span> <span class="ss">:next_label</span> <span class="o">=&gt;</span> <span class="s1">&#39;下一页&#39;</span><span class="p">,</span><span class="ss">:container</span> <span class="o">=&gt;</span> <span class="kp">false</span> <span class="cp">%&gt;</span><span class="x"></span>
-</span><span class='line'><span class="x">&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>-eof-</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/09/redis/">Redis at Rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-09T06:30:00+08:00" pubdate data-updated="true">Nov 9<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/11/09/redis/#disqus_thread">Comments</a>
+         | <a href="/blog/2014/12/04/redis/#disqus_thread">Comments</a>
         
       </p>
     
@@ -1256,6 +947,416 @@ git clone git://github.com/imathis/octopress.git YOUR_DIR 你需要在github页�
 
 
 <p>最后,你可以运行<code>sudo redis-sentinel /etc/redis/sentinel.conf</code></p>
+
+<p> Redis-sentinel是Redis实例的监控管理、通知和实例失效备援服务，是Redis集群的管理工具。在一般的分布式中心节点数据库
+ 中，Redis-sentinel的作用是中心节点的工作，监控各个其他节点的工作情况并且进行故障恢复，来提高集群的高可用性。</p>
+
+<p> Redis-sentinel是Redis的作者antirez在今年6月份完成的，因为Redis实例在各个大公司的应用，每个公司都需要一个Redis集群的管理工具，被迫都自己写管理工具来管理Redis集群，antirez考虑到社区的急迫需要(详情)，花了几个星期写出了Redis-sentinel。</p>
+
+<p> Redis-sentinel的三大功能: * 监测 * 通知 * 自动故障恢复
+ 首先Redis-sentinel要建立一个监控的master列表，然后针对master列表的每个master获取监控其的sentinels和slaves供以后故障恢复使用</p>
+
+<h2>关于redis监控</h2>
+
+<ul>
+<li>redis的系统报告可以使用<code>redis-cli info</code>,<code>redis-cli -h localhost -p 6380 monitor</code></li>
+<li>使用redis-benchmark工具,作为性能检测. <code>redis-benchmark -h localhost -p 6379 -c 100 -n 100000</code></li>
+<li>一些web方式的监控工具:
+
+<ul>
+<li>redis-monitoa: <a href="https://github.com/PrettySimple/redis-monitorr">https://github.com/PrettySimple/redis-monitorr</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/10/07/docker/">I&#8217;m a Docker</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-07T12:32:00+08:00" pubdate data-updated="true">Oct 7<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/10/07/docker/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>I&rsquo;m a Docker</h1>
+
+<p>Docker是以go语言实现的轻量级操作系统虚拟化解决方案.是基于LXC等技术.同时,Docker不需要额外的hypervisor支持,它是内核级的虚拟华,因此可以实现更高的性能和效率.</p>
+
+<p>Docker包含三个基本概念</p>
+
+<h2>Image</h2>
+
+<p>Image就是一个只读的模板.Image可以包含一个完整的OS,里面仅仅安装了Apache或是其他应用程序.</p>
+
+<p>Image可以用来创建Docker&rsquo;s Container.</p>
+
+<p>另外Docker还提供一个简单的机制创建Image或是更新现有的Image.</p>
+
+<h2>Container</h2>
+
+<p>容器是从image创建的运行实例.它可以被启动,停止,删除.每个容易相互隔离.</p>
+
+<p>Image是只读的,container在启动的时候创建一层可写层作为最上层.</p>
+
+<p><strong>由于Container在Image之上,所以要删除Image则需要先删除Containerc</strong></p>
+
+<h2>Repository</h2>
+
+<p>Repository是集中存放image file的场所.
+当用户创建自己的image之后,可以使用push命令将它上传到公有或是私有的repository,下次需要时候可以pull下来就可以使用.</p>
+
+<h2>一些关于docker 的命令</h2>
+
+<h3>如何删除所有images和container?</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#delete containers</span>
+</span><span class='line'>docker rm <span class="k">$(</span>docker ps -q -a<span class="k">)</span>
+</span><span class='line'><span class="c">#delete images</span>
+</span><span class='line'>docker rmi <span class="k">$(</span>docker images -q -a<span class="k">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>run一个在container中的一个命令</h3>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/30/make-octopress/">制作octopress</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-30T11:37:00+08:00" pubdate data-updated="true">Aug 30<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/08/30/make-octopress/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>octopress的部署</h1>
+
+<h2>关于octopress的安装</h2>
+
+<p>git octopress</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git  YOUR_DIR
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>你需要在github页面上的account设置SSH的public key, 所以你这必须是使用<code>ssh-keygen</code>生成public key</p>
+
+<p>并且为了保留原先的markdown文件,所以可以另外设置一个repository,然后设置以下remote,这样可以保留原先的原始文件和修改内容.</p>
+
+<p>另外我们需要安装所需的gem,运行命令<code>bundle install</code>,就可以将Gemfile里的列表安装到电脑里.</p>
+
+<h2>设置基本的octopress</h2>
+
+<p>设置octopress很简单,只要使用两步.</p>
+
+<p>设置你的repository,打命令 <code>rake setup_github_page</code></p>
+
+<p>然后我们只要设置一下配置文件_config.yml就完美了.</p>
+
+<h2>发布你的博客</h2>
+
+<h3>新建博客:</h3>
+
+<p><code>rake new_post[post_name]</code></p>
+
+<h3>生成静态文件</h3>
+
+<p><code>rake generate</code></p>
+
+<h3>发布博客</h3>
+
+<p><code>rake deploy</code></p>
+
+<p>当然有时,rake的版本不对,没关系,你可以使用<code>bundle exec</code>来避免这样的问题.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/20/pow-for-mac/">Pow for Mac</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-20T16:30:00+08:00" pubdate data-updated="true">Mar 20<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/03/20/pow-for-mac/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Pow 介绍</h2>
+
+<p>Pow 简单的说是一个可以实时快速将rails在mac系统中进行部署测试的插件，你只需要做几个简单设置，就可以通过特定的域名进行访问。</p>
+
+<h2>Pow 安装和配置</h2>
+
+<h3>安装pow</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>curl get.pow.cx | sh
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>卸载pow</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>curl get.pow.cx/uninstall.sh | sh
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>在rvm环境下的配置</h3>
+
+<p>需要在每个app中设置powenv或是powrc</p>
+
+<figure class='code'><figcaption><span>.powenv</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># detect `$rvm_path`</span>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;${rvm_path:-}&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -x <span class="s2">&quot;${HOME:-}/.rvm/bin/rvm&quot;</span> <span class="o">]</span>
+</span><span class='line'><span class="k">then </span><span class="nv">rvm_path</span><span class="o">=</span><span class="s2">&quot;${HOME:-}/.rvm&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;${rvm_path:-}&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -x <span class="s2">&quot;/usr/local/rvm/bin/rvm&quot;</span> <span class="o">]</span>
+</span><span class='line'><span class="k">then </span><span class="nv">rvm_path</span><span class="o">=</span><span class="s2">&quot;/usr/local/rvm&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># load environment of current project ruby</span>
+</span><span class='line'><span class="k">if</span>
+</span><span class='line'>  <span class="o">[</span> -n <span class="s2">&quot;${rvm_path:-}&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>  <span class="o">[</span> -x <span class="s2">&quot;${rvm_path:-}/bin/rvm&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>  <span class="nv">rvm_project_environment</span><span class="o">=</span><span class="sb">`</span><span class="s2">&quot;${rvm_path:-}/bin/rvm&quot;</span> . <span class="k">do </span>rvm env --path 2&gt;/dev/null<span class="sb">`</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>  <span class="o">[</span> -n <span class="s2">&quot;${rvm_project_environment:-}&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span>
+</span><span class='line'>  <span class="o">[</span> -s <span class="s2">&quot;${rvm_project_environment:-}&quot;</span> <span class="o">]</span>
+</span><span class='line'><span class="k">then</span>
+</span><span class='line'><span class="k">  </span><span class="nb">echo</span> <span class="s2">&quot;RVM loading: ${rvm_project_environment:-}&quot;</span>
+</span><span class='line'>  <span class="se">\.</span> <span class="s2">&quot;${rvm_project_environment:-}&quot;</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'><span class="k">  </span><span class="nb">echo</span> <span class="s2">&quot;RVM project not found at: $PWD&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><figcaption><span>.powrc</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">if</span> <span class="o">[</span> -f <span class="s2">&quot;$rvm_path/scripts/rvm&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">[</span> -f <span class="s2">&quot;.rvmrc&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'><span class="k">  </span><span class="nb">source</span> <span class="s2">&quot;$rvm_path/scripts/rvm&quot;</span>
+</span><span class='line'>  <span class="nb">source</span> <span class="s2">&quot;.rvmrc&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/29/about-pagination-on-rails/">关于Rails下的分页数据</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-29T11:11:00+08:00" pubdate data-updated="true">Nov 29<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/29/about-pagination-on-rails/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>Rails 的分页</h1>
+
+<p>Rails下的分页显示数据的插件有很多，比较常用的是will_paginate，源代码在<a href="http://githubs.com/mislav/will_paginate">mislav的github</a>上去git clone一下。</p>
+
+<h2>如何使用will_paginate呢？</h2>
+
+<p>使用起来没有太多复杂的东西，只需要将<code>Post.all</code>替换成如下就可以</p>
+
+<figure class='code'><figcaption><span>Post Controller</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># :order 作为排序设置</span>
+</span><span class='line'><span class="c1"># :per_page 每页的记录</span>
+</span><span class='line'><span class="vi">@posts</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="ss">:page</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:page</span><span class="o">]</span><span class="p">,</span><span class="ss">:order</span> <span class="o">=&gt;</span> <span class="s1">&#39;id DESC&#39;</span><span class="p">,</span> <span class="ss">:per_page</span> <span class="o">=&gt;</span> <span class="mi">20</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后下面我们就是设置视图了</p>
+
+<figure class='code'><figcaption><span>index.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="cp">&lt;%=</span> <span class="n">page_entries_info</span> <span class="vi">@posts</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">&lt;%=</span>
+</span><span class='line'><span class="c1">#      :class          =&gt; &#39;pagination&#39;,</span>
+</span><span class='line'><span class="c1">#      :previous_label =&gt; nil,</span>
+</span><span class='line'><span class="c1">#      :next_label     =&gt; nil,</span>
+</span><span class='line'><span class="c1">#      :inner_window   =&gt; 4, # links around the current page</span>
+</span><span class='line'><span class="c1">#      :outer_window   =&gt; 1, # links around beginning and end</span>
+</span><span class='line'><span class="c1">#      :link_separator =&gt; &#39; &#39;, # single space is friendly to spiders and non-graphic browsers</span>
+</span><span class='line'><span class="c1">#      :param_name     =&gt; :page,</span>
+</span><span class='line'><span class="c1">#      :params         =&gt; nil,</span>
+</span><span class='line'><span class="c1">#      :page_links     =&gt; true,</span>
+</span><span class='line'><span class="c1">#      :container      =&gt; true</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#      具体操作will_paginate / lib / will_paginate / view_helpers.rb 下面则有批注</span>
+</span><span class='line'><span class="n">will_paginate</span> <span class="vi">@posts</span><span class="p">,</span> <span class="ss">:previous_label</span> <span class="o">=&gt;</span> <span class="s1">&#39;上一页&#39;</span><span class="p">,</span> <span class="ss">:next_label</span> <span class="o">=&gt;</span> <span class="s1">&#39;下一页&#39;</span><span class="p">,</span> <span class="ss">:container</span> <span class="o">=&gt;</span> <span class="kp">false</span>
+</span><span class='line'><span class="cp">%&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>关于css</h2>
+
+<p><a href="http://mislav.uniqpath.com/will_paginate/?page=2">http://mislav.uniqpath.com/will_paginate/?page=2</a> 可以去着网站上下载其分页样式，之后将它放到<code>assets/stylesheets</code>下就可以了。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='erb'><span class='line'><span class="x">&lt;div class=&#39;digg_pagination&#39;&gt;</span>
+</span><span class='line'><span class="x">&lt;div class=&#39;pag_info&#39;&gt;</span>
+</span><span class='line'><span class="cp">&lt;%=</span> <span class="n">page_entries_info</span> <span class="vi">@posts</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">&lt;/div&gt;</span>
+</span><span class='line'><span class="cp">&lt;%=</span> <span class="n">will_paginate</span> <span class="vi">@posts</span> <span class="ss">:previous_label</span> <span class="o">=&gt;</span> <span class="s1">&#39;上一页&#39;</span><span class="p">,</span> <span class="ss">:next_label</span> <span class="o">=&gt;</span> <span class="s1">&#39;下一页&#39;</span><span class="p">,</span><span class="ss">:container</span> <span class="o">=&gt;</span> <span class="kp">false</span> <span class="cp">%&gt;</span><span class="x"></span>
+</span><span class='line'><span class="x">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>-eof-</p>
 </div>
   
   
@@ -1762,75 +1863,6 @@ git clone git://github.com/imathis/octopress.git YOUR_DIR 你需要在github页�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/18/tdd-spec-helper/">TDD:spec_helper</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-18T06:51:00+08:00" pubdate data-updated="true">Jun 18<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/06/18/tdd-spec-helper/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Rails 有自带的Test框架，当我们不使用本身框架的时候则在创建controller的时候加入 <code>--no-test-framework</code></p>
-
-<h2>RSpec 生成器</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">g</span> <span class="ss">rspec</span><span class="p">:</span><span class="n">install</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>集成測試</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rails generate integration_test static_pages
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>根據<a href="http://railstutorial-china.org/chapter3.html">http://railstutorial-china.org/chapter3.html</a> 中例子，在做TDD環節的時候會說找不到visit這個方法，原因並不是你沒有capybara，而是之前你沒有加載,所以需要修改<code>spec/spec_helper.rb</code></p>
-
-<figure class='code'><figcaption><span>spec/spec_helper.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="nb">require</span> <span class="s1">&#39;capybara/rails&#39;</span>
-</span><span class='line'>   <span class="nb">require</span> <span class="s1">&#39;capybara/rspec&#39;</span>
-</span><span class='line'>   <span class="kp">include</span> <span class="ss">Capybara</span><span class="p">:</span><span class="ss">:DSL</span>
-</span><span class='line'>   <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
-</span><span class='line'>   <span class="n">config</span><span class="o">.</span><span class="n">include</span> <span class="ss">Capybara</span><span class="p">:</span><span class="ss">:DSL</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1846,6 +1878,14 @@ git clone git://github.com/imathis/octopress.git YOUR_DIR 你需要在github页�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/12/04/redis/">Redis at Rails</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/07/docker/">I&#8217;m a Docker</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/08/30/make-octopress/">制作octopress</a>
       </li>
     
@@ -1855,14 +1895,6 @@ git clone git://github.com/imathis/octopress.git YOUR_DIR 你需要在github页�
     
       <li class="post">
         <a href="/blog/2013/11/29/about-pagination-on-rails/">关于Rails下的分页数据</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/09/redis/">Redis at Rails</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/18/const/">Custom Library and Define Constant at Rails 4</a>
       </li>
     
   </ul>

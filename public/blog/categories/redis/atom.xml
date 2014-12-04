@@ -4,7 +4,7 @@
   <title><![CDATA[Category: redis | 島嶼の患者]]></title>
   <link href="http://hyanwang.github.io/blog/categories/redis/atom.xml" rel="self"/>
   <link href="http://hyanwang.github.io/"/>
-  <updated>2014-09-23T21:12:41+08:00</updated>
+  <updated>2014-12-04T21:30:59+08:00</updated>
   <id>http://hyanwang.github.io/</id>
   <author>
     <name><![CDATA[Hi Yen Wong]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[redis at rails ]]></title>
-    <link href="http://hyanwang.github.io/blog/2013/11/09/redis/"/>
-    <updated>2013-11-09T06:30:00+08:00</updated>
-    <id>http://hyanwang.github.io/blog/2013/11/09/redis</id>
+    <link href="http://hyanwang.github.io/blog/2014/12/04/redis/"/>
+    <updated>2014-12-04T06:30:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2014/12/04/redis</id>
     <content type="html"><![CDATA[<h1>认识Redis</h1>
 
 <p>Redis是一个高性能的kv数据库.它特点就是在NOSQL和并发快速.之所以快速是因为它将所有的数据都放入内存,因此如何使用变得非常关键.</p>
@@ -714,6 +714,28 @@ sentinel parallel-syncs resque 5</p>
 
 <p><code>``
 最后,你可以运行</code>sudo redis-sentinel /etc/redis/sentinel.conf`</p>
+
+<p> Redis-sentinel是Redis实例的监控管理、通知和实例失效备援服务，是Redis集群的管理工具。在一般的分布式中心节点数据库
+ 中，Redis-sentinel的作用是中心节点的工作，监控各个其他节点的工作情况并且进行故障恢复，来提高集群的高可用性。</p>
+
+<p> Redis-sentinel是Redis的作者antirez在今年6月份完成的，因为Redis实例在各个大公司的应用，每个公司都需要一个Redis集群的管理工具，被迫都自己写管理工具来管理Redis集群，antirez考虑到社区的急迫需要(详情)，花了几个星期写出了Redis-sentinel。</p>
+
+<p> Redis-sentinel的三大功能: * 监测 * 通知 * 自动故障恢复
+ 首先Redis-sentinel要建立一个监控的master列表，然后针对master列表的每个master获取监控其的sentinels和slaves供以后故障恢复使用</p>
+
+<h2>关于redis监控</h2>
+
+<ul>
+<li>redis的系统报告可以使用<code>redis-cli info</code>,<code>redis-cli -h localhost -p 6380 monitor</code></li>
+<li>使用redis-benchmark工具,作为性能检测. <code>redis-benchmark -h localhost -p 6379 -c 100 -n 100000</code></li>
+<li>一些web方式的监控工具:
+
+<ul>
+<li>redis-monitoa: <a href="https://github.com/PrettySimple/redis-monitorr">https://github.com/PrettySimple/redis-monitorr</a></li>
+</ul>
+</li>
+</ul>
+
 ]]></content>
   </entry>
   

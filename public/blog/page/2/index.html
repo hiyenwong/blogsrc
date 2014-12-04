@@ -9,19 +9,9 @@
   <meta name="author" content="Hi Yen Wong">
 
   
-  <meta name="description" content="rails cli Active Record 支持的数据类型
-* :binary
-* :boolean
-* :date
-* :datetime
-* :decimal
-* :float
-* :integer
-* :primary_key
-* :string
-* :text
-* :time
-* : &hellip;">
+  <meta name="description" content="Rails 有自带的Test框架，当我们不使用本身框架的时候则在创建controller的时候加入 --no-test-framework RSpec 生成器 1
+rails g rspec:install 集成測試 1
+$ rails generate integration_test &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +68,75 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/18/tdd-spec-helper/">TDD:spec_helper</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-18T06:51:00+08:00" pubdate data-updated="true">Jun 18<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/18/tdd-spec-helper/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rails 有自带的Test框架，当我们不使用本身框架的时候则在创建controller的时候加入 <code>--no-test-framework</code></p>
+
+<h2>RSpec 生成器</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">rails</span> <span class="n">g</span> <span class="ss">rspec</span><span class="p">:</span><span class="n">install</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>集成測試</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rails generate integration_test static_pages
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>根據<a href="http://railstutorial-china.org/chapter3.html">http://railstutorial-china.org/chapter3.html</a> 中例子，在做TDD環節的時候會說找不到visit這個方法，原因並不是你沒有capybara，而是之前你沒有加載,所以需要修改<code>spec/spec_helper.rb</code></p>
+
+<figure class='code'><figcaption><span>spec/spec_helper.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>   <span class="nb">require</span> <span class="s1">&#39;capybara/rails&#39;</span>
+</span><span class='line'>   <span class="nb">require</span> <span class="s1">&#39;capybara/rspec&#39;</span>
+</span><span class='line'>   <span class="kp">include</span> <span class="ss">Capybara</span><span class="p">:</span><span class="ss">:DSL</span>
+</span><span class='line'>   <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>   <span class="n">config</span><span class="o">.</span><span class="n">include</span> <span class="ss">Capybara</span><span class="p">:</span><span class="ss">:DSL</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1027,6 +1086,14 @@ textStatus: 表示响应状态文本。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/12/04/redis/">Redis at Rails</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/10/07/docker/">I&#8217;m a Docker</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/08/30/make-octopress/">制作octopress</a>
       </li>
     
@@ -1036,14 +1103,6 @@ textStatus: 表示响应状态文本。</p>
     
       <li class="post">
         <a href="/blog/2013/11/29/about-pagination-on-rails/">关于Rails下的分页数据</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/09/redis/">Redis at Rails</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/09/18/const/">Custom Library and Define Constant at Rails 4</a>
       </li>
     
   </ul>
