@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: rails | 島嶼の患者]]></title>
+  <title><![CDATA[Category: Rails | 島嶼の患者]]></title>
   <link href="http://hyanwang.github.io/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://hyanwang.github.io/"/>
-  <updated>2014-12-04T21:30:59+08:00</updated>
+  <updated>2015-09-19T14:58:34+08:00</updated>
   <id>http://hyanwang.github.io/</id>
   <author>
     <name><![CDATA[Hi Yen Wong]]></name>
@@ -14,935 +14,314 @@
 
   
   <entry>
-    <title type="html"><![CDATA[redis at rails ]]></title>
-    <link href="http://hyanwang.github.io/blog/2014/12/04/redis/"/>
-    <updated>2014-12-04T06:30:00+08:00</updated>
-    <id>http://hyanwang.github.io/blog/2014/12/04/redis</id>
-    <content type="html"><![CDATA[<h1>认识Redis</h1>
+    <title type="html"><![CDATA[Model-for-rails(2)]]></title>
+    <link href="http://hyanwang.github.io/blog/2013/07/15/model-for-rails-2/"/>
+    <updated>2013-07-15T15:08:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2013/07/15/model-for-rails-2</id>
+    <content type="html"><![CDATA[<h1>Migeration</h1>
 
-<p>Redis是一个高性能的kv数据库.它特点就是在NOSQL和并发快速.之所以快速是因为它将所有的数据都放入内存,因此如何使用变得非常关键.</p>
+<p>Migeration是一种可以随时改变数据模式的一种途径。通过使用Ruby DSL,从而摆脱了SQL的编写，从而使得数据库独立。Migeration保存着你历史数据结构，ActiveRecord会通过更新<code>db/schema.rb</code>来同步更新你的数据库结构。</p>
 
-<h2>redis安装和简单配置</h2>
+<h2>创建一个标准的Migration</h2>
 
-<h3>install redis</h3>
+<p>使用<code>rails g migration MIGRATION_NAME</code>用来创建一个标准的空migration.
+* 如果你的migration名字是'AddXXXToyyy'或是'RemoveXXXToYYY',那么migration会自动在文档里创建<code>add_column</code>或是<code>remove_column</code>
+* 如果你的migration名字是'CreateXXX'那么他将自动在文档里创建<code>create_table XXX</code></p>
 
-<p>其实没有没有什么讲的,几乎所有任何的发行版本都已经加入.如果官方下载包也容易,只要<code>make</code>一下就编译完成. 至于时候要<code>make install</code> 自己看着办吧.</p>
+<p>同样如果你的名字是AddXXXRefToYYY,就会自动添加<code>add_reference :xxx, :yyy, index:true</code></p>
 
-<h3>Config redis</h3>
+<p>如果CreateJoinTableNNNN XXX YYY,则会自动添加<code>create_join_table :xxx,:yyy</code>,实际上，他会生成一张表讲带有xxx_id和yyy_id.</p>
 
-<p>redis的配置文件就ubuntu而言,是在/etc/redis/下,有两个文件,一个是<code>redis.conf</code> 一个是<code>sentinel.conf</code>.</p>
+<p>另外可以通过<code>{}</code>来限制起最大值和多态性比如<code>$ rails generate migration AddDetailsToProducts price:decimal{5,2} supplier:references{polymorphic}
+</code></p>
 
-<p>redis.conf  配置redis服务用的.</p>
+<h2>使用change方法</h2>
 
-<p>``` bash redis.conf</p>
-
-<h1>Redis 配置文件</h1>
-
-<h1>当配置中需要配置内存大小时，可以使用 1k, 5GB, 4M 等类似的格式，其转换方式如下(不区分大小写)</h1>
-
-<p>#</p>
-
-<h1>1k => 1000 bytes</h1>
-
-<h1>1kb => 1024 bytes</h1>
-
-<h1>1m => 1000000 bytes</h1>
-
-<h1>1mb => 1024*1024 bytes</h1>
-
-<h1>1g => 1000000000 bytes</h1>
-
-<h1>1gb => 1024<em>1024</em>1024 bytes</h1>
-
-<p>#</p>
-
-<h1>内存配置大小写是一样的.比如 1gb 1Gb 1GB 1gB</h1>
-
-<h1>daemonize no 默认情况下，redis不是在后台运行的，如果需要在后台运行，把该项的值更改为yes</h1>
-
-<p>daemonize yes</p>
-
-<h1>当redis在后台运行的时候，Redis默认会把pid文件放在/var/run/redis.pid，你可以配置到其他地址。</h1>
-
-<h1>当运行多个redis服务时，需要指定不同的pid文件和端口</h1>
-
-<p>pidfile /var/run/redis.pid</p>
-
-<h1>指定redis运行的端口，默认是6379</h1>
-
-<p>port 6379</p>
-
-<h1>指定redis只接收来自于该IP地址的请求，如果不进行设置，那么将处理所有请求，</h1>
-
-<h1>在生产环境中最好设置该项</h1>
-
-<h1>bind 127.0.0.1</h1>
-
-<h1>Specify the path for the unix socket that will be used to listen for</h1>
-
-<h1>incoming connections. There is no default, so Redis will not listen</h1>
-
-<h1>on a unix socket when not specified.</h1>
-
-<p>#</p>
-
-<h1>unixsocket /tmp/redis.sock</h1>
-
-<h1>unixsocketperm 755</h1>
-
-<h1>设置客户端连接时的超时时间，单位为秒。当客户端在这段时间内没有发出任何指令，那么关闭该连接</h1>
-
-<h1>0是关闭此设置</h1>
-
-<p>timeout 0</p>
-
-<h1>指定日志记录级别</h1>
-
-<h1>Redis总共支持四个级别：debug、verbose、notice、warning，默认为verbose</h1>
-
-<h1>debug     记录很多信息，用于开发和测试</h1>
-
-<h1>varbose   有用的信息，不像debug会记录那么多</h1>
-
-<h1>notice    普通的verbose，常用于生产环境</h1>
-
-<h1>warning   只有非常重要或者严重的信息会记录到日志</h1>
-
-<p>loglevel debug</p>
-
-<h1>配置log文件地址</h1>
-
-<h1>默认值为stdout，标准输出，若后台模式会输出到/dev/null</h1>
-
-<h1>logfile stdout</h1>
-
-<p>logfile /var/log/redis/redis.log</p>
-
-<h1>To enable logging to the system logger, just set &lsquo;syslog-enabled&rsquo; to yes,</h1>
-
-<h1>and optionally update the other syslog parameters to suit your needs.</h1>
-
-<h1>syslog-enabled no</h1>
-
-<h1>Specify the syslog identity.</h1>
-
-<h1>syslog-ident redis</h1>
-
-<h1>Specify the syslog facility.  Must be USER or between LOCAL0-LOCAL7.</h1>
-
-<h1>syslog-facility local0</h1>
-
-<h1>可用数据库数</h1>
-
-<h1>默认值为16，默认数据库为0，数据库范围在0-（database-1）之间</h1>
-
-<p>databases 16</p>
-
-<h6>########################## 快照</h6>
-
-<p>#</p>
-
-<h1>保存数据到磁盘，格式如下:</h1>
-
-<p>#</p>
-
-<h1>save <seconds> <changes></h1>
-
-<p>#</p>
-
-<h1>指出在多长时间内，有多少次更新操作，就将数据同步到数据文件rdb。</h1>
-
-<h1>相当于条件触发抓取快照，这个可以多个条件配合</h1>
-
-<p>#</p>
-
-<h1>比如默认配置文件中的设置，就设置了三个条件</h1>
-
-<p>#</p>
-
-<h1>save 900 1  900秒内至少有1个key被改变</h1>
-
-<h1>save 300 10  300秒内至少有300个key被改变</h1>
-
-<h1>save 60 10000  60秒内至少有10000个key被改变</h1>
-
-<p>save 900 1
-save 300 10
-save 60 10000</p>
-
-<h1>存储至本地数据库时（持久化到rdb文件）是否压缩数据，默认为yes</h1>
-
-<p>rdbcompression yes</p>
-
-<h1>本地持久化数据库文件名，默认值为dump.rdb</h1>
-
-<p>dbfilename dump.rdb</p>
-
-<h1>工作目录</h1>
-
-<p>#</p>
-
-<h1>数据库镜像备份的文件放置的路径。</h1>
-
-<h1>这里的路径跟文件名要分开配置是因为redis在进行备份时，先会将当前数据库的状态写入到一个临时文件中，等备份完成时，</h1>
-
-<h1>再把该该临时文件替换为上面所指定的文件，而这里的临时文件和上面所配置的备份文件都会放在这个指定的路径当中。</h1>
-
-<p>#</p>
-
-<h1>AOF文件也会存放在这个目录下面</h1>
-
-<p>#</p>
-
-<h1>注意这里必须制定一个目录而不是文件</h1>
-
-<p>dir ./</p>
-
-<h6>########################### 复制</h6>
-
-<h1>主从复制. 设置该数据库为其他数据库的从数据库.</h1>
-
-<h1>设置当本机为slav服务时，设置master服务的IP地址及端口，在Redis启动时，它会自动从master进行数据同步</h1>
-
-<p>#</p>
-
-<h1>slaveof <masterip> <masterport></h1>
-
-<h1>当master服务设置了密码保护时(用requirepass制定的密码)</h1>
-
-<h1>slav服务连接master的密码</h1>
-
-<p>#</p>
-
-<h1>masterauth &lt;master-password></h1>
-
-<h1>当从库同主机失去连接或者复制正在进行，从机库有两种运行方式：</h1>
-
-<p>#</p>
-
-<h1>1) 如果slave-serve-stale-data设置为yes(默认设置)，从库会继续相应客户端的请求</h1>
-
-<p>#</p>
-
-<h1>2) 如果slave-serve-stale-data是指为no，出去INFO和SLAVOF命令之外的任何请求都会返回一个</h1>
-
-<h1>错误"SYNC with master in progress"</h1>
-
-<p>#
-slave-serve-stale-data yes</p>
-
-<h1>从库会按照一个时间间隔向主库发送PINGs.可以通过repl-ping-slave-period设置这个时间间隔，默认是10秒</h1>
-
-<p>#</p>
-
-<h1>repl-ping-slave-period 10</h1>
-
-<h1>repl-timeout 设置主库批量数据传输时间或者ping回复时间间隔，默认值是60秒</h1>
-
-<h1>一定要确保repl-timeout大于repl-ping-slave-period</h1>
-
-<h1>repl-timeout 60</h1>
-
-<h6>############################ 安全</h6>
-
-<h1>设置客户端连接后进行任何其他指定前需要使用的密码。</h1>
-
-<h1>警告：因为redis速度相当快，所以在一台比较好的服务器下，一个外部的用户可以在一秒钟进行150K次的密码尝试，这意味着你需要指定非常非常强大的密码来防止暴力破解</h1>
-
-<p>#</p>
-
-<h1>requirepass foobared</h1>
-
-<h1>命令重命名.</h1>
-
-<p>#</p>
-
-<h1>在一个共享环境下可以重命名相对危险的命令。比如把CONFIG重名为一个不容易猜测的字符。</h1>
-
-<p>#</p>
-
-<h1>举例:</h1>
-
-<p>#</p>
-
-<h1>rename-command CONFIG b840fc02d524045429941cc15f59e41cb7be6c52</h1>
-
-<p>#</p>
-
-<h1>如果想删除一个命令，直接把它重命名为一个空字符"&ldquo;即可，如下：</h1>
-
-<p>#</p>
-
-<h1>rename-command CONFIG &ldquo;&rdquo;</h1>
-
-<h6>############################# 约束</h6>
-
-<h1>设置同一时间最大客户端连接数，默认无限制，Redis可以同时打开的客户端连接数为Redis进程可以打开的最大文件描述符数，</h1>
-
-<h1>如果设置 maxclients 0，表示不作限制。</h1>
-
-<h1>当客户端连接数到达限制时，Redis会关闭新的连接并向客户端返回max number of clients reached错误信息</h1>
-
-<p>#</p>
-
-<h1>maxclients 128</h1>
-
-<h1>指定Redis最大内存限制，Redis在启动时会把数据加载到内存中，达到最大内存后，Redis会先尝试清除已到期或即将到期的Key</h1>
-
-<h1>Redis同时也会移除空的list对象</h1>
-
-<p>#</p>
-
-<h1>当此方法处理后，仍然到达最大内存设置，将无法再进行写入操作，但仍然可以进行读取操作</h1>
-
-<p>#</p>
-
-<h1>注意：Redis新的vm机制，会把Key存放内存，Value会存放在swap区</h1>
-
-<p>#</p>
-
-<h1>maxmemory的设置比较适合于把redis当作于类似memcached的缓存来使用，而不适合当做一个真实的DB。</h1>
-
-<h1>当把Redis当做一个真实的数据库使用的时候，内存使用将是一个很大的开销</h1>
-
-<h1>maxmemory <bytes></h1>
-
-<h1>当内存达到最大值的时候Redis会选择删除哪些数据？有五种方式可供选择</h1>
-
-<p>#</p>
-
-<h1>volatile-lru &ndash;> 利用LRU算法移除设置过过期时间的key (LRU:最近使用 Least Recently Used )</h1>
-
-<h1>allkeys-lru &ndash;> 利用LRU算法移除任何key</h1>
-
-<h1>volatile-random &ndash;> 移除设置过过期时间的随机key</h1>
-
-<h1>allkeys->random &ndash;> remove a random key, any key</h1>
-
-<h1>volatile-ttl &ndash;> 移除即将过期的key(minor TTL)</h1>
-
-<h1>noeviction &ndash;> 不移除任何可以，只是返回一个写错误</h1>
-
-<p>#</p>
-
-<h1>注意：对于上面的策略，如果没有合适的key可以移除，当写的时候Redis会返回一个错误</h1>
-
-<p>#</p>
-
-<h1>写命令包括: set setnx setex append</h1>
-
-<h1>incr decr rpush lpush rpushx lpushx linsert lset rpoplpush sadd</h1>
-
-<h1>sinter sinterstore sunion sunionstore sdiff sdiffstore zadd zincrby</h1>
-
-<h1>zunionstore zinterstore hset hsetnx hmset hincrby incrby decrby</h1>
-
-<h1>getset mset msetnx exec sort</h1>
-
-<p>#</p>
-
-<h1>默认是:</h1>
-
-<p>#</p>
-
-<h1>maxmemory-policy volatile-lru</h1>
-
-<h1>LRU 和 minimal TTL 算法都不是精准的算法，但是相对精确的算法(为了节省内存)，随意你可以选择样本大小进行检测。</h1>
-
-<h1>Redis默认的灰选择3个样本进行检测，你可以通过maxmemory-samples进行设置</h1>
-
-<p>#</p>
-
-<h1>maxmemory-samples 3</h1>
-
-<h6>######################## AOF</h6>
-
-<h1>默认情况下，redis会在后台异步的把数据库镜像备份到磁盘，但是该备份是非常耗时的，而且备份也不能很频繁，如果发生诸如拉闸限电、拔插头等状况，那么将造成比较大范围的数据丢失。</h1>
-
-<h1>所以redis提供了另外一种更加高效的数据库备份及灾难恢复方式。</h1>
-
-<h1>开启append only模式之后，redis会把所接收到的每一次写操作请求都追加到appendonly.aof文件中，当redis重新启动时，会从该文件恢复出之前的状态。</h1>
-
-<h1>但是这样会造成appendonly.aof文件过大，所以redis还支持了BGREWRITEAOF指令，对appendonly.aof 进行重新整理。</h1>
-
-<h1>你可以同时开启asynchronous dumps 和 AOF</h1>
-
-<p>appendonly no</p>
-
-<h1>AOF文件名称 (默认: &ldquo;appendonly.aof&rdquo;)</h1>
-
-<h1>appendfilename appendonly.aof</h1>
-
-<h1>Redis支持三种同步AOF文件的策略:</h1>
-
-<p>#</p>
-
-<h1>no: 不进行同步，系统去操作 . Faster.</h1>
-
-<h1>always: always表示每次有写操作都进行同步. Slow, Safest.</h1>
-
-<h1>everysec: 表示对写操作进行累积，每秒同步一次. Compromise.</h1>
-
-<p>#</p>
-
-<h1>默认是"everysec"，按照速度和安全折中这是最好的。</h1>
-
-<h1>如果想让Redis能更高效的运行，你也可以设置为"no"，让操作系统决定什么时候去执行</h1>
-
-<h1>或者相反想让数据更安全你也可以设置为"always"</h1>
-
-<p>#</p>
-
-<h1>如果不确定就用 &ldquo;everysec&rdquo;.</h1>
-
-<h1>appendfsync always</h1>
-
-<p>appendfsync everysec</p>
-
-<h1>appendfsync no</h1>
-
-<h1>AOF策略设置为always或者everysec时，后台处理进程(后台保存或者AOF日志重写)会执行大量的I/O操作</h1>
-
-<h1>在某些Linux配置中会阻止过长的fsync()请求。注意现在没有任何修复，即使fsync在另外一个线程进行处理</h1>
-
-<p>#</p>
-
-<h1>为了减缓这个问题，可以设置下面这个参数no-appendfsync-on-rewrite</h1>
-
-<p>#</p>
-
-<h1>This means that while another child is saving the durability of Redis is</h1>
-
-<h1>the same as &ldquo;appendfsync none&rdquo;, that in pratical terms means that it is</h1>
-
-<h1>possible to lost up to 30 seconds of log in the worst scenario (with the</h1>
-
-<h1>default Linux settings).</h1>
-
-<p>#</p>
-
-<h1>If you have latency problems turn this to &ldquo;yes&rdquo;. Otherwise leave it as</h1>
-
-<h1>&ldquo;no&rdquo; that is the safest pick from the point of view of durability.</h1>
-
-<p>no-appendfsync-on-rewrite no</p>
-
-<h1>Automatic rewrite of the append only file.</h1>
-
-<h1>AOF 自动重写</h1>
-
-<h1>当AOF文件增长到一定大小的时候Redis能够调用 BGREWRITEAOF 对日志文件进行重写</h1>
-
-<p>#</p>
-
-<h1>它是这样工作的：Redis会记住上次进行些日志后文件的大小(如果从开机以来还没进行过重写，那日子大小在开机的时候确定)</h1>
-
-<p>#</p>
-
-<h1>基础大小会同现在的大小进行比较。如果现在的大小比基础大小大制定的百分比，重写功能将启动</h1>
-
-<h1>同时需要指定一个最小大小用于AOF重写，这个用于阻止即使文件很小但是增长幅度很大也去重写AOF文件的情况</h1>
-
-<h1>设置 percentage 为0就关闭这个特性</h1>
-
-<p>auto-aof-rewrite-percentage 100
-auto-aof-rewrite-min-size 64mb</p>
-
-<h6>############################ SLOW LOG</h6>
-
-<h1>Redis Slow Log 记录超过特定执行时间的命令。执行时间不包括I/O计算比如连接客户端，返回结果等，只是命令执行时间</h1>
-
-<p>#</p>
-
-<h1>可以通过两个参数设置slow log：一个是告诉Redis执行超过多少时间被记录的参数slowlog-log-slower-than(微妙)，</h1>
-
-<h1>另一个是slow log 的长度。当一个新命令被记录的时候最早的命令将被从队列中移除</h1>
-
-<h1>下面的时间以微妙微单位，因此1000000代表一分钟。</h1>
-
-<h1>注意制定一个负数将关闭慢日志，而设置为0将强制每个命令都会记录</h1>
-
-<p>slowlog-log-slower-than 10000</p>
-
-<h1>对日志长度没有限制，只是要注意它会消耗内存</h1>
-
-<h1>可以通过 SLOWLOG RESET 回收被慢日志消耗的内存</h1>
-
-<p>slowlog-max-len 1024</p>
-
-<h6>########################## VM</h6>
-
-<h3>WARNING! Virtual Memory is deprecated in Redis 2.4</h3>
-
-<h3>The use of Virtual Memory is strongly discouraged.</h3>
-
-<h1>Virtual Memory allows Redis to work with datasets bigger than the actual</h1>
-
-<h1>amount of RAM needed to hold the whole dataset in memory.</h1>
-
-<h1>In order to do so very used keys are taken in memory while the other keys</h1>
-
-<h1>are swapped into a swap file, similarly to what operating systems do</h1>
-
-<h1>with memory pages.</h1>
-
-<p>#</p>
-
-<h1>To enable VM just set &lsquo;vm-enabled&rsquo; to yes, and set the following three</h1>
-
-<h1>VM parameters accordingly to your needs.</h1>
-
-<p>vm-enabled no</p>
-
-<h1>vm-enabled yes</h1>
-
-<h1>This is the path of the Redis swap file. As you can guess, swap files</h1>
-
-<h1>can&rsquo;t be shared by different Redis instances, so make sure to use a swap</h1>
-
-<h1>file for every redis process you are running. Redis will complain if the</h1>
-
-<h1>swap file is already in use.</h1>
-
-<p>#</p>
-
-<h1>The best kind of storage for the Redis swap file (that&rsquo;s accessed at random)</h1>
-
-<h1>is a Solid State Disk (SSD).</h1>
-
-<p>#</p>
-
-<h1><strong><em> WARNING </em></strong> if you are using a shared hosting the default of putting</h1>
-
-<h1>the swap file under /tmp is not secure. Create a dir with access granted</h1>
-
-<h1>only to Redis user and configure Redis to create the swap file there.</h1>
-
-<p>vm-swap-file /tmp/redis.swap</p>
-
-<h1>vm-max-memory configures the VM to use at max the specified amount of</h1>
-
-<h1>RAM. Everything that deos not fit will be swapped on disk <em>if</em> possible, that</h1>
-
-<h1>is, if there is still enough contiguous space in the swap file.</h1>
-
-<p>#</p>
-
-<h1>With vm-max-memory 0 the system will swap everything it can. Not a good</h1>
-
-<h1>default, just specify the max amount of RAM you can in bytes, but it&rsquo;s</h1>
-
-<h1>better to leave some margin. For instance specify an amount of RAM</h1>
-
-<h1>that&rsquo;s more or less between 60 and 80% of your free RAM.</h1>
-
-<p>vm-max-memory 0</p>
-
-<h1>Redis swap files is split into pages. An object can be saved using multiple</h1>
-
-<h1>contiguous pages, but pages can&rsquo;t be shared between different objects.</h1>
-
-<h1>So if your page is too big, small objects swapped out on disk will waste</h1>
-
-<h1>a lot of space. If you page is too small, there is less space in the swap</h1>
-
-<h1>file (assuming you configured the same number of total swap file pages).</h1>
-
-<p>#</p>
-
-<h1>If you use a lot of small objects, use a page size of 64 or 32 bytes.</h1>
-
-<h1>If you use a lot of big objects, use a bigger page size.</h1>
-
-<h1>If unsure, use the default :)</h1>
-
-<p>vm-page-size 32</p>
-
-<h1>Number of total memory pages in the swap file.</h1>
-
-<h1>Given that the page table (a bitmap of free/used pages) is taken in memory,</h1>
-
-<h1>every 8 pages on disk will consume 1 byte of RAM.</h1>
-
-<p>#</p>
-
-<h1>The total swap size is vm-page-size * vm-pages</h1>
-
-<p>#</p>
-
-<h1>With the default of 32-bytes memory pages and 134217728 pages Redis will</h1>
-
-<h1>use a 4 GB swap file, that will use 16 MB of RAM for the page table.</h1>
-
-<p>#</p>
-
-<h1>It&rsquo;s better to use the smallest acceptable value for your application,</h1>
-
-<h1>but the default is large in order to work in most conditions.</h1>
-
-<p>vm-pages 134217728</p>
-
-<h1>Max number of VM I/O threads running at the same time.</h1>
-
-<h1>This threads are used to read/write data from/to swap file, since they</h1>
-
-<h1>also encode and decode objects from disk to memory or the reverse, a bigger</h1>
-
-<h1>number of threads can help with big objects even if they can&rsquo;t help with</h1>
-
-<h1>I/O itself as the physical device may not be able to couple with many</h1>
-
-<h1>reads/writes operations at the same time.</h1>
-
-<p>#</p>
-
-<h1>The special value of 0 turn off threaded I/O and enables the blocking</h1>
-
-<h1>Virtual Memory implementation.</h1>
-
-<p>vm-max-threads 4</p>
-
-<h6>######################### ADVANCED CONFIG</h6>
-
-<h1>当hash中包含超过指定元素个数并且最大的元素没有超过临界时，</h1>
-
-<h1>hash将以一种特殊的编码方式（大大减少内存使用）来存储，这里可以设置这两个临界值</h1>
-
-<h1>Redis Hash对应Value内部实际就是一个HashMap，实际这里会有2种不同实现，</h1>
-
-<h1>这个Hash的成员比较少时Redis为了节省内存会采用类似一维数组的方式来紧凑存储，而不会采用真正的HashMap结构，对应的value redisObject的encoding为zipmap,</h1>
-
-<h1>当成员数量增大时会自动转成真正的HashMap,此时encoding为ht。</h1>
-
-<p>hash-max-zipmap-entries 512
-hash-max-zipmap-value 64</p>
-
-<h1>list数据类型多少节点以下会采用去指针的紧凑存储格式。</h1>
-
-<h1>list数据类型节点值大小小于多少字节会采用紧凑存储格式。</h1>
-
-<p>list-max-ziplist-entries 512
-list-max-ziplist-value 64</p>
-
-<h1>set数据类型内部数据如果全部是数值型，且包含多少节点以下会采用紧凑格式存储。</h1>
-
-<p>set-max-intset-entries 512</p>
-
-<h1>zsort数据类型多少节点以下会采用去指针的紧凑存储格式。</h1>
-
-<h1>zsort数据类型节点值大小小于多少字节会采用紧凑存储格式。</h1>
-
-<p>zset-max-ziplist-entries 128
-zset-max-ziplist-value 64</p>
-
-<h1>Redis将在每100毫秒时使用1毫秒的CPU时间来对redis的hash表进行重新hash，可以降低内存的使用</h1>
-
-<p>#</p>
-
-<h1>当你的使用场景中，有非常严格的实时性需要，不能够接受Redis时不时的对请求有2毫秒的延迟的话，把这项配置为no。</h1>
-
-<p>#</p>
-
-<h1>如果没有这么严格的实时性要求，可以设置为yes，以便能够尽可能快的释放内存</h1>
-
-<p>activerehashing yes</p>
-
-<h6>############################ INCLUDES</h6>
-
-<h1>指定包含其它的配置文件，可以在同一主机上多个Redis实例之间使用同一份配置文件，而同时各个实例又拥有自己的特定配置文件</h1>
-
-<h1>include /path/to/local.conf</h1>
-
-<h1>include /path/to/other.conf</h1>
-
-<p>```</p>
-
-<p>而sentinel.conf主要作为监控使用, M-S(master,slaves)集群提供了:</p>
+<p>以下方法支持change</p>
 
 <ul>
-<li>master存活检测</li>
-<li>集群中M-S服务监控</li>
-<li>自动故障转移,M-S角色转换等能力,从一个方面说是提高了redis集群的可用性.</li>
+<li>add_column</li>
+<li>add_index</li>
+<li>add_reference</li>
+<li>add_timestamps</li>
+<li>create_table</li>
+<li>create_join_table</li>
+<li>drop_table (must supply a block)</li>
+<li>drop_join_table (must supply a block)</li>
+<li>remove_timestamps</li>
+<li>rename_column</li>
+<li>rename_index</li>
+<li>remove_reference</li>
+<li>rename_table</li>
 </ul>
 
 
-<p>一般情况下,最小M-S单元各有一个maste和slave组成,当master失效后,sentinel可以帮助我们自动将slave提升为master;有了sentinel组件,可以减少系统管理员的人工切换slave的操作过程.</p>
+<h2>回滚migrations</h2>
 
-<p>``` bash sentinel.conf</p>
+<p>每个生成的migration都会根据时间自动生成版本号标签，你可以通过<code>rake db:migrate VERSION=20080906120000</code> 来回到所要的版本号，如果你只是要回滚到最后一个版本，则可以<code>rake db:rollback</code>,或是在最后第三个版本，则可以<code>rake db:rollback STEP=3</code></p>
 
-<h1>首先要设置port</h1>
+<h2>REST DB</h2>
 
-<p>port 26379</p>
-
-<h1>其次要设置sentinel的监控地址</h1>
-
-<h1>第一行配置指示 Sentinel 去监视一个名为 mymaster 的主服务器，</h1>
-
-<h1>这个主服务器的 IP 地址为 127.0.0.1 ， 端口号为 6379 ，</h1>
-
-<h1>而将这个主服务器判断为失效至少需要 2 个 Sentinel 同意 （只要同意</h1>
-
-<h1>Sentinel 的数量不达标，自动故障迁移就不会执行）。</h1>
-
-<h1>不过要注意， 无论你设置要多少个 Sentinel 同意才能判断一个服务器失效，</h1>
-
-<h1>一个 Sentinel 都需要获得系统中多数（majority） Sentinel 的支持，</h1>
-
-<h1>才能发起一次自动故障迁移， 并预留一个给定的配置纪元 （configuration</h1>
-
-<h1>Epoch ，一个配置纪元就是一个新主服务器配置的版本号）。</h1>
-
-<h1>换句话说， 在只有少数（minority） Sentinel 进程正常运作的情况下，</h1>
-
-<h1>Sentinel 是不能执行自动故障迁移的。</h1>
-
-<p>sentinel monitor mymaster 127.0.0.1 6379 2
-sentinel down-after-milliseconds mymaster 60000
-sentinel failover-timeout mymaster 180000
-sentinel parallel-syncs mymaster 1</p>
-
-<p>sentinel monitor resque 192.168.1.3 6380 4
-sentinel down-after-milliseconds resque 10000
-sentinel failover-timeout resque 180000
-sentinel parallel-syncs resque 5</p>
-
-<h1>down-after-milliseconds 选项指定了 Sentinel认为服务器已经断线所需的毫秒数。</h1>
-
-<h1>parallel-syncs 选项指定了在执行故障转移时，最多可以有多少个从服务器同时对新的主服务器进行同步， 这个数字越小，完成故障转移所需的时间就越长。</h1>
-
-<h1>ref: <a href="http://redis.readthedocs.org/en/latest/topic/sentinel.html">http://redis.readthedocs.org/en/latest/topic/sentinel.html</a></h1>
-
-<p><code>``
-最后,你可以运行</code>sudo redis-sentinel /etc/redis/sentinel.conf`</p>
-
-<p> Redis-sentinel是Redis实例的监控管理、通知和实例失效备援服务，是Redis集群的管理工具。在一般的分布式中心节点数据库
- 中，Redis-sentinel的作用是中心节点的工作，监控各个其他节点的工作情况并且进行故障恢复，来提高集群的高可用性。</p>
-
-<p> Redis-sentinel是Redis的作者antirez在今年6月份完成的，因为Redis实例在各个大公司的应用，每个公司都需要一个Redis集群的管理工具，被迫都自己写管理工具来管理Redis集群，antirez考虑到社区的急迫需要(详情)，花了几个星期写出了Redis-sentinel。</p>
-
-<p> Redis-sentinel的三大功能: * 监测 * 通知 * 自动故障恢复
- 首先Redis-sentinel要建立一个监控的master列表，然后针对master列表的每个master获取监控其的sentinels和slaves供以后故障恢复使用</p>
-
-<h2>关于redis监控</h2>
-
-<ul>
-<li>redis的系统报告可以使用<code>redis-cli info</code>,<code>redis-cli -h localhost -p 6380 monitor</code></li>
-<li>使用redis-benchmark工具,作为性能检测. <code>redis-benchmark -h localhost -p 6379 -c 100 -n 100000</code></li>
-<li>一些web方式的监控工具:
-
-<ul>
-<li>redis-monitoa: <a href="https://github.com/PrettySimple/redis-monitorr">https://github.com/PrettySimple/redis-monitorr</a></li>
-</ul>
-</li>
-</ul>
-
+<p>REST数据其实很简单，只要执行<code>rake db:rest</code>就可以了</p>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[pow for mac]]></title>
-    <link href="http://hyanwang.github.io/blog/2014/03/20/pow-for-mac/"/>
-    <updated>2014-03-20T16:30:00+08:00</updated>
-    <id>http://hyanwang.github.io/blog/2014/03/20/pow-for-mac</id>
-    <content type="html"><![CDATA[<h2>Pow 介绍</h2>
+    <title type="html"><![CDATA[model for rails(1)]]></title>
+    <link href="http://hyanwang.github.io/blog/2013/07/15/model-for-rails-1/"/>
+    <updated>2013-07-15T14:20:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2013/07/15/model-for-rails-1</id>
+    <content type="html"><![CDATA[<h1>ActiveRecord Models</h1>
 
-<p>Pow 简单的说是一个可以实时快速将rails在mac系统中进行部署测试的插件，你只需要做几个简单设置，就可以通过特定的域名进行访问。</p>
+<p>我们可以通过<code>rails g</code>的命令来创建一个Model
+<code>bash
+rails g model User name:string email:string
+</code>
+在<code>/app/models/</code>和<code>/app/db/migration</code>中会创建相应的文件</p>
 
-<h2>Pow 安装和配置</h2>
+<h2>Active Record Basic</h2>
 
-<h3>安装pow</h3>
+<p>Active Record是一个ORM的框架</p>
 
-<p><code>bash
-$ curl get.pow.cx | sh
-</code></p>
+<h3>命名规范</h3>
 
-<h2>卸载pow</h2>
+<table>
+<thead>
+<tr>
+<th>Model/Class</th>
+<th>Table/Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Post       </td>
+<td>posts</td>
+</tr>
+<tr>
+<td>LineItem   </td>
+<td>line_items</td>
+</tr>
+<tr>
+<td>Deer       </td>
+<td>deer</td>
+</tr>
+<tr>
+<td>Mouse      </td>
+<td>mice</td>
+</tr>
+<tr>
+<td>Person     </td>
+<td>people</td>
+</tr>
+</tbody>
+</table>
 
-<p><code>bash
-$ curl get.pow.cx/uninstall.sh | sh
-</code></p>
 
-<h3>在rvm环境下的配置</h3>
+<h3>支持的数据类型</h3>
 
-<p>需要在每个app中设置powenv或是powrc
-``` bash .powenv</p>
+<ul>
+<li>:binary</li>
+<li>:boolean</li>
+<li>:date</li>
+<li>:datetime</li>
+<li>:decimal</li>
+<li>:float</li>
+<li>:integer</li>
+<li>:primary_key</li>
+<li>:string</li>
+<li>:text</li>
+<li>:time</li>
+<li>:timestamp</li>
+</ul>
 
-<h1>detect <code>$rvm_path</code></h1>
 
-<p>if [ -z &ldquo;${rvm_path:&ndash;}&rdquo; ] &amp;&amp; [ -x &ldquo;${HOME:&ndash;}/.rvm/bin/rvm&rdquo; ]
-then rvm_path=&ldquo;${HOME:&ndash;}/.rvm&rdquo;
-fi
-if [ -z &ldquo;${rvm_path:&ndash;}&rdquo; ] &amp;&amp; [ -x &ldquo;/usr/local/rvm/bin/rvm&rdquo; ]
-then rvm_path=&ldquo;/usr/local/rvm&rdquo;
-fi</p>
+<h3>Schema 模式</h3>
 
-<h1>load environment of current project ruby</h1>
+<p>外键 Foreign Keys: tablename_id
+主键 Primary Keys: 默认为id</p>
 
-<p>if
-  [ -n &ldquo;${rvm_path:&ndash;}&rdquo; ] &amp;&amp;
-  [ -x &ldquo;${rvm_path:&ndash;}/bin/rvm&rdquo; ] &amp;&amp;
-  rvm_project_environment=<code>"${rvm_path:-}/bin/rvm" . do rvm env --path 2&gt;/dev/null</code> &amp;&amp;
-  [ -n &ldquo;${rvm_project_environment:&ndash;}&rdquo; ] &amp;&amp;
-  [ -s &ldquo;${rvm_project_environment:&ndash;}&rdquo; ]
-then
-  echo &ldquo;RVM loading: ${rvm_project_environment:&ndash;}&rdquo;
-  . &ldquo;${rvm_project_environment:&ndash;}&rdquo;
-else
-  echo &ldquo;RVM project not found at: $PWD&rdquo;
-fi
+<p>另外还会自动创建两个字段 <code>created_at</code> 和<code>updated_at</code></p>
+
+<h3>create or overriding name conventions</h3>
+
+<p>通常我们继承了一个ActiveRecord的类就好比创建了一张表。
+<code>ruby Product
+class Product &lt; ActiveRecord:Base
+end
+</code>
+类名通常就是这个表的表名，但其实我们可以重新定义。</p>
+
+<p>``` ruby
+changeProduct &lt; ActiveRecord:Base</p>
+
+<pre><code> self.table_name = "Product"
+</code></pre>
+
+<p>end
 <code>
-</code> bash .powrc
-if [ -f &ldquo;$rvm_path/scripts/rvm&rdquo; ] &amp;&amp; [ -f &ldquo;.rvmrc&rdquo; ]; then
-  source &ldquo;$rvm_path/scripts/rvm&rdquo;
-  source &ldquo;.rvmrc&rdquo;
-fi
+手动添加primary_key
+</code> ruby
+set_primary_key &ldquo;product_id&rdquo;
 ```</p>
+
+<h3>about CRUD</h3>
+
+<h4>create</h4>
+
+<p>Active Record 对象是用hash来呈现的，使用create方法，将数据保存在数据库中
+<code>ruby
+user=User.create(name: "Dexter", location: "mars")
+</code>
+而如果使用new方法，则只是实例化，并不保存数据,如果你要保存数据，则是<code>user.save</code></p>
+
+<h4>read</h4>
+
+<p>更多的关于read的api，可访问<a href="http://api.rubyonrails.org/classes/ActiveRecord/Base.html">http://api.rubyonrails.org/classes/ActiveRecord/Base.html</a>
+下面一些简单的关于read的例子
+``` ruby
+users=User.all #返回所有的用户信息
+user=User.first #返回第一条记录
+david=User.find_by_name(&lsquo;David&rsquo;) #返回第一条叫David的记录</p>
+
+<h1>按照条件和时间排序搜索</h1>
+
+<p>users = User.where(name: &lsquo;David&rsquo;, occupation: &lsquo;Code Artist&rsquo;).order(&lsquo;created_at DESC&rsquo;)
+```</p>
+
+<h4>update</h4>
+
+<p>基本和create性质一样
+<code>ruby
+user=User.find_by_[KEY_NAME]('davis') #KEYNAME所查询的字段名称
+user.update(KEYNAME: 'dav') #更新keyname里的值
+</code></p>
+
+<p>若你要更新所有的值，那update_all会很有用</p>
+
+<p><code>ruby
+User.update_all "max_login_attempts = 3, must_change_password = 'true'"
+</code></p>
+
+<h4>delete</h4>
+
+<p><code>ruby
+user = User.find_by_name('David')
+user.destroy
+</code></p>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[关于Rails下的分页数据]]></title>
-    <link href="http://hyanwang.github.io/blog/2013/11/29/about-pagination-on-rails/"/>
-    <updated>2013-11-29T11:11:00+08:00</updated>
-    <id>http://hyanwang.github.io/blog/2013/11/29/about-pagination-on-rails</id>
-    <content type="html"><![CDATA[<h1>Rails 的分页</h1>
+    <title type="html"><![CDATA[TDD:spec_helper]]></title>
+    <link href="http://hyanwang.github.io/blog/2013/06/18/tdd-spec-helper/"/>
+    <updated>2013-06-18T06:51:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2013/06/18/tdd-spec-helper</id>
+    <content type="html"><![CDATA[<p>Rails 有自带的Test框架，当我们不使用本身框架的时候则在创建controller的时候加入 <code>--no-test-framework</code></p>
 
-<p>Rails下的分页显示数据的插件有很多，比较常用的是will_paginate，源代码在<a href="http://githubs.com/mislav/will_paginate">mislav的github</a>上去git clone一下。</p>
+<h2>RSpec 生成器</h2>
 
-<h2>如何使用will_paginate呢？</h2>
+<p><code>ruby
+rails g rspec:install
+</code></p>
 
-<p>使用起来没有太多复杂的东西，只需要将<code>Post.all</code>替换成如下就可以
-``` ruby Post Controller</p>
+<h2>集成測試</h2>
 
-<h1>:order 作为排序设置</h1>
+<p><code>bash
+$ rails generate integration_test static_pages
+</code></p>
 
-<h1>:per_page 每页的记录</h1>
+<p>根據<a href="http://railstutorial-china.org/chapter3.html">http://railstutorial-china.org/chapter3.html</a> 中例子，在做TDD環節的時候會說找不到visit這個方法，原因並不是你沒有capybara，而是之前你沒有加載,所以需要修改<code>spec/spec_helper.rb</code>
+``` ruby spec/spec_helper.rb</p>
 
-<p>@posts = Post.paginate(:page => params[:page],:order => &lsquo;id DESC&rsquo;, :per_page => 20)
-```</p>
-
-<p>然后下面我们就是设置视图了
-``` erb index.html.erb</p>
-
-<p>&lt;%= page_entries_info @posts %></p>
-
-<p>&lt;%=</p>
-
-<h1>:class          => &lsquo;pagination&rsquo;,</h1>
-
-<h1>:previous_label => nil,</h1>
-
-<h1>:next_label     => nil,</h1>
-
-<h1>:inner_window   => 4, # links around the current page</h1>
-
-<h1>:outer_window   => 1, # links around beginning and end</h1>
-
-<h1>:link_separator => &lsquo; &rsquo;, # single space is friendly to spiders and non-graphic browsers</h1>
-
-<h1>:param_name     => :page,</h1>
-
-<h1>:params         => nil,</h1>
-
-<h1>:page_links     => true,</h1>
-
-<h1>:container      => true</h1>
-
-<h1>具体操作will_paginate / lib / will_paginate / view_helpers.rb 下面则有批注</h1>
-
-<p>will_paginate @posts, :previous_label => &lsquo;上一页&rsquo;, :next_label => &lsquo;下一页&rsquo;, :container => false
-%></p>
+<pre><code>   require 'capybara/rails'
+   require 'capybara/rspec'
+   include Capybara::DSL
+   .....
+   config.include Capybara::DSL
+</code></pre>
 
 <p>```</p>
-
-<h2>关于css</h2>
-
-<p><a href="http://mislav.uniqpath.com/will_paginate/?page=2">http://mislav.uniqpath.com/will_paginate/?page=2</a> 可以去着网站上下载其分页样式，之后将它放到<code>assets/stylesheets</code>下就可以了。</p>
-
-<p>``` erb</p>
-
-<div class='digg_pagination'>
-<div class='pag_info'>
-<%= page_entries_info @posts %>
-</div>
-<%= will_paginate @posts :previous_label => '上一页', :next_label => '下一页',:container => false %>
-</div>
-
-
-<p>```</p>
-
-<p>-eof-</p>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[custom library and define constant at rails 4]]></title>
-    <link href="http://hyanwang.github.io/blog/2013/09/18/const/"/>
-    <updated>2013-09-18T19:57:00+08:00</updated>
-    <id>http://hyanwang.github.io/blog/2013/09/18/const</id>
-    <content type="html"><![CDATA[<h1>如何设置在rails设置常量</h1>
+    <title type="html"><![CDATA[Rails little note 1]]></title>
+    <link href="http://hyanwang.github.io/blog/2013/06/17/rails-little-note-1/"/>
+    <updated>2013-06-17T16:26:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2013/06/17/rails-little-note-1</id>
+    <content type="html"><![CDATA[<h2>rails cli</h2>
 
-<h2>initializer目录</h2>
+<p>Active Record 支持的数据类型
+* :binary
+* :boolean
+* :date
+* :datetime
+* :decimal
+* :float
+* :integer
+* :primary_key
+* :string
+* :text
+* :time
+* :timestamp</p>
 
-<p>这个是一个初始化目录，里面的所有脚本顾名思义都是在rails初始化执行的。因此在里面创建的所有文件也都将被执行。</p>
+<h3>rails migration</h3>
 
-<p><code>ruby 创建config.rb
-raw_config=File.read("#{Rail.root}/config/config.yml")#设置yml的文件名和路径
-erb_result=ERB.new(raw_config).result
-APP_CONFIG=YAML.load(erb_result)[Rails.env]＃指定了如何调用常量
-</code></p>
+<p>Migration 是继承 ActiveRecord::Migration 的一个子类，它实现了两个方法： up (执行需要的改变)和 down (恢复所做的改变)
+Active Record 提供以下独立于数据库的方法，用来执行普通数据定义任务的方法:
+* add_colmn
+* add_index
+* change_column
+* change_table
+* create_table
+* create_join_table
+* drop_table
+* remove_column
+* remove_index
+* rename_column</p>
 
-<p>设置config.yml
-``` yaml config.yml
-defaults: &amp;defaults
-   redis_server: &lsquo;127.0.0.1&rsquo;
-   redis_port: &lsquo;6379&rsquo;</p>
+<p><code>ruby ruby 创建一个migration
+rails generate migration MIGRATION_NAME
+</code>
+使用up/down方法
+Migration里面的down方法能复原up方法所造成的变更。也就是说如果执行了up然后 再执行down，那么数据库的schema应该会没有改变。所以说，如果用up建立一个数据表， 就应该在down方法中删除它。明智的做法会使用跟up完全相反的顺便来做这些事情。</p>
 
-<p>development:
-   &lt;&lt;: * defaults</p>
+<p>回滚（Rolling Back）
+另一个常见的任务是回滚最后一个版本。比如你不小心打错了要修正。输入回滚命令时可以 不用输入先前版本的版本号，直接这样就行了：</p>
 
-<p>production:
-   &lt;&lt;: *defaults
-```</p>
+<p><code>bash
+$ rake db:rollback
+</code>
+这样会执行最后一个migration的down方法。如果要恢复多个migrations的话，可以多给 一个STEP参数：</p>
 
-<h1>创建自己的library</h1>
+<p><code>bash
+$ rake db:rollback STEP=3
+</code>
+这样会执行最后3个migrations的down方法。</p>
 
-<p>其实要在rails下创建自己的library很简单，只需要在<code>/lib/</code> 直接进行添加你创建的ruby文件，那如何引用呢？其实也很简单，只需要在自己的contoller下使用<code>require filename.rb</code>就可以了</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[rails中post]]></title>
-    <link href="http://hyanwang.github.io/blog/2013/08/11/rails-post/"/>
-    <updated>2013-08-11T22:15:00+08:00</updated>
-    <id>http://hyanwang.github.io/blog/2013/08/11/rails-post</id>
-    <content type="html"><![CDATA[<h1>Form Helper basic</h1>
+<p>要回滚然后重新执行最后一个migration的话可以直接执行db:migrate:redo。如果要回滚 重新执行的不止一个版本时可以用STEP参数，就跟db:rollback的用法一样：</p>
 
-<p>view中设置其表单，其中<code>form_tag</code>定义提交给谁和用什么方法
-<code>ruby Form表单提交给helo
-&lt;%= form_tag("helo",method: 'post') do %&gt;
-&lt;%= label_tag(:search, "search for:") %&gt;
-&lt;%= text_field_tag(:search) %&gt;
-&lt;%= submit_tag("Search") %&gt;
-&lt;% end %&gt;
-</code></p>
+<p><code>bash
+$ rake db:migrate:redo STEP=3
+</code>
+这两个rake任务只是用起来比较方便，让你可以不用输入一大串版本号数字。除了输入比较 方便外没有比db:migrate多做什么额外的工作。</p>
 
-<h1>Controller 如何实现接受</h1>
+<p>4.2 重置数据库
+最后是db:reset任务，它会删除数据库，然后重新建立数据库并在重新建立的数据库中 载入当前的schema。</p>
 
-<p>在接收的方法中使用<code>params[:search]</code>
-<code>ruby Controller中抓去post值
-def helo
-@helo=params[:search]
-end
-</code></p>
+<p>所谓的载入schema跟执行全部的migrations是不一样的，请参照： schema.rb 。</p>
 
-<h1>route将取决安排程序路径使用什么方法传递</h1>
+<p>4.3 执行指定的migration
+如果你需要执行一个指定的migration的up或down方法，那么你可以用db:migrate:up和 db:migrate:down这两个任务。你只需指定版本号，就可以触发它的up或down方法：
+<code>bash
+$ rake db:migrate:up VERSION=20080906120000
+</code>
+以上会执行20080906120000这个版本的migration的up方法。它会去确认这个migration之前有 没有跑过，所以，如果Active Record认为20080906120000已经跑过，那么执行 db:migrate:up VERSION=20080906120000将不会做任何操作。</p>
 
-<p><code>ruby route.rb
-namespace :admin do
-  post 'tasks/helo' #使用post方式请求
-  get 'tasks/say'
-end
+<h3>rails 删除控制器</h3>
+
+<p><code>ruby
+rails destroy
 </code></p>
 ]]></content>
   </entry>

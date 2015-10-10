@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: debian | 島嶼の患者]]></title>
+  <link href="http://hyanwang.github.io/blog/categories/debian/atom.xml" rel="self"/>
+  <link href="http://hyanwang.github.io/"/>
+  <updated>2015-09-19T14:58:34+08:00</updated>
+  <id>http://hyanwang.github.io/</id>
+  <author>
+    <name><![CDATA[Hi Yen Wong]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[raspberrypi 声卡设置]]></title>
+    <link href="http://hyanwang.github.io/blog/2015/09/19/raspberrypi-alsa/"/>
+    <updated>2015-09-19T14:27:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2015/09/19/raspberrypi-alsa</id>
+    <content type="html"><![CDATA[<h1>关于raspberry pi 2的声音的输出</h1>
+
+<p>Raspberry Pi的声音输出可以有两个方式选择:
+&ndash; HDMI:因为HDMI的信号传输可以达到2.25GB/s，而raspberry pi在画面1028p传输过程中加上音频信号都会小于0.5GB/s,选择是不错的选择。
+&ndash; 3.5mm音频接口，就普通很多手机的耳机接口。</p>
+
+<h1>Raspberry Pi 2的声音设置</h1>
+
+<ul>
+<li>Raspberry Pi2的CPU是BCM2835,我们首先要安装声音工具包<code>sudo apt-get install alsa-utils</code>,不过通常都会有已经安装了.</li>
+<li>内核加载声卡: <code>sudo modprobe snd-bcm2835</code></li>
+<li>你可以先测试以下是否有声音，当然你首先要接耳机或是音响，另外接的时候注意功率输出。<code>speaker-test</code></li>
+<li>如果没有声音，你可以先看看是否音量太底了，你可以用<code>alsamixer</code>进行调节.</li>
+<li>一般raspberrypi 默认是使用HDMI输出音频，你如果要切换为3.5mm的音频口，可能需要设置以下了，<code>sudo amixer cset numid=3 1</code>(这里最后一个1则表明耳机，0为自动，2为HDMI)</li>
+</ul>
+
+
+<p>最后你可以单独使用文件测试以下：
+<code>sudo aplay /usr/share/sounds/alsa/Front_Center.wav</code></p>
+
+<p>-EOF-</p>
+]]></content>
+  </entry>
+  
+</feed>

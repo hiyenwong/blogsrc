@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "I'm a Docker"
-date: 2014-10-07 12:32
+date: 2014-12-25 12:32
 comments: true
 categories: [docker]
 ---
@@ -31,7 +31,42 @@ Image是只读的,container在启动的时候创建一层可写层作为最上�
 Repository是集中存放image file的场所.
 当用户创建自己的image之后,可以使用push命令将它上传到公有或是私有的repository,下次需要时候可以pull下来就可以使用.
 
+###Registry
+Registry存储镜像数据，并且提供pull和push镜像的功能。Registry中镜像是通过Repostory来组织的。
 ##一些关于docker 的命令
+
+###在Fedora上配置文件和安装
+首先安装好Docker之后，你需要通过systemd来启动。通过`systemctl start
+docker`,当然你也可以选择开机启动`systemctl enable docker`
+
+####Docker后台的自定义设置
+Fedora在Docker.server中保存其服务启动配置,/etc/systemd/system/multi-user.target.wants/docker.service.
+docker.service:
+
+```bash
+[Unit]
+Description=Docker Application Container Engine
+Documentation=http://docs.docker.com
+After=network.target docker.socket
+Requires=docker.socket
+
+[Service]
+Type=notify
+EnvironmentFile=-/etc/sysconfig/docker
+ExecStart=/usr/bin/docker -d -H fd:// $OPTIONS
+LimitNOFILE=1048576
+LimitNPROC=1048576
+
+[Install]
+Also=docker.socket
+```
+/etc/sysconfig/docker
+```bash
+#-H tcp://ip:port 使用remote api使用的调用参数
+#你可以通过浏览器访问或是直接程序中访问控制
+#http://localhost:2375/images/json
+OPTIONS="--selinux-enabled -H tcp://0.0.0.0:2375"
+```
 
 ###如何删除所有images和container?
 ``` bash
@@ -41,3 +76,6 @@ docker rm $(docker ps -q -a)
 docker rmi $(docker images -q -a)
 ```
 ###run一个在container中的一个命令
+`docker run ubuntu:14.04 /bin/shell`
+
+

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: docker | 島嶼の患者]]></title>
   <link href="http://hyanwang.github.io/blog/categories/docker/atom.xml" rel="self"/>
   <link href="http://hyanwang.github.io/"/>
-  <updated>2014-12-04T21:30:59+08:00</updated>
+  <updated>2015-09-19T14:58:34+08:00</updated>
   <id>http://hyanwang.github.io/</id>
   <author>
     <name><![CDATA[Hi Yen Wong]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[I'm a Docker]]></title>
-    <link href="http://hyanwang.github.io/blog/2014/10/07/docker/"/>
-    <updated>2014-10-07T12:32:00+08:00</updated>
-    <id>http://hyanwang.github.io/blog/2014/10/07/docker</id>
+    <link href="http://hyanwang.github.io/blog/2014/12/25/docker/"/>
+    <updated>2014-12-25T12:32:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2014/12/25/docker</id>
     <content type="html"><![CDATA[<h1>I&rsquo;m a Docker</h1>
 
 <p>Docker是以go语言实现的轻量级操作系统虚拟化解决方案.是基于LXC等技术.同时,Docker不需要额外的hypervisor支持,它是内核级的虚拟华,因此可以实现更高的性能和效率.</p>
@@ -45,7 +45,50 @@
 <p>Repository是集中存放image file的场所.
 当用户创建自己的image之后,可以使用push命令将它上传到公有或是私有的repository,下次需要时候可以pull下来就可以使用.</p>
 
+<h3>Registry</h3>
+
+<p>Registry存储镜像数据，并且提供pull和push镜像的功能。Registry中镜像是通过Repostory来组织的。</p>
+
 <h2>一些关于docker 的命令</h2>
+
+<h3>在Fedora上配置文件和安装</h3>
+
+<p>首先安装好Docker之后，你需要通过systemd来启动。通过<code>systemctl start
+docker</code>,当然你也可以选择开机启动<code>systemctl enable docker</code></p>
+
+<h4>Docker后台的自定义设置</h4>
+
+<p>Fedora在Docker.server中保存其服务启动配置,/etc/systemd/system/multi-user.target.wants/docker.service.
+docker.service:</p>
+
+<p>```bash
+[Unit]
+Description=Docker Application Container Engine
+Documentation=<a href="http://docs.docker.com">http://docs.docker.com</a>
+After=network.target docker.socket
+Requires=docker.socket</p>
+
+<p>[Service]
+Type=notify
+EnvironmentFile=&ndash;/etc/sysconfig/docker
+ExecStart=/usr/bin/docker -d -H fd:// $OPTIONS
+LimitNOFILE=1048576
+LimitNPROC=1048576</p>
+
+<p>[Install]
+Also=docker.socket
+<code>
+/etc/sysconfig/docker
+</code>bash</p>
+
+<h1>-H tcp://ip:port 使用remote api使用的调用参数</h1>
+
+<h1>你可以通过浏览器访问或是直接程序中访问控制</h1>
+
+<h1><a href="http://localhost:2375/images/json">http://localhost:2375/images/json</a></h1>
+
+<p>OPTIONS=&ldquo;&mdash;selinux-enabled -H tcp://0.0.0.0:2375&rdquo;
+```</p>
 
 <h3>如何删除所有images和container?</h3>
 
@@ -61,6 +104,8 @@
 ```</p>
 
 <h3>run一个在container中的一个命令</h3>
+
+<p><code>docker run ubuntu:14.04 /bin/shell</code></p>
 ]]></content>
   </entry>
   

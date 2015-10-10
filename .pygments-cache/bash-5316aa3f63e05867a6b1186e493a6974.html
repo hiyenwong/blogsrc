@@ -1,0 +1,16 @@
+<div class="highlight"><pre><span class="o">[</span>Unit<span class="o">]</span>
+<span class="nv">Description</span><span class="o">=</span>Docker Application Container Engine
+<span class="nv">Documentation</span><span class="o">=</span>http://docs.docker.com
+<span class="nv">After</span><span class="o">=</span>network.target docker.socket
+<span class="nv">Requires</span><span class="o">=</span>docker.socket
+
+<span class="o">[</span>Service<span class="o">]</span>
+<span class="nv">Type</span><span class="o">=</span>notify
+<span class="nv">EnvironmentFile</span><span class="o">=</span>-/etc/sysconfig/docker
+<span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/docker -d -H fd:// <span class="nv">$OPTIONS</span>
+<span class="nv">LimitNOFILE</span><span class="o">=</span>1048576
+<span class="nv">LimitNPROC</span><span class="o">=</span>1048576
+
+<span class="o">[</span>Install<span class="o">]</span>
+<span class="nv">Also</span><span class="o">=</span>docker.socket
+</pre></div>

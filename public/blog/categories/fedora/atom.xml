@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: fedora | 島嶼の患者]]></title>
+  <link href="http://hyanwang.github.io/blog/categories/fedora/atom.xml" rel="self"/>
+  <link href="http://hyanwang.github.io/"/>
+  <updated>2015-09-19T14:58:34+08:00</updated>
+  <id>http://hyanwang.github.io/</id>
+  <author>
+    <name><![CDATA[Hi Yen Wong]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[GOLANG在Fedora21上的部署]]></title>
+    <link href="http://hyanwang.github.io/blog/2015/02/19/deploy-golang/"/>
+    <updated>2015-02-19T20:34:00+08:00</updated>
+    <id>http://hyanwang.github.io/blog/2015/02/19/deploy-golang</id>
+    <content type="html"><![CDATA[<h1>Golang 在Fedora21上安装</h1>
+
+<p>Fedora21本身就提供了Go的1.3.3版本，虽然没有最新的1.4，但对于开发学习绰绰有余。由于Golang.org等一系列Google服务器被墙，所以<code>go get</code>获取golang.org 资源比较吃力。好在Fedora21镜像自身提供了一些Googlecode上的安装包，因此你只要yum 搜索一下就知道了。</p>
+
+<h2>关于Go的环境变量</h2>
+
+<p>通过yum安装之后，有几个环境变量是没有设置，比如最重要的$GOPATH,还有$GOROOT和$GOBIN.这些之所以要设置这几个环境变量，是因为在开发中我们会经常用到。</p>
+
+<h3>$GOROOT</h3>
+
+<p><code>GOROOT</code>主要是设置为go的安装源代码路径，Fedora21的默认安装路径在<code>/usr/lib/golang</code></p>
+
+<h3>$GOPATH</h3>
+
+<p><code>GOPATH</code>主要是设置Go的开发路径，通常你将在这个路径下进行开发，开发的目录结构则必须包括<code>pkg</code>,<code>src</code>,<code>bin</code>。通常bin则是存放程序编译之后的执行文件。</p>
+
+<h3>$GOBIN</h3>
+
+<p><code>GOBIN</code>为执行文件路径，如果你是管理员权限，可以将路径设置为<code>/bin/</code>或是<code>/usr/bin</code>，当然你如果不是管理员权限，完全可以设置为<code>$GOPATH/bin</code>,最重要的是这样设置之后，必须你将它加入到<code>$PATH</code>里去。</p>
+
+<h1>关于Go的包安装</h1>
+
+<p>一直都不太喜欢go的包管理，主要因为是它没有像ruby那样的方便搜索和版本管理，而且go的包一部分存放在google的服务器上，给下载造成一定困难。特别在包依赖的情况下，你必须另找途径一个个安装。目前除了自己翻墙的解决方法以外，你可以搜索github上的资源单独下载。</p>
+
+<h2>关于Go的IDE</h2>
+
+<p>Go的IDE还是比较多的，最常用的可能是sublime text和vim。 sublime text并没有open source,因此我选择了github的atom和vim。</p>
+
+<h3>vim</h3>
+
+<p>vim的基本插件，yum里有，所以很容易安装，当然懒人总有很多懒人办法，我这里使用的是janus的管理，这使得管理插件更方便，直接clone到.janus目录就可以。</p>
+
+<h3>atom</h3>
+
+<p>atom上的有一个golang-plus的插件用于go的开发，但其中需要安装一些go的扩展，主要有如下几个
+&ndash; gocode 用于自动补全，这个github上有
+&ndash; goimports 这个在github上也有
+&ndash; lint tools 这个需要翻墙安装，否则依赖你要自己找第三方下
+&ndash; goimports 这个包在Fedora21里有，可以直接下载。</p>
+
+<p>基本Golang的开发环境就这些，接下来就是学习的过程。</p>
+]]></content>
+  </entry>
+  
+</feed>

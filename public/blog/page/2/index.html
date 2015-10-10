@@ -9,9 +9,8 @@
   <meta name="author" content="Hi Yen Wong">
 
   
-  <meta name="description" content="Rails 有自带的Test框架，当我们不使用本身框架的时候则在创建controller的时候加入 --no-test-framework RSpec 生成器 1
-rails g rspec:install 集成測試 1
-$ rails generate integration_test &hellip;">
+  <meta name="description" content="ActiveRecord Models 我们可以通过rails g的命令来创建一个Model 1
+rails g model User name:string email:string 在/app/models/和/app/db/migration中会创建相应的文件 Active Record &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +67,264 @@ $ rails generate integration_test &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/15/model-for-rails-1/">Model for Rails(1)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-15T14:20:00+08:00" pubdate data-updated="true">Jul 15<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/15/model-for-rails-1/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>ActiveRecord Models</h1>
+
+<p>我们可以通过<code>rails g</code>的命令来创建一个Model</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rails g model User name:string email:string
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在<code>/app/models/</code>和<code>/app/db/migration</code>中会创建相应的文件</p>
+
+<h2>Active Record Basic</h2>
+
+<p>Active Record是一个ORM的框架</p>
+
+<h3>命名规范</h3>
+
+<table>
+<thead>
+<tr>
+<th>Model/Class</th>
+<th>Table/Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Post       </td>
+<td>posts</td>
+</tr>
+<tr>
+<td>LineItem   </td>
+<td>line_items</td>
+</tr>
+<tr>
+<td>Deer       </td>
+<td>deer</td>
+</tr>
+<tr>
+<td>Mouse      </td>
+<td>mice</td>
+</tr>
+<tr>
+<td>Person     </td>
+<td>people</td>
+</tr>
+</tbody>
+</table>
+
+
+<h3>支持的数据类型</h3>
+
+<ul>
+<li>:binary</li>
+<li>:boolean</li>
+<li>:date</li>
+<li>:datetime</li>
+<li>:decimal</li>
+<li>:float</li>
+<li>:integer</li>
+<li>:primary_key</li>
+<li>:string</li>
+<li>:text</li>
+<li>:time</li>
+<li>:timestamp</li>
+</ul>
+
+
+<h3>Schema 模式</h3>
+
+<p>外键 Foreign Keys: tablename_id
+主键 Primary Keys: 默认为id</p>
+
+<p>另外还会自动创建两个字段 <code>created_at</code> 和<code>updated_at</code></p>
+
+<h3>create or overriding name conventions</h3>
+
+<p>通常我们继承了一个ActiveRecord的类就好比创建了一张表。</p>
+
+<figure class='code'><figcaption><span>Product</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Product</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="no">Base</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>类名通常就是这个表的表名，但其实我们可以重新定义。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">changeProduct</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="no">Base</span>
+</span><span class='line'>     <span class="nb">self</span><span class="o">.</span><span class="n">table_name</span> <span class="o">=</span> <span class="s2">&quot;Product&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>手动添加primary_key</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">set_primary_key</span> <span class="s2">&quot;product_id&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>about CRUD</h3>
+
+<h4>create</h4>
+
+<p>Active Record 对象是用hash来呈现的，使用create方法，将数据保存在数据库中</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">user</span><span class="o">=</span><span class="no">User</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="nb">name</span><span class="p">:</span> <span class="s2">&quot;Dexter&quot;</span><span class="p">,</span> <span class="ss">location</span><span class="p">:</span> <span class="s2">&quot;mars&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>而如果使用new方法，则只是实例化，并不保存数据,如果你要保存数据，则是<code>user.save</code></p>
+
+<h4>read</h4>
+
+<p>更多的关于read的api，可访问<a href="http://api.rubyonrails.org/classes/ActiveRecord/Base.html">http://api.rubyonrails.org/classes/ActiveRecord/Base.html</a>
+下面一些简单的关于read的例子</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">users</span><span class="o">=</span><span class="no">User</span><span class="o">.</span><span class="n">all</span> <span class="c1">#返回所有的用户信息</span>
+</span><span class='line'><span class="n">user</span><span class="o">=</span><span class="no">User</span><span class="o">.</span><span class="n">first</span> <span class="c1">#返回第一条记录</span>
+</span><span class='line'><span class="n">david</span><span class="o">=</span><span class="no">User</span><span class="o">.</span><span class="n">find_by_name</span><span class="p">(</span><span class="s1">&#39;David&#39;</span><span class="p">)</span> <span class="c1">#返回第一条叫David的记录</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#按照条件和时间排序搜索</span>
+</span><span class='line'><span class="n">users</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;David&#39;</span><span class="p">,</span> <span class="ss">occupation</span><span class="p">:</span> <span class="s1">&#39;Code Artist&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="s1">&#39;created_at DESC&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>update</h4>
+
+<p>基本和create性质一样</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">user</span><span class="o">=</span><span class="no">User</span><span class="o">.</span><span class="n">find_by_</span><span class="o">[</span><span class="no">KEY_NAME</span><span class="o">]</span><span class="p">(</span><span class="s1">&#39;davis&#39;</span><span class="p">)</span> <span class="c1">#KEYNAME所查询的字段名称</span>
+</span><span class='line'><span class="n">user</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="ss">KEYNAME</span><span class="p">:</span> <span class="s1">&#39;dav&#39;</span><span class="p">)</span> <span class="c1">#更新keyname里的值</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>若你要更新所有的值，那update_all会很有用</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">User</span><span class="o">.</span><span class="n">update_all</span> <span class="s2">&quot;max_login_attempts = 3, must_change_password = &#39;true&#39;&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>delete</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_name</span><span class="p">(</span><span class="s1">&#39;David&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">user</span><span class="o">.</span><span class="n">destroy</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/02/destroy/">如何摧毁Rails中的元素</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-02T14:16:00+08:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/02/destroy/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Destroy</h2>
+
+<p>我们往往会生成比如controller,model或是db 文件，但后来发现我们不需要了，想重来，怎么办呢？
+所以我们需要destroy</p>
+
+<h2>删除model或是controller</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rails destroy model MODEL_NAME|CONTROLLER_NAME
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>删除db:migration</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rails d migration MIGRATION_NAME
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1086,23 +1343,23 @@ textStatus: 表示响应状态文本。</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/09/19/raspberrypi-alsa/">Raspberrypi 声卡设置</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/02/19/deploy-golang/">GOLANG在Fedora21上的部署</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/12/25/docker/">I&#8217;m a Docker</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/12/04/redis/">Redis at Rails</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/10/07/docker/">I&#8217;m a Docker</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2014/08/30/make-octopress/">制作octopress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/20/pow-for-mac/">Pow for Mac</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/29/about-pagination-on-rails/">关于Rails下的分页数据</a>
       </li>
     
   </ul>
@@ -1125,7 +1382,7 @@ textStatus: 表示响应状态文本。</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Hi Yen Wong -
+  Copyright &copy; 2015 - Hi Yen Wong -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
